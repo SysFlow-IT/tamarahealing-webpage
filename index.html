@@ -42,7 +42,7 @@
 
         /* ── Hero ── */
         .hero { min-height: 100vh; display: flex; align-items: flex-end; justify-content: flex-start; position: relative; overflow: hidden; }
-        .hero-bg { position: absolute; inset: 0; background: url('designs/1. ethereal-abstract-energy-field-flowing-g_JS_5jDqdTDqGUWug_Cv9oA_GOMdJY2GQ-Sw7M_ASI92Og_cover_hd.png') center/cover; }
+        .hero-bg { position: absolute; inset: 0; background: url('assets/hero-bg.png') center/cover; }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,59,92,.85) 0%, rgba(74,59,92,.6) 40%, rgba(74,59,92,.4) 70%, rgba(74,59,92,.75) 100%); }
         .hero-content { position: relative; z-index: 2; padding: 4rem 3rem 5rem; max-width: 700px; }
         .hero-badge { display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--cream); border: 1px solid rgba(255,248,238,.4); padding: .45rem 1.2rem; margin-bottom: 2rem; }
@@ -62,7 +62,7 @@
         @keyframes scrollLine { 0% { top: -100%; } 50% { top: 0; } 100% { top: 100%; } }
 
         /* ── About Section ── */
-        .about-band { width: 100%; height: 50vh; min-height: 350px; background: url('designs/6. soft-abstract-background-with-warm-golde_PMasHbVBTHmzyoXl4paXng_8uN3meO4SfmZDsk9-S29yg_cover_hd.png') center/cover; position: relative; }
+        .about-band { width: 100%; height: 50vh; min-height: 350px; background: url('assets/about-bg.png') center/cover; position: relative; }
         .about-band::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(200,150,62,.15) 0%, rgba(255,248,238,.3) 100%); }
         .about-card { max-width: 1000px; margin: -12rem auto 0; position: relative; z-index: 2; padding: 3.5rem; background: rgba(255,253,249,.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(200,150,62,.1); display: flex; gap: 3.5rem; align-items: flex-start; }
         .about-photo { flex-shrink: 0; width: 260px; position: relative; }
@@ -85,7 +85,7 @@
 
         /* ── Services (Dark) ── */
         .services { background: var(--plum); text-align: center; padding: 6rem 2rem; position: relative; overflow: hidden; }
-        .services-texture { position: absolute; inset: 0; background: url('designs/4. seamless-subtle-repeating-pattern-very-f_7qy31mcGRKKr2MV8vfhB9Q_GIseaBiVRlaqlG2CGkyLMQ_cover_hd.png') center/400px repeat; opacity: .06; }
+        .services-texture { position: absolute; inset: 0; background: url('assets/texture.png') center/400px repeat; opacity: .06; }
         .services-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
         .services .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
         .services .section-title { font-family: var(--heading); font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 500; color: var(--cream); line-height: 1.2; margin-bottom: 1.2rem; }
@@ -112,7 +112,7 @@
 
         /* ── Visual Break ── */
         .visual-break { width: 100%; height: 40vh; min-height: 300px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .visual-break-bg { position: absolute; inset: 0; background: url('designs/5. soft-decorative-background-panel-warm-go__EyqEqpMRbmxGb2xCDddGg_ti-dzQy4Q9SOVv7oKHtV4Q_cover_hd.png') center/cover; }
+        .visual-break-bg { position: absolute; inset: 0; background: url('assets/testimonial-bg.png') center/cover; }
         .visual-break-overlay { position: absolute; inset: 0; background: rgba(74,59,92,.7); }
         .visual-break blockquote { position: relative; z-index: 2; font-family: var(--heading); font-size: clamp(1.4rem,3vw,2.2rem); font-style: italic; font-weight: 400; color: var(--cream); text-align: center; max-width: 600px; padding: 0 2rem; line-height: 1.4; }
 
@@ -145,7 +145,7 @@
 
         /* ── Contact (Dark) ── */
         .contact { background: var(--plum); text-align: center; padding: 6rem 2rem; position: relative; overflow: hidden; }
-        .contact-texture { position: absolute; inset: 0; background: url('designs/4. seamless-subtle-repeating-pattern-very-f_7qy31mcGRKKr2MV8vfhB9Q_GIseaBiVRlaqlG2CGkyLMQ_cover_hd.png') center/400px repeat; opacity: .04; }
+        .contact-texture { position: absolute; inset: 0; background: url('assets/texture.png') center/400px repeat; opacity: .04; }
         .contact-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 2; }
         .contact .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
         .contact .section-title { font-family: var(--heading); font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 500; color: var(--cream); line-height: 1.2; margin-bottom: 1.2rem; }
@@ -202,7 +202,7 @@
 
 <nav id="nav">
     <div class="nav-inner">
-        <img src="designs/2. elegant-wordmark-logo-design-body-mind-h_Qj_ze_0vRre_VeCI6uUQnw_F8akWxZZTeuudA0Ohr32dQ_cover_hd.png" alt="Body Mind Healing" class="nav-logo">
+        <img src="assets/logo.png" alt="Body Mind Healing" class="nav-logo">
         <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
         <ul class="nav-links">
             <li><a href="#o-mnie" data-i18n="navAbout">O mnie</a></li>
@@ -288,7 +288,7 @@
         <div class="services-grid">
             <!-- Service 1 -->
             <div class="service-card reveal">
-                <div class="service-icon"><img src="designs/7. abstract-symbolic-illustration-of-body-m_6UX32Mw6QrWSu8xuCAjC9w_Llckx14FQv-TcbVPA1FRoQ_cover_hd.png" alt=""></div>
+                <div class="service-icon"><img src="assets/services-icon.png" alt=""></div>
                 <h3 data-i18n="s1title">Psychoterapia Integracyjna</h3>
                 <p data-i18n="s1desc">Praca z szerokim spektrum stanów psychologicznych i emocjonalnych, w tym zaburzenia osobowości, depresja, lęki, traumy, żałoba i problemy w relacjach.</p>
                 <button class="read-more-btn" onclick="toggleService(this)" data-i18n="readMore">Czytaj więcej</button>
@@ -313,7 +313,7 @@
             </div>
             <!-- Service 2 -->
             <div class="service-card reveal">
-                <div class="service-icon"><img src="designs/7. abstract-symbolic-illustration-of-body-m_6UX32Mw6QrWSu8xuCAjC9w_Llckx14FQv-TcbVPA1FRoQ_cover_hd.png" alt=""></div>
+                <div class="service-icon"><img src="assets/services-icon.png" alt=""></div>
                 <h3 data-i18n="s2title">Dolegliwości Fizyczne i Psychosomatyczne</h3>
                 <p data-i18n="s2desc">Leczenie dolegliwości fizycznych, w tym korekcja kręgosłupa, bóle szyi i pleców, oraz terapie manualne i ciałowe.</p>
                 <button class="read-more-btn" onclick="toggleService(this)" data-i18n="readMore">Czytaj więcej</button>
@@ -334,7 +334,7 @@
             </div>
             <!-- Service 3 -->
             <div class="service-card reveal">
-                <div class="service-icon"><img src="designs/7. abstract-symbolic-illustration-of-body-m_6UX32Mw6QrWSu8xuCAjC9w_Llckx14FQv-TcbVPA1FRoQ_cover_hd.png" alt=""></div>
+                <div class="service-icon"><img src="assets/services-icon.png" alt=""></div>
                 <h3 data-i18n="s3title">Diagnostyka GDV i VedaPulse</h3>
                 <p data-i18n="s3desc">Zaawansowana diagnostyka energetyczna ciała: komputerowa analiza aury (metoda Kirliana) oraz cyfrowa diagnostyka pulsu łącząca nowoczesną technologię z medycyną ajurwedyjską.</p>
                 <button class="read-more-btn" onclick="toggleService(this)" data-i18n="readMore">Czytaj więcej</button>
@@ -348,7 +348,7 @@
             </div>
             <!-- Service 4 -->
             <div class="service-card reveal">
-                <div class="service-icon"><img src="designs/7. abstract-symbolic-illustration-of-body-m_6UX32Mw6QrWSu8xuCAjC9w_Llckx14FQv-TcbVPA1FRoQ_cover_hd.png" alt=""></div>
+                <div class="service-icon"><img src="assets/services-icon.png" alt=""></div>
                 <h3 data-i18n="s4title">The Reconnection i Reconnective Healing</h3>
                 <p data-i18n="s4desc">Metody uzdrawiania wprowadzone przez dr. Erica Pearla, oparte na dostępie do szerszego spektrum częstotliwości uzdrawiających obejmujących energię, światło i informację.</p>
                 <button class="read-more-btn" onclick="toggleService(this)" data-i18n="readMore">Czytaj więcej</button>

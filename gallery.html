@@ -41,12 +41,12 @@
         /* ── Gallery Grid ── */
         .gallery-section { max-width: 1200px; margin: 0 auto; padding: 0 2rem 5rem; }
         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .gallery-item { position: relative; cursor: pointer; overflow: hidden; aspect-ratio: 4/3; border: 1px solid rgba(200,150,62,.15); transition: border-color .4s, transform .4s, box-shadow .4s; }
+        .gallery-item { cursor: pointer; overflow: hidden; border: 1px solid rgba(200,150,62,.15); transition: border-color .4s, transform .4s, box-shadow .4s; }
         .gallery-item:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+        .gallery-item-img { aspect-ratio: 4/3; overflow: hidden; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.22,1,.36,1); }
         .gallery-item:hover img { transform: scale(1.05); }
-        .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: .8rem 1rem; background: linear-gradient(transparent, rgba(0,0,0,.7)); font-size: .82rem; color: var(--cream); font-weight: 300; opacity: 0; transform: translateY(8px); transition: opacity .4s, transform .4s; }
-        .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
+        .gallery-caption { padding: .7rem 1rem; font-size: .82rem; color: rgba(255,248,238,.65); font-weight: 400; text-align: center; background: rgba(0,0,0,.25); }
 
         /* ── Lightbox ── */
         .lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); align-items: center; justify-content: center; }
@@ -78,7 +78,6 @@
             .gallery-grid { grid-template-columns: 1fr; }
             .gallery-hero { padding: 7rem 1.5rem 3rem; }
             .gallery-section { padding: 0 1.5rem 4rem; }
-            .gallery-caption { opacity: 1; transform: translateY(0); }
             .footer-columns { grid-template-columns: 1fr; text-align: center; }
             .lightbox-nav { width: 40px; height: 40px; }
             .lightbox-prev { left: .5rem; }
@@ -93,7 +92,7 @@
 
 <nav>
     <div class="nav-inner">
-        <a href="index.html"><img src="designs/2. elegant-wordmark-logo-design-body-mind-h_Qj_ze_0vRre_VeCI6uUQnw_F8akWxZZTeuudA0Ohr32dQ_cover_hd.png" alt="Body Mind Healing" class="nav-logo"></a>
+        <a href="index.html"><img src="assets/logo.png" alt="Body Mind Healing" class="nav-logo"></a>
         <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
         <ul class="nav-links">
             <li><a href="index.html#o-mnie" data-i18n="navAbout">O mnie</a></li>
@@ -211,7 +210,7 @@ function renderGallery() {
     const grid = document.getElementById('galleryGrid');
     grid.innerHTML = photos.map((p, i) => `
         <div class="gallery-item" onclick="openLightbox(${i})">
-            <img src="${p.src}" alt="${p[currentLang]}" loading="lazy">
+            <div class="gallery-item-img"><img src="${p.src}" alt="${p[currentLang]}" loading="lazy"></div>
             <div class="gallery-caption">${p[currentLang]}</div>
         </div>
     `).join('');
