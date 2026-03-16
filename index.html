@@ -131,6 +131,9 @@
         .carousel-card .t-expand { font-size: .75rem; font-weight: 600; color: var(--gold); cursor: pointer; background: none; border: none; font-family: var(--body); letter-spacing: .05em; }
         .carousel-card .t-author { font-size: .82rem; font-weight: 600; color: var(--plum); margin-top: .8rem; }
         .carousel-card .t-location { font-size: .75rem; color: var(--text-sec); }
+        .carousel-card.featured { border-color: rgba(200,150,62,.25); background: linear-gradient(135deg, #fffdf9 0%, #fff8ee 100%); }
+        .carousel-card.featured::before { background: linear-gradient(180deg, var(--gold), var(--plum)); width: 5px; }
+        .carousel-card .t-photo { width: 100%; margin-top: 1rem; border: 1px solid rgba(200,150,62,.15); display: block; }
         .carousel-controls { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 2rem; }
         .carousel-btn { width: 42px; height: 42px; border: 1px solid rgba(200,150,62,.25); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; }
         .carousel-btn:hover { background: var(--gold); border-color: var(--gold); }
@@ -576,6 +579,9 @@ en: {
 
 // ═══════ TESTIMONIALS DATA ═══════
 const testimonials = [
+{name:'Czarek Głuch / Trader21',loc:'',featured:true,photo:'photos/indepenttrader-trader21-cezary-gluch-690x434.webp',
+pl:'Znam Tamarę od 15 lat i wielokrotnie korzystałem z jej ogromnej wiedzy oraz umiejętności. Jest jedną z najważniejszych osób, jeśli chodzi o dbanie o zdrowie moje i mojej rodziny. Jej podejście wykracza daleko poza typowe postrzeganie lekarzy czy uzdrowicieli. To, co robi, wyprzedza swoje czasy, dlatego dla osób przyzwyczajonych do schematu „problem – tabletka" może wydawać się nieoczywiste. Jestem jednak przekonany, że za 30–50 lat takie podejście stanie się standardem. Jestem bardzo wdzięczny, że mogę korzystać z jej terapii już dziś – tym bardziej, że efekty często odczuwalne są niemal natychmiast.',
+en:'I\'ve known Tamara for 15 years and have repeatedly benefited from her vast knowledge and skills. She is one of the most important people when it comes to the health of me and my family. Her approach goes far beyond the typical perception of doctors or healers. What she does is ahead of its time — for people used to the "problem – pill" pattern, it may seem unconventional. However, I\'m convinced that in 30–50 years, this approach will become the standard. I\'m very grateful that I can benefit from her therapy today — especially since the effects are often felt almost immediately.'},
 {name:'Kasia i Mariusz',loc:'Luxemburg',
 pl:'Sesje z Tamarą to dla nas coś naprawdę wyjątkowego. Każde spotkanie jest jak odkrywanie nowej części siebie – nie tylko na poziomie ciała, ale też umysłu i ducha. Tamara ma ogromną wiedzę i niesamowite wyczucie, a jej wskazówki dotyczące tego, jak „obsługiwać" siebie, w realny sposób zmieniły nasze codzienne funkcjonowanie. Z całego serca dziękujemy i polecamy.',
 en:'Sessions with Tamara are truly exceptional for us. Each meeting is like discovering a new part of yourself — body, mind and spirit. Tamara has vast knowledge and incredible intuition. Her guidance on how to navigate ourselves has genuinely changed our daily functioning. We wholeheartedly thank and recommend her.'},
@@ -718,11 +724,12 @@ function renderCarousel() {
     cardsPerView = getCardsPerView();
     const track = document.getElementById('carouselTrack');
     track.innerHTML = testimonials.map((t, i) => `
-        <div class="carousel-card">
+        <div class="carousel-card${t.featured ? ' featured' : ''}">
             <div class="t-text" id="ttext${i}">${t[currentLang]}</div>
             <button class="t-expand" onclick="this.previousElementSibling.classList.toggle('expanded'); this.textContent = this.previousElementSibling.classList.contains('expanded') ? '${T[currentLang].collapseText}' : '${T[currentLang].expandText}'">${T[currentLang].expandText}</button>
             <div class="t-author">— ${t.name}</div>
             ${t.loc ? `<div class="t-location">${t.loc}</div>` : ''}
+            ${t.photo ? `<img src="${t.photo}" alt="${t.name}" class="t-photo">` : ''}
         </div>
     `).join('');
     const totalPages = Math.ceil(testimonials.length / cardsPerView);
