@@ -133,7 +133,7 @@
         .carousel-card .t-location { font-size: .75rem; color: var(--text-sec); }
         .carousel-card.featured { border-color: rgba(200,150,62,.25); background: linear-gradient(135deg, #fffdf9 0%, #fff8ee 100%); }
         .carousel-card.featured::before { background: linear-gradient(180deg, var(--gold), var(--plum)); width: 5px; }
-        .carousel-card .t-photo { width: 100%; margin-top: 1rem; border: 1px solid rgba(200,150,62,.15); display: block; }
+        .carousel-card .t-photo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: 50% 20%; margin-top: 1rem; border: 2px solid var(--gold); display: block; }
         .carousel-controls { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 2rem; }
         .carousel-btn { width: 42px; height: 42px; border: 1px solid rgba(200,150,62,.25); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; }
         .carousel-btn:hover { background: var(--gold); border-color: var(--gold); }
@@ -735,12 +735,20 @@ function renderCarousel() {
     track.innerHTML = testimonials.map((t, i) => `
         <div class="carousel-card${t.featured ? ' featured' : ''}">
             <div class="t-text" id="ttext${i}">${t[currentLang]}</div>
-            <button class="t-expand" onclick="this.previousElementSibling.classList.toggle('expanded'); this.textContent = this.previousElementSibling.classList.contains('expanded') ? '${T[currentLang].collapseText}' : '${T[currentLang].expandText}'">${T[currentLang].expandText}</button>
+            <button class="t-expand" data-idx="${i}" style="display:none" onclick="this.previousElementSibling.classList.toggle('expanded'); this.textContent = this.previousElementSibling.classList.contains('expanded') ? '${T[currentLang].collapseText}' : '${T[currentLang].expandText}'">${T[currentLang].expandText}</button>
             <div class="t-author">— ${t.name}</div>
             ${t.loc ? `<div class="t-location">${t.loc}</div>` : ''}
             ${t.photo ? `<img src="${t.photo}" alt="${t.name}" class="t-photo">` : ''}
         </div>
     `).join('');
+    // Show expand button only when text is actually truncated
+    requestAnimationFrame(() => {
+        track.querySelectorAll('.t-text').forEach(el => {
+            const btn = el.nextElementSibling;
+            if (el.scrollHeight > el.clientHeight + 2) btn.style.display = '';
+            else btn.style.display = 'none';
+        });
+    });
     const totalPages = Math.ceil(testimonials.length / cardsPerView);
     if (carouselPos >= totalPages) carouselPos = totalPages - 1;
     const dots = document.getElementById('carouselDots');
