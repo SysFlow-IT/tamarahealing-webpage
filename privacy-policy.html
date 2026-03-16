@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pl" class="lang-pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polityka Prywatności — Body Mind Healing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #C8963E; --amber: #D4A855; --violet: #7B6D8E; --plum: #4A3B5C;
+            --cream: #FFF8EE; --off-white: #FFFDF9; --text: #3A2E2A; --text-sec: #6B5D56;
+            --heading: 'Cormorant Garamond', Georgia, serif;
+            --body: 'Nunito Sans', 'Segoe UI', sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body); color: var(--cream); background: var(--plum); line-height: 1.7; overflow-x: hidden; }
+
+        /* ── Nav ── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(74,59,92,.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 2px 30px rgba(0,0,0,.2); border-bottom: 1px solid transparent; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { height: 38px; filter: brightness(0) invert(1); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,248,238,.7); text-decoration: none; transition: color .3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .lang-switch { display: flex; gap: 0; border: 1px solid rgba(200,150,62,.35); margin-left: .5rem; }
+        .lang-btn { padding: .35rem .7rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; background: transparent; color: rgba(255,248,238,.7); border: none; cursor: pointer; transition: all .3s; font-family: var(--body); }
+        .lang-btn.active { background: var(--gold); color: var(--off-white); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: .5rem; }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--cream); margin: 4px 0; transition: all .3s; }
+
+        /* ── Page Hero ── */
+        .page-hero { padding: 8rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(200,150,62,.1) 0%, transparent 70%); }
+        .page-hero h1 { font-family: var(--heading); font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 500; color: var(--cream); position: relative; }
+        .page-hero .gold-bar { width: 50px; height: 2px; background: var(--gold); margin: 1.2rem auto 0; position: relative; }
+
+        /* ── Content ── */
+        .content { max-width: 800px; margin: 0 auto; padding: 0 2rem 5rem; }
+        .content h2 { font-family: var(--heading); font-size: 1.6rem; font-weight: 600; color: var(--gold); margin: 2.5rem 0 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(200,150,62,.15); }
+        .content h2:first-of-type { border-top: none; padding-top: 0; }
+        .content p { font-size: .95rem; color: rgba(255,248,238,.7); line-height: 1.8; margin-bottom: 1rem; }
+        .content ul { list-style: none; padding: 0; margin-bottom: 1rem; }
+        .content li { font-size: .93rem; color: rgba(255,248,238,.65); padding: .3rem 0 .3rem 1.2rem; position: relative; line-height: 1.7; }
+        .content li::before { content: ''; position: absolute; left: 0; top: .7rem; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+        .content a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(200,150,62,.3); transition: border-color .3s; }
+        .content a:hover { border-color: var(--gold); }
+        .content strong { color: var(--cream); font-weight: 600; }
+
+        /* ── Footer ── */
+        footer { padding: 3rem 2rem 2rem; background: var(--plum); border-top: 1px solid rgba(200,150,62,.1); }
+        .footer-columns { max-width: 900px; margin: 0 auto 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .footer-col { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-col-title { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+        .footer-col a { font-size: .82rem; color: rgba(255,248,238,.55); text-decoration: none; transition: color .3s; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; font-size: .75rem; color: rgba(255,248,238,.35); padding-top: 1.5rem; border-top: 1px solid rgba(200,150,62,.08); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(74,59,92,.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(200,150,62,.15); }
+            .page-hero { padding: 7rem 1.5rem 3rem; }
+            .content { padding: 0 1.5rem 4rem; }
+            .footer-columns { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html"><img src="designs/2. elegant-wordmark-logo-design-body-mind-h_Qj_ze_0vRre_VeCI6uUQnw_F8akWxZZTeuudA0Ohr32dQ_cover_hd.png" alt="Body Mind Healing" class="nav-logo"></a>
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="index.html#o-mnie" data-i18n="navAbout">O mnie</a></li>
+            <li><a href="index.html#uslugi" data-i18n="navServices">Usługi</a></li>
+            <li><a href="index.html#opinie" data-i18n="navTestimonials">Opinie</a></li>
+            <li><a href="gallery.html" data-i18n="navGallery">Galeria</a></li>
+            <li><a href="index.html#kontakt" data-i18n="navContact">Kontakt</a></li>
+            <li>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+                    <button class="lang-btn" onclick="setLang('en')">EN</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<section class="page-hero">
+    <h1 data-i18n="pageTitle">Polityka Prywatności</h1>
+    <div class="gold-bar"></div>
+</section>
+
+<div class="content">
+    <h2 data-i18n="pp1title">1. Administrator danych</h2>
+    <p data-i18n="pp1text">Administratorem Twoich danych osobowych jest Tamara Hofland-Doloechanova, prowadząca praktykę terapii holistycznej Body Mind Healing, z siedzibą pod adresem Blekerstraat 119, 1315 AD Almere, Holandia. Kontakt: <a href="mailto:tamara@bodymindhealing.nl">tamara@bodymindhealing.nl</a>.</p>
+
+    <h2 data-i18n="pp2title">2. Jakie dane zbieramy</h2>
+    <p data-i18n="pp2text">Za pośrednictwem formularza kontaktowego na naszej stronie zbieramy następujące dane:</p>
+    <ul>
+        <li data-i18n="pp2l1">Imię i nazwisko</li>
+        <li data-i18n="pp2l2">Adres e-mail</li>
+        <li data-i18n="pp2l3">Numer telefonu (opcjonalnie)</li>
+        <li data-i18n="pp2l4">Treść wiadomości</li>
+    </ul>
+
+    <h2 data-i18n="pp3title">3. Cel przetwarzania danych</h2>
+    <p data-i18n="pp3text">Twoje dane osobowe przetwarzamy wyłącznie w celu odpowiedzi na Twoje zapytania oraz umówienia wizyt terapeutycznych. Nie wykorzystujemy danych w celach marketingowych ani nie przekazujemy ich podmiotom trzecim.</p>
+
+    <h2 data-i18n="pp4title">4. Podstawa prawna</h2>
+    <p data-i18n="pp4text">Przetwarzanie danych odbywa się na podstawie Twojej dobrowolnej zgody, zgodnie z art. 6 ust. 1 lit. a) Rozporządzenia Ogólnego o Ochronie Danych Osobowych (RODO). Zgodę wyrażasz poprzez zaznaczenie odpowiedniego pola w formularzu kontaktowym.</p>
+
+    <h2 data-i18n="pp5title">5. Okres przechowywania danych</h2>
+    <p data-i18n="pp5text">Dane osobowe pozyskane za pośrednictwem formularza kontaktowego przechowujemy przez okres 12 miesięcy od daty otrzymania wiadomości, po czym są trwale usuwane.</p>
+
+    <h2 data-i18n="pp6title">6. Pliki cookies i śledzenie</h2>
+    <p data-i18n="pp6text">Nasza strona internetowa nie wykorzystuje plików cookies, narzędzi analitycznych ani technologii śledzących. Nie zbieramy żadnych danych o zachowaniu użytkowników na stronie.</p>
+
+    <h2 data-i18n="pp7title">7. Twoje prawa</h2>
+    <p data-i18n="pp7text">Zgodnie z RODO przysługują Ci następujące prawa:</p>
+    <ul>
+        <li data-i18n="pp7l1">Prawo dostępu do swoich danych osobowych</li>
+        <li data-i18n="pp7l2">Prawo do sprostowania (poprawienia) danych</li>
+        <li data-i18n="pp7l3">Prawo do usunięcia danych ("prawo do bycia zapomnianym")</li>
+        <li data-i18n="pp7l4">Prawo do przenoszenia danych</li>
+        <li data-i18n="pp7l5">Prawo do wycofania zgody w dowolnym momencie</li>
+        <li data-i18n="pp7l6">Prawo do wniesienia skargi do organu nadzorczego (Autoriteit Persoonsgegevens, Holandia)</li>
+    </ul>
+
+    <h2 data-i18n="pp8title">8. Udostępnianie danych osobom trzecim</h2>
+    <p data-i18n="pp8text">Nie udostępniamy Twoich danych osobowych żadnym podmiotom trzecim. Dane są przetwarzane wyłącznie przez administratora.</p>
+
+    <h2 data-i18n="pp9title">9. Kontakt w sprawie danych osobowych</h2>
+    <p data-i18n="pp9text">W przypadku pytań dotyczących przetwarzania danych osobowych lub w celu skorzystania z przysługujących Ci praw, prosimy o kontakt pod adresem: <a href="mailto:tamara@bodymindhealing.nl">tamara@bodymindhealing.nl</a>.</p>
+
+    <h2 data-i18n="pp10title">10. Zmiany w polityce prywatności</h2>
+    <p data-i18n="pp10text">Zastrzegamy sobie prawo do wprowadzania zmian w niniejszej Polityce Prywatności. Aktualna wersja jest zawsze dostępna na tej stronie. Ostatnia aktualizacja: marzec 2026.</p>
+</div>
+
+<footer>
+    <div class="footer-columns">
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColGallery">Galeria i CV</div>
+            <a href="gallery.html" data-i18n="footGallery">Galeria</a>
+            <a href="cv.html">Curriculum Vitae</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColServices">Usługi</div>
+            <a href="reconnection.html">Reconnection & Reconnective Healing</a>
+            <a href="gdv-camera.html">GDV Camera</a>
+            <a href="vedapulse.html">VedaPulse</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColLegal">Informacje prawne</div>
+            <a href="privacy-policy.html" data-i18n="footPrivacy">Polityka Prywatności</a>
+            <a href="terms.html" data-i18n="footTerms">Regulamin</a>
+        </div>
+    </div>
+    <div class="footer-bottom" data-i18n="footer">&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+const T = {
+pl: {
+    navAbout:'O mnie', navServices:'Usługi', navTestimonials:'Opinie', navContact:'Kontakt',
+    navGallery:'Galeria', footGallery:'Galeria', footPrivacy:'Polityka Prywatności', footTerms:'Regulamin',
+    footColGallery:'Galeria i CV', footColServices:'Usługi', footColLegal:'Informacje prawne',
+    footer:'&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.',
+    pageTitle:'Polityka Prywatności',
+    pp1title:'1. Administrator danych',
+    pp1text:'Administratorem Twoich danych osobowych jest Tamara Hofland-Doloechanova, prowadząca praktykę terapii holistycznej Body Mind Healing, z siedzibą pod adresem Blekerstraat 119, 1315 AD Almere, Holandia. Kontakt: <a href="mailto:tamara@bodymindhealing.nl">tamara@bodymindhealing.nl</a>.',
+    pp2title:'2. Jakie dane zbieramy',
+    pp2text:'Za pośrednictwem formularza kontaktowego na naszej stronie zbieramy następujące dane:',
+    pp2l1:'Imię i nazwisko', pp2l2:'Adres e-mail', pp2l3:'Numer telefonu (opcjonalnie)', pp2l4:'Treść wiadomości',
+    pp3title:'3. Cel przetwarzania danych',
+    pp3text:'Twoje dane osobowe przetwarzamy wyłącznie w celu odpowiedzi na Twoje zapytania oraz umówienia wizyt terapeutycznych. Nie wykorzystujemy danych w celach marketingowych ani nie przekazujemy ich podmiotom trzecim.',
+    pp4title:'4. Podstawa prawna',
+    pp4text:'Przetwarzanie danych odbywa się na podstawie Twojej dobrowolnej zgody, zgodnie z art. 6 ust. 1 lit. a) Rozporządzenia Ogólnego o Ochronie Danych Osobowych (RODO). Zgodę wyrażasz poprzez zaznaczenie odpowiedniego pola w formularzu kontaktowym.',
+    pp5title:'5. Okres przechowywania danych',
+    pp5text:'Dane osobowe pozyskane za pośrednictwem formularza kontaktowego przechowujemy przez okres 12 miesięcy od daty otrzymania wiadomości, po czym są trwale usuwane.',
+    pp6title:'6. Pliki cookies i śledzenie',
+    pp6text:'Nasza strona internetowa nie wykorzystuje plików cookies, narzędzi analitycznych ani technologii śledzących. Nie zbieramy żadnych danych o zachowaniu użytkowników na stronie.',
+    pp7title:'7. Twoje prawa',
+    pp7text:'Zgodnie z RODO przysługują Ci następujące prawa:',
+    pp7l1:'Prawo dostępu do swoich danych osobowych',
+    pp7l2:'Prawo do sprostowania (poprawienia) danych',
+    pp7l3:'Prawo do usunięcia danych ("prawo do bycia zapomnianym")',
+    pp7l4:'Prawo do przenoszenia danych',
+    pp7l5:'Prawo do wycofania zgody w dowolnym momencie',
+    pp7l6:'Prawo do wniesienia skargi do organu nadzorczego (Autoriteit Persoonsgegevens, Holandia)',
+    pp8title:'8. Udostępnianie danych osobom trzecim',
+    pp8text:'Nie udostępniamy Twoich danych osobowych żadnym podmiotom trzecim. Dane są przetwarzane wyłącznie przez administratora.',
+    pp9title:'9. Kontakt w sprawie danych osobowych',
+    pp9text:'W przypadku pytań dotyczących przetwarzania danych osobowych lub w celu skorzystania z przysługujących Ci praw, prosimy o kontakt pod adresem: <a href="mailto:tamara@bodymindhealing.nl">tamara@bodymindhealing.nl</a>.',
+    pp10title:'10. Zmiany w polityce prywatności',
+    pp10text:'Zastrzegamy sobie prawo do wprowadzania zmian w niniejszej Polityce Prywatności. Aktualna wersja jest zawsze dostępna na tej stronie. Ostatnia aktualizacja: marzec 2026.'
+},
+en: {
+    navAbout:'About', navServices:'Services', navTestimonials:'Testimonials', navContact:'Contact',
+    navGallery:'Gallery', footGallery:'Gallery', footPrivacy:'Privacy Policy', footTerms:'Terms of Use',
+    footColGallery:'Gallery & CV', footColServices:'Services', footColLegal:'Legal',
+    footer:'&copy; 2026 Body Mind Healing — Tamara Hofland. All rights reserved.',
+    pageTitle:'Privacy Policy',
+    pp1title:'1. Data Controller',
+    pp1text:'The controller of your personal data is Tamara Hofland-Doloechanova, operating the holistic therapy practice Body Mind Healing, located at Blekerstraat 119, 1315 AD Almere, The Netherlands. Contact: <a href="mailto:tamara@bodymindhealing.nl">tamara@bodymindhealing.nl</a>.',
+    pp2title:'2. Data We Collect',
+    pp2text:'Through the contact form on our website, we collect the following data:',
+    pp2l1:'Name', pp2l2:'Email address', pp2l3:'Phone number (optional)', pp2l4:'Message content',
+    pp3title:'3. Purpose of Data Processing',
+    pp3text:'We process your personal data solely for the purpose of responding to your inquiries and scheduling therapy appointments. We do not use data for marketing purposes and do not share it with third parties.',
+    pp4title:'4. Legal Basis',
+    pp4text:'Data processing is based on your voluntary consent, in accordance with Article 6(1)(a) of the General Data Protection Regulation (GDPR). Consent is given by checking the appropriate box on the contact form.',
+    pp5title:'5. Data Retention Period',
+    pp5text:'Personal data obtained through the contact form is stored for a period of 12 months from the date the message is received, after which it is permanently deleted.',
+    pp6title:'6. Cookies and Tracking',
+    pp6text:'Our website does not use cookies, analytics tools, or tracking technologies. We do not collect any data about user behavior on the website.',
+    pp7title:'7. Your Rights',
+    pp7text:'Under the GDPR, you have the following rights:',
+    pp7l1:'Right of access to your personal data',
+    pp7l2:'Right to rectification (correction) of data',
+    pp7l3:'Right to erasure ("right to be forgotten")',
+    pp7l4:'Right to data portability',
+    pp7l5:'Right to withdraw consent at any time',
+    pp7l6:'Right to lodge a complaint with the supervisory authority (Autoriteit Persoonsgegevens, The Netherlands)',
+    pp8title:'8. Sharing Data with Third Parties',
+    pp8text:'We do not share your personal data with any third parties. Data is processed solely by the data controller.',
+    pp9title:'9. Contact Regarding Personal Data',
+    pp9text:'For questions about personal data processing or to exercise your rights, please contact us at: <a href="mailto:tamara@bodymindhealing.nl">tamara@bodymindhealing.nl</a>.',
+    pp10title:'10. Changes to This Privacy Policy',
+    pp10text:'We reserve the right to make changes to this Privacy Policy. The current version is always available on this page. Last updated: March 2026.'
+}
+};
+
+let currentLang = 'pl';
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (T[lang][key]) el.innerHTML = T[lang][key];
+    });
+}
+</script>
+</body>
+</html>

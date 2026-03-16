@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pl" class="lang-pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulamin — Body Mind Healing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #C8963E; --amber: #D4A855; --violet: #7B6D8E; --plum: #4A3B5C;
+            --cream: #FFF8EE; --off-white: #FFFDF9; --text: #3A2E2A; --text-sec: #6B5D56;
+            --heading: 'Cormorant Garamond', Georgia, serif;
+            --body: 'Nunito Sans', 'Segoe UI', sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body); color: var(--cream); background: var(--plum); line-height: 1.7; overflow-x: hidden; }
+
+        /* ── Nav ── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(74,59,92,.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 2px 30px rgba(0,0,0,.2); border-bottom: 1px solid transparent; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { height: 38px; filter: brightness(0) invert(1); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,248,238,.7); text-decoration: none; transition: color .3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .lang-switch { display: flex; gap: 0; border: 1px solid rgba(200,150,62,.35); margin-left: .5rem; }
+        .lang-btn { padding: .35rem .7rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; background: transparent; color: rgba(255,248,238,.7); border: none; cursor: pointer; transition: all .3s; font-family: var(--body); }
+        .lang-btn.active { background: var(--gold); color: var(--off-white); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: .5rem; }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--cream); margin: 4px 0; transition: all .3s; }
+
+        /* ── Page Hero ── */
+        .page-hero { padding: 8rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(200,150,62,.1) 0%, transparent 70%); }
+        .page-hero h1 { font-family: var(--heading); font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 500; color: var(--cream); position: relative; }
+        .page-hero .gold-bar { width: 50px; height: 2px; background: var(--gold); margin: 1.2rem auto 0; position: relative; }
+
+        /* ── Content ── */
+        .content { max-width: 800px; margin: 0 auto; padding: 0 2rem 5rem; }
+        .content h2 { font-family: var(--heading); font-size: 1.6rem; font-weight: 600; color: var(--gold); margin: 2.5rem 0 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(200,150,62,.15); }
+        .content h2:first-of-type { border-top: none; padding-top: 0; }
+        .content p { font-size: .95rem; color: rgba(255,248,238,.7); line-height: 1.8; margin-bottom: 1rem; }
+        .content ul { list-style: none; padding: 0; margin-bottom: 1rem; }
+        .content li { font-size: .93rem; color: rgba(255,248,238,.65); padding: .3rem 0 .3rem 1.2rem; position: relative; line-height: 1.7; }
+        .content li::before { content: ''; position: absolute; left: 0; top: .7rem; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+        .content a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(200,150,62,.3); transition: border-color .3s; }
+        .content a:hover { border-color: var(--gold); }
+        .content strong { color: var(--cream); font-weight: 600; }
+
+        /* ── Footer ── */
+        footer { padding: 3rem 2rem 2rem; background: var(--plum); border-top: 1px solid rgba(200,150,62,.1); }
+        .footer-columns { max-width: 900px; margin: 0 auto 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .footer-col { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-col-title { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+        .footer-col a { font-size: .82rem; color: rgba(255,248,238,.55); text-decoration: none; transition: color .3s; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; font-size: .75rem; color: rgba(255,248,238,.35); padding-top: 1.5rem; border-top: 1px solid rgba(200,150,62,.08); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(74,59,92,.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(200,150,62,.15); }
+            .page-hero { padding: 7rem 1.5rem 3rem; }
+            .content { padding: 0 1.5rem 4rem; }
+            .footer-columns { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html"><img src="designs/2. elegant-wordmark-logo-design-body-mind-h_Qj_ze_0vRre_VeCI6uUQnw_F8akWxZZTeuudA0Ohr32dQ_cover_hd.png" alt="Body Mind Healing" class="nav-logo"></a>
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="index.html#o-mnie" data-i18n="navAbout">O mnie</a></li>
+            <li><a href="index.html#uslugi" data-i18n="navServices">Usługi</a></li>
+            <li><a href="index.html#opinie" data-i18n="navTestimonials">Opinie</a></li>
+            <li><a href="gallery.html" data-i18n="navGallery">Galeria</a></li>
+            <li><a href="index.html#kontakt" data-i18n="navContact">Kontakt</a></li>
+            <li>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+                    <button class="lang-btn" onclick="setLang('en')">EN</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<section class="page-hero">
+    <h1 data-i18n="pageTitle">Regulamin</h1>
+    <div class="gold-bar"></div>
+</section>
+
+<div class="content">
+    <h2 data-i18n="t1title">1. Postanowienia ogólne</h2>
+    <p data-i18n="t1text">Niniejsza strona internetowa jest prowadzona przez Tamarę Hofland-Doloechanova w ramach praktyki terapii holistycznej Body Mind Healing, z siedzibą pod adresem Blekerstraat 119, 1315 AD Almere, Holandia. Korzystanie ze strony oznacza akceptację niniejszego regulaminu.</p>
+
+    <h2 data-i18n="t2title">2. Charakter informacyjny strony</h2>
+    <p data-i18n="t2text">Treści zamieszczone na tej stronie mają wyłącznie charakter informacyjny i służą prezentacji oferowanych usług terapii holistycznej. Strona nie stanowi źródła porad medycznych, psychologicznych ani diagnostycznych.</p>
+
+    <h2 data-i18n="t3title">3. Brak porad medycznych</h2>
+    <p data-i18n="t3text">Usługi oferowane przez Body Mind Healing mają charakter komplementarny i nie stanowią substytutu profesjonalnej opieki medycznej, psychiatrycznej ani psychologicznej. Nie należy rezygnować z leczenia medycznego ani opóźniać wizyt lekarskich na podstawie informacji zamieszczonych na tej stronie lub uzyskanych podczas sesji terapeutycznych. W przypadku jakichkolwiek dolegliwości zdrowotnych zawsze należy skonsultować się z wykwalifikowanym lekarzem.</p>
+
+    <h2 data-i18n="t4title">4. Własność intelektualna</h2>
+    <p data-i18n="t4text">Wszystkie treści zamieszczone na stronie, w tym teksty, grafiki, zdjęcia, logotypy i elementy projektu, są własnością Body Mind Healing i podlegają ochronie na mocy prawa autorskiego. Kopiowanie, rozpowszechnianie lub wykorzystywanie materiałów ze strony bez pisemnej zgody jest zabronione.</p>
+
+    <h2 data-i18n="t5title">5. Ograniczenie odpowiedzialności</h2>
+    <p data-i18n="t5text">Body Mind Healing dokłada wszelkich starań, aby informacje zamieszczone na stronie były aktualne i prawidłowe, jednak nie ponosi odpowiedzialności za ewentualne błędy, nieścisłości lub nieaktualność treści. Korzystanie ze strony i podejmowanie decyzji na podstawie zamieszczonych informacji odbywa się na własne ryzyko użytkownika. Body Mind Healing nie ponosi odpowiedzialności za jakiekolwiek szkody bezpośrednie lub pośrednie wynikające z korzystania ze strony.</p>
+
+    <h2 data-i18n="t6title">6. Prawo właściwe</h2>
+    <p data-i18n="t6text">Niniejszy regulamin podlega prawu holenderskiemu. Wszelkie spory wynikające z korzystania ze strony lub świadczonych usług będą rozstrzygane przez właściwy sąd w Holandii.</p>
+
+    <h2 data-i18n="t7title">7. Kontakt</h2>
+    <p data-i18n="t7text">W przypadku pytań dotyczących niniejszego regulaminu prosimy o kontakt pod adresem: <a href="mailto:tamara@bodymindhealing.nl">tamara@bodymindhealing.nl</a>.</p>
+
+    <h2 data-i18n="t8title">8. Zmiany regulaminu</h2>
+    <p data-i18n="t8text">Zastrzegamy sobie prawo do wprowadzania zmian w niniejszym regulaminie. Aktualna wersja jest zawsze dostępna na tej stronie. Ostatnia aktualizacja: marzec 2026.</p>
+</div>
+
+<footer>
+    <div class="footer-columns">
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColGallery">Galeria i CV</div>
+            <a href="gallery.html" data-i18n="footGallery">Galeria</a>
+            <a href="cv.html">Curriculum Vitae</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColServices">Usługi</div>
+            <a href="reconnection.html">Reconnection & Reconnective Healing</a>
+            <a href="gdv-camera.html">GDV Camera</a>
+            <a href="vedapulse.html">VedaPulse</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColLegal">Informacje prawne</div>
+            <a href="privacy-policy.html" data-i18n="footPrivacy">Polityka Prywatności</a>
+            <a href="terms.html" data-i18n="footTerms">Regulamin</a>
+        </div>
+    </div>
+    <div class="footer-bottom" data-i18n="footer">&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+const T = {
+pl: {
+    navAbout:'O mnie', navServices:'Usługi', navTestimonials:'Opinie', navContact:'Kontakt',
+    navGallery:'Galeria', footGallery:'Galeria', footPrivacy:'Polityka Prywatności', footTerms:'Regulamin',
+    footColGallery:'Galeria i CV', footColServices:'Usługi', footColLegal:'Informacje prawne',
+    footer:'&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.',
+    pageTitle:'Regulamin',
+    t1title:'1. Postanowienia ogólne',
+    t1text:'Niniejsza strona internetowa jest prowadzona przez Tamarę Hofland-Doloechanova w ramach praktyki terapii holistycznej Body Mind Healing, z siedzibą pod adresem Blekerstraat 119, 1315 AD Almere, Holandia. Korzystanie ze strony oznacza akceptację niniejszego regulaminu.',
+    t2title:'2. Charakter informacyjny strony',
+    t2text:'Treści zamieszczone na tej stronie mają wyłącznie charakter informacyjny i służą prezentacji oferowanych usług terapii holistycznej. Strona nie stanowi źródła porad medycznych, psychologicznych ani diagnostycznych.',
+    t3title:'3. Brak porad medycznych',
+    t3text:'Usługi oferowane przez Body Mind Healing mają charakter komplementarny i nie stanowią substytutu profesjonalnej opieki medycznej, psychiatrycznej ani psychologicznej. Nie należy rezygnować z leczenia medycznego ani opóźniać wizyt lekarskich na podstawie informacji zamieszczonych na tej stronie lub uzyskanych podczas sesji terapeutycznych. W przypadku jakichkolwiek dolegliwości zdrowotnych zawsze należy skonsultować się z wykwalifikowanym lekarzem.',
+    t4title:'4. Własność intelektualna',
+    t4text:'Wszystkie treści zamieszczone na stronie, w tym teksty, grafiki, zdjęcia, logotypy i elementy projektu, są własnością Body Mind Healing i podlegają ochronie na mocy prawa autorskiego. Kopiowanie, rozpowszechnianie lub wykorzystywanie materiałów ze strony bez pisemnej zgody jest zabronione.',
+    t5title:'5. Ograniczenie odpowiedzialności',
+    t5text:'Body Mind Healing dokłada wszelkich starań, aby informacje zamieszczone na stronie były aktualne i prawidłowe, jednak nie ponosi odpowiedzialności za ewentualne błędy, nieścisłości lub nieaktualność treści. Korzystanie ze strony i podejmowanie decyzji na podstawie zamieszczonych informacji odbywa się na własne ryzyko użytkownika. Body Mind Healing nie ponosi odpowiedzialności za jakiekolwiek szkody bezpośrednie lub pośrednie wynikające z korzystania ze strony.',
+    t6title:'6. Prawo właściwe',
+    t6text:'Niniejszy regulamin podlega prawu holenderskiemu. Wszelkie spory wynikające z korzystania ze strony lub świadczonych usług będą rozstrzygane przez właściwy sąd w Holandii.',
+    t7title:'7. Kontakt',
+    t7text:'W przypadku pytań dotyczących niniejszego regulaminu prosimy o kontakt pod adresem: <a href="mailto:tamara@bodymindhealing.nl">tamara@bodymindhealing.nl</a>.',
+    t8title:'8. Zmiany regulaminu',
+    t8text:'Zastrzegamy sobie prawo do wprowadzania zmian w niniejszym regulaminie. Aktualna wersja jest zawsze dostępna na tej stronie. Ostatnia aktualizacja: marzec 2026.'
+},
+en: {
+    navAbout:'About', navServices:'Services', navTestimonials:'Testimonials', navContact:'Contact',
+    navGallery:'Gallery', footGallery:'Gallery', footPrivacy:'Privacy Policy', footTerms:'Terms of Use',
+    footColGallery:'Gallery & CV', footColServices:'Services', footColLegal:'Legal',
+    footer:'&copy; 2026 Body Mind Healing — Tamara Hofland. All rights reserved.',
+    pageTitle:'Terms of Use',
+    t1title:'1. General Provisions',
+    t1text:'This website is operated by Tamara Hofland-Doloechanova as part of the holistic therapy practice Body Mind Healing, located at Blekerstraat 119, 1315 AD Almere, The Netherlands. By using this website, you accept these terms of use.',
+    t2title:'2. Informational Purpose',
+    t2text:'The content on this website is for informational purposes only and serves to present the holistic therapy services offered. This website does not constitute a source of medical, psychological, or diagnostic advice.',
+    t3title:'3. No Medical Advice',
+    t3text:'Services offered by Body Mind Healing are complementary in nature and do not constitute a substitute for professional medical, psychiatric, or psychological care. You should not discontinue medical treatment or delay medical consultations based on information found on this website or obtained during therapy sessions. For any health concerns, always consult a qualified medical professional.',
+    t4title:'4. Intellectual Property',
+    t4text:'All content on this website, including texts, graphics, photographs, logos, and design elements, is the property of Body Mind Healing and is protected under copyright law. Copying, distributing, or using materials from this website without written permission is prohibited.',
+    t5title:'5. Limitation of Liability',
+    t5text:'Body Mind Healing makes every effort to ensure the information on this website is current and accurate, but accepts no liability for any errors, inaccuracies, or outdated content. Use of this website and decisions made based on its content are at the user\'s own risk. Body Mind Healing shall not be liable for any direct or indirect damages arising from the use of this website.',
+    t6title:'6. Applicable Law',
+    t6text:'These terms are governed by Dutch law. Any disputes arising from the use of this website or the services provided shall be resolved by the competent court in The Netherlands.',
+    t7title:'7. Contact',
+    t7text:'For questions regarding these terms of use, please contact us at: <a href="mailto:tamara@bodymindhealing.nl">tamara@bodymindhealing.nl</a>.',
+    t8title:'8. Changes to Terms',
+    t8text:'We reserve the right to make changes to these terms of use. The current version is always available on this page. Last updated: March 2026.'
+}
+};
+
+let currentLang = 'pl';
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (T[lang][key]) el.innerHTML = T[lang][key];
+    });
+}
+</script>
+</body>
+</html>

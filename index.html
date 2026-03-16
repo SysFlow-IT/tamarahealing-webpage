@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pl" class="lang-pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Mind Healing — Tamara Hofland-Doloechanova</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #C8963E; --amber: #D4A855; --violet: #7B6D8E; --plum: #4A3B5C;
+            --cream: #FFF8EE; --off-white: #FFFDF9; --text: #3A2E2A; --text-sec: #6B5D56;
+            --heading: 'Cormorant Garamond', Georgia, serif;
+            --body: 'Nunito Sans', 'Segoe UI', sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body); color: var(--text); background: var(--off-white); line-height: 1.7; overflow-x: hidden; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── Nav ── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: transparent; border-bottom: 1px solid rgba(255,255,255,.1); transition: background .5s, box-shadow .4s, border-color .5s; }
+        nav.scrolled { background: rgba(74,59,92,.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 2px 30px rgba(0,0,0,.2); border-color: transparent; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { height: 38px; filter: brightness(0) invert(1); transition: filter .5s; }
+        nav.scrolled .nav-logo { filter: brightness(0) invert(1); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,248,238,.85); text-decoration: none; transition: color .3s; }
+        .nav-links a:hover { color: var(--gold); }
+        nav.scrolled .nav-links a { color: rgba(255,248,238,.7); }
+        nav.scrolled .nav-links a:hover { color: var(--gold); }
+        .lang-switch { display: flex; gap: 0; border: 1px solid rgba(255,248,238,.3); margin-left: .5rem; }
+        nav.scrolled .lang-switch { border-color: rgba(200,150,62,.35); }
+        .lang-btn { padding: .35rem .7rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; background: transparent; color: rgba(255,248,238,.7); border: none; cursor: pointer; transition: all .3s; font-family: var(--body); }
+        .lang-btn.active { background: var(--gold); color: var(--off-white); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: .5rem; }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--cream); margin: 4px 0; transition: all .3s; }
+        nav.scrolled .nav-toggle span { background: var(--cream); }
+
+        /* ── Hero ── */
+        .hero { min-height: 100vh; display: flex; align-items: flex-end; justify-content: flex-start; position: relative; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; background: url('designs/1. ethereal-abstract-energy-field-flowing-g_JS_5jDqdTDqGUWug_Cv9oA_GOMdJY2GQ-Sw7M_ASI92Og_cover_hd.png') center/cover; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,59,92,.85) 0%, rgba(74,59,92,.6) 40%, rgba(74,59,92,.4) 70%, rgba(74,59,92,.75) 100%); }
+        .hero-content { position: relative; z-index: 2; padding: 4rem 3rem 5rem; max-width: 700px; }
+        .hero-badge { display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--cream); border: 1px solid rgba(255,248,238,.4); padding: .45rem 1.2rem; margin-bottom: 2rem; }
+        .hero h1 { font-family: var(--heading); font-size: clamp(2.8rem,6vw,4.5rem); font-weight: 500; line-height: 1.08; color: var(--cream); margin-bottom: 1.2rem; opacity: 0; animation: fadeUp .9s .5s cubic-bezier(.22,1,.36,1) forwards; }
+        .hero p { font-size: 1.1rem; color: rgba(255,248,238,.7); font-weight: 300; max-width: 480px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp .9s .7s cubic-bezier(.22,1,.36,1) forwards; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-cta { display: inline-flex; align-items: center; gap: .8rem; font-family: var(--body); font-size: .82rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--cream); background: transparent; border: 1px solid var(--gold); padding: .95rem 2rem; cursor: pointer; text-decoration: none; transition: all .4s cubic-bezier(.22,1,.36,1); opacity: 0; animation: fadeUp .9s .9s cubic-bezier(.22,1,.36,1) forwards; }
+        .hero-cta:hover { background: var(--gold); color: var(--plum); }
+        .hero-cta svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+        .hero-cta:hover svg { transform: translateX(4px); }
+
+        /* Scroll indicator */
+        .scroll-indicator { position: absolute; right: 2.5rem; bottom: 3rem; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: .8rem; }
+        .scroll-indicator span { writing-mode: vertical-rl; font-size: .7rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,248,238,.5); }
+        .scroll-line { width: 1px; height: 50px; background: rgba(255,248,238,.2); position: relative; overflow: hidden; }
+        .scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 1px; height: 100%; background: var(--gold); animation: scrollLine 2s infinite; }
+        @keyframes scrollLine { 0% { top: -100%; } 50% { top: 0; } 100% { top: 100%; } }
+
+        /* ── About Section ── */
+        .about-band { width: 100%; height: 50vh; min-height: 350px; background: url('designs/6. soft-abstract-background-with-warm-golde_PMasHbVBTHmzyoXl4paXng_8uN3meO4SfmZDsk9-S29yg_cover_hd.png') center/cover; position: relative; }
+        .about-band::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(200,150,62,.15) 0%, rgba(255,248,238,.3) 100%); }
+        .about-card { max-width: 1000px; margin: -12rem auto 0; position: relative; z-index: 2; padding: 3.5rem; background: rgba(255,253,249,.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(200,150,62,.1); display: flex; gap: 3.5rem; align-items: flex-start; }
+        .about-photo { flex-shrink: 0; width: 260px; position: relative; }
+        .about-photo img { width: 100%; height: auto; display: block; position: relative; z-index: 1; }
+        .about-photo::after { content: ''; position: absolute; top: 12px; left: 12px; right: -12px; bottom: -12px; border: 1px solid var(--gold); z-index: 0; }
+        .about-text { flex: 1; }
+        .about-text .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
+        .about-text .section-title { font-family: var(--heading); font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 500; color: var(--plum); line-height: 1.2; margin-bottom: 1.2rem; }
+        .about-text p { font-size: 1rem; color: var(--text-sec); line-height: 1.8; margin-bottom: 1rem; }
+        .about-extra { max-height: 0; overflow: hidden; transition: max-height .6s cubic-bezier(.22,1,.36,1); }
+        .about-extra.open { max-height: 2000px; }
+        .read-more-btn { background: none; border: none; font-family: var(--body); font-size: .82rem; font-weight: 600; color: var(--gold); cursor: pointer; padding: .5rem 0; letter-spacing: .05em; transition: color .3s; border-bottom: 1px solid var(--gold); }
+        .read-more-btn:hover { color: var(--plum); border-color: var(--plum); }
+        .about-quals { margin-top: 1.5rem; }
+        .about-quals h4 { font-family: var(--heading); font-size: 1.2rem; font-weight: 600; color: var(--plum); margin: 1.2rem 0 .6rem; }
+        .about-quals ul { list-style: none; padding: 0; }
+        .about-quals li { font-size: .9rem; color: var(--text-sec); padding: .25rem 0 .25rem 1.2rem; position: relative; }
+        .about-quals li::before { content: ''; position: absolute; left: 0; top: .7rem; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+        .about-section-wrap { padding: 0 2rem 5rem; }
+
+        /* ── Services (Dark) ── */
+        .services { background: var(--plum); text-align: center; padding: 6rem 2rem; position: relative; overflow: hidden; }
+        .services-texture { position: absolute; inset: 0; background: url('designs/4. seamless-subtle-repeating-pattern-very-f_7qy31mcGRKKr2MV8vfhB9Q_GIseaBiVRlaqlG2CGkyLMQ_cover_hd.png') center/400px repeat; opacity: .06; }
+        .services-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+        .services .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
+        .services .section-title { font-family: var(--heading); font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 500; color: var(--cream); line-height: 1.2; margin-bottom: 1.2rem; }
+        .services .section-divider { width: 36px; height: 1px; background: var(--gold); margin: 0 auto 2.5rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2.5rem; text-align: left; }
+        .service-card { padding: 2.5rem; background: rgba(0,0,0,.2); border: 1px solid rgba(200,150,62,.25); position: relative; overflow: hidden; transition: all .5s cubic-bezier(.22,1,.36,1); }
+        .service-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: radial-gradient(circle, rgba(200,150,62,.15) 0%, transparent 70%); transition: opacity .5s; opacity: .6; }
+        .service-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+        .service-card:hover::before { opacity: 1; }
+        .service-icon { width: 52px; height: 52px; border: 1px solid rgba(200,150,62,.35); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+        .service-icon img { width: 28px; height: 28px; object-fit: contain; filter: sepia(1) saturate(2) hue-rotate(-10deg) brightness(1.3); }
+        .service-card h3 { font-family: var(--heading); font-size: 1.4rem; font-weight: 600; color: var(--cream); margin-bottom: .8rem; }
+        .service-card > p { font-size: .92rem; color: rgba(255,248,238,.6); line-height: 1.7; }
+        .service-card .read-more-btn { color: var(--gold); border-bottom-color: var(--gold); }
+        .service-card .read-more-btn:hover { color: var(--cream); border-color: var(--cream); }
+        .service-detail { max-height: 0; overflow: hidden; transition: max-height .6s cubic-bezier(.22,1,.36,1); }
+        .service-detail.open { max-height: 3000px; }
+        .service-detail-inner { padding-top: 1.2rem; border-top: 1px solid rgba(200,150,62,.15); margin-top: 1.2rem; }
+        .service-detail-inner p { font-size: .9rem; color: rgba(255,248,238,.55); line-height: 1.75; margin-bottom: .8rem; }
+        .service-detail-inner ul { list-style: none; padding: 0; margin-bottom: 1rem; }
+        .service-detail-inner li { font-size: .88rem; color: rgba(255,248,238,.55); padding: .2rem 0 .2rem 1rem; position: relative; }
+        .service-detail-inner li::before { content: ''; position: absolute; left: 0; top: .6rem; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+        .service-detail-inner .price { display: inline-block; font-weight: 600; color: var(--gold); background: rgba(200,150,62,.1); padding: .3rem .8rem; margin-top: .3rem; font-size: .85rem; }
+
+        /* ── Visual Break ── */
+        .visual-break { width: 100%; height: 40vh; min-height: 300px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .visual-break-bg { position: absolute; inset: 0; background: url('designs/5. soft-decorative-background-panel-warm-go__EyqEqpMRbmxGb2xCDddGg_ti-dzQy4Q9SOVv7oKHtV4Q_cover_hd.png') center/cover; }
+        .visual-break-overlay { position: absolute; inset: 0; background: rgba(74,59,92,.7); }
+        .visual-break blockquote { position: relative; z-index: 2; font-family: var(--heading); font-size: clamp(1.4rem,3vw,2.2rem); font-style: italic; font-weight: 400; color: var(--cream); text-align: center; max-width: 600px; padding: 0 2rem; line-height: 1.4; }
+
+        /* ── Testimonials (Light) ── */
+        .testimonials { background: var(--off-white); text-align: center; padding: 6rem 2rem; position: relative; }
+        .testimonials-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+        .testimonials .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
+        .testimonials .section-title { font-family: var(--heading); font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 500; color: var(--plum); line-height: 1.2; margin-bottom: 1.2rem; }
+        .testimonials .section-divider { width: 36px; height: 1px; background: var(--gold); margin: 0 auto 2.5rem; }
+        .carousel-wrapper { position: relative; overflow: hidden; margin-top: 2.5rem; }
+        .carousel-track { display: flex; transition: transform .5s cubic-bezier(.22,1,.36,1); }
+        .carousel-card { flex: 0 0 calc(33.333% - 1.33rem); margin-right: 2rem; padding: 2.2rem; background: white; border: 1px solid rgba(200,150,62,.06); text-align: left; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.04); }
+        .carousel-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, var(--gold), var(--amber)); }
+        .carousel-card .t-text { font-size: .9rem; font-style: italic; color: var(--text-sec); line-height: 1.7; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; transition: all .3s; }
+        .carousel-card .t-text.expanded { -webkit-line-clamp: unset; }
+        .carousel-card .t-expand { font-size: .75rem; font-weight: 600; color: var(--gold); cursor: pointer; background: none; border: none; font-family: var(--body); letter-spacing: .05em; }
+        .carousel-card .t-author { font-size: .82rem; font-weight: 600; color: var(--plum); margin-top: .8rem; }
+        .carousel-card .t-location { font-size: .75rem; color: var(--text-sec); }
+        .carousel-controls { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 2rem; }
+        .carousel-btn { width: 42px; height: 42px; border: 1px solid rgba(200,150,62,.25); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; }
+        .carousel-btn:hover { background: var(--gold); border-color: var(--gold); }
+        .carousel-btn svg { width: 16px; height: 16px; stroke: var(--text-sec); fill: none; stroke-width: 2; transition: stroke .3s; }
+        .carousel-btn:hover svg { stroke: var(--off-white); }
+        .carousel-dots { display: flex; gap: .4rem; }
+        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(200,150,62,.2); border: none; cursor: pointer; transition: all .3s; padding: 0; }
+        .carousel-dot.active { background: var(--gold); transform: scale(1.2); }
+
+        /* ── Contact (Dark) ── */
+        .contact { background: var(--plum); text-align: center; padding: 6rem 2rem; position: relative; overflow: hidden; }
+        .contact-texture { position: absolute; inset: 0; background: url('designs/4. seamless-subtle-repeating-pattern-very-f_7qy31mcGRKKr2MV8vfhB9Q_GIseaBiVRlaqlG2CGkyLMQ_cover_hd.png') center/400px repeat; opacity: .04; }
+        .contact-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 2; }
+        .contact .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
+        .contact .section-title { font-family: var(--heading); font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 500; color: var(--cream); line-height: 1.2; margin-bottom: 1.2rem; }
+        .contact p.contact-sub { color: rgba(255,248,238,.6); }
+        .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; text-align: left; }
+        .contact-form .full { grid-column: 1 / -1; }
+        .form-group label { display: block; font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,248,238,.5); margin-bottom: .4rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: .85rem 1rem; font-family: var(--body); font-size: .92rem; color: var(--cream); background: rgba(0,0,0,.2); border: 1px solid rgba(200,150,62,.3); outline: none; transition: border-color .3s, box-shadow .3s; }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,248,238,.3); }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,150,62,.12); }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .contact-form .btn { width: 100%; text-align: center; margin-top: .3rem; background: var(--gold); color: var(--plum); font-family: var(--body); font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .95rem 2.5rem; border: none; cursor: pointer; transition: all .4s cubic-bezier(.22,1,.36,1); display: inline-block; }
+        .contact-form .btn:hover { background: var(--cream); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+        .contact-info { display: flex; justify-content: center; gap: 3rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(200,150,62,.15); }
+        .contact-info-item { text-align: center; }
+        .contact-info-item span { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .2rem; }
+        .contact-info-item p { font-size: .9rem; color: rgba(255,248,238,.6); }
+
+        /* ── Footer ── */
+        footer { padding: 3rem 2rem 2rem; background: var(--plum); border-top: 1px solid rgba(200,150,62,.1); }
+        .footer-columns { max-width: 900px; margin: 0 auto 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .footer-col { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-col-title { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+        .footer-col a { font-size: .82rem; color: rgba(255,248,238,.55); text-decoration: none; transition: color .3s; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; font-size: .75rem; color: rgba(255,248,238,.35); padding-top: 1.5rem; border-top: 1px solid rgba(200,150,62,.08); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(74,59,92,.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(200,150,62,.15); }
+            .hero-content { padding: 2rem 1.5rem 4rem; }
+            .scroll-indicator { right: 1rem; bottom: 1.5rem; }
+            .about-band { height: 30vh; min-height: 200px; }
+            .about-card { margin-top: -6rem; flex-direction: column; gap: 2rem; padding: 2rem; margin-left: 1rem; margin-right: 1rem; }
+            .about-photo { width: 200px; margin: 0 auto; }
+            .about-section-wrap { padding: 0 0 4rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .carousel-card { flex: 0 0 calc(100% - 1rem); margin-right: 1rem; }
+            .contact-form { grid-template-columns: 1fr; }
+            .contact-info { flex-direction: column; gap: 1.2rem; }
+            .services, .testimonials, .contact { padding: 4.5rem 1.5rem; }
+            .footer-columns { grid-template-columns: 1fr; text-align: center; }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .carousel-card { flex: 0 0 calc(50% - 1rem); }
+            .about-card { margin-top: -8rem; }
+        }
+    </style>
+</head>
+<body>
+
+
+<nav id="nav">
+    <div class="nav-inner">
+        <img src="designs/2. elegant-wordmark-logo-design-body-mind-h_Qj_ze_0vRre_VeCI6uUQnw_F8akWxZZTeuudA0Ohr32dQ_cover_hd.png" alt="Body Mind Healing" class="nav-logo">
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="#o-mnie" data-i18n="navAbout">O mnie</a></li>
+            <li><a href="#uslugi" data-i18n="navServices">Usługi</a></li>
+            <li><a href="#opinie" data-i18n="navTestimonials">Opinie</a></li>
+            <li><a href="gallery.html" data-i18n="navGallery">Galeria</a></li>
+            <li><a href="#kontakt" data-i18n="navContact">Kontakt</a></li>
+            <li>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+                    <button class="lang-btn" onclick="setLang('en')">EN</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-badge">Body Mind Healing</div>
+        <h1 data-i18n="heroTitle">Uzdrawianie Ciała,<br>Umysłu i Duszy</h1>
+        <p data-i18n="heroSub">Holistyczne podejście do zdrowia i harmonii wewnętrznej</p>
+        <a href="#kontakt" class="hero-cta" data-i18n="heroCta">Umów wizytę<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="scroll-indicator">
+        <span>Przewiń</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- About -->
+<div id="o-mnie">
+    <div class="about-band"></div>
+    <div class="about-section-wrap">
+        <div class="about-card reveal">
+            <div class="about-photo">
+                <img src="https://bodymindhealing.nl/wp-content/uploads/2024/04/Tamara-Doloechanova-bodymindhealing-418x813.jpg" alt="Tamara Hofland-Doloechanova">
+            </div>
+            <div class="about-text">
+                <div class="section-label" data-i18n="aboutLabel">O mnie</div>
+                <h2 class="section-title">Tamara Hofland-Doloechanova</h2>
+                <p data-i18n="aboutIntro">Jestem niezależnym terapeutą z wieloletnim doświadczeniem w leczeniu stanów psychologicznych, emocjonalnych, fizycznych i energetycznych. Urodziłam się w Związku Radzieckim, a od 1989 roku mieszkam i pracuję w Holandii.</p>
+                <p data-i18n="aboutMethod">Centralną zasadą mojej pracy terapeutycznej jest szybkość i skuteczność. Podczas kilku intensywnych sesji wspólnie identyfikujemy podświadome wzorce wyzwalaczy — to, co nazywam „programami wirusowymi". Te głęboko zakorzenione wzorce, często pochodzące z dzieciństwa, nieświadomie wpływają na emocje, zachowanie i codzienne funkcjonowanie. Po ich zidentyfikowaniu neutralizujemy ich emocjonalny wpływ. Wspomnienie pozostaje, ale ładunek emocjonalny znika.</p>
+                <button class="read-more-btn" onclick="toggleExtra(this)" data-i18n="readMore">Czytaj więcej</button>
+                <div class="about-extra">
+                    <p data-i18n="aboutWhy">Klienci często wybierają moje podejście, ponieważ koncentruje się na bezpośrednich rezultatach i znaczących zmianach. Zamiast spędzać lata na rozmowach o problemach, moja metoda pracuje nad identyfikacją głębszych podświadomych wzorców. Wielu klientów doświadcza silnego poczucia jasności, ulgi i wewnętrznej stabilności.</p>
+                    <div class="about-quals">
+                        <h4 data-i18n="qualsTitle">Wykształcenie i kwalifikacje</h4>
+                        <ul>
+                            <li data-i18n="qual1">Studia uniwersyteckie: Pedagogika i Psychologia</li>
+                            <li data-i18n="qual2">Akademia Psychoterapii Integralnej (HBO), Amersfoort, Holandia</li>
+                            <li data-i18n="qual3">Podstawy Nauk Medycznych — Anatomia, Fizjologia, Patologia (HBO)</li>
+                            <li data-i18n="qual4">Wiedza Psychospołeczna (HBO), Utrecht, Holandia</li>
+                            <li data-i18n="qual5">Terapeuta w instytucji psychiatrycznej dla dzieci (ZSRR)</li>
+                        </ul>
+                        <h4 data-i18n="methodsTitle">Metody i certyfikacje</h4>
+                        <ul>
+                            <li>EMDR, EFT, TAT, TFT, WHEE</li>
+                            <li data-i18n="meth1">Rebirthing, Mindfulness, Trening Komunikacji</li>
+                            <li data-i18n="meth2">Metoda Dorn-Breuss, Bańki lekarskie, Terapia misami dźwiękowymi</li>
+                            <li data-i18n="meth3">Quantum-Touch, Matrix Energetics, Regenesis Healing</li>
+                            <li data-i18n="meth4">The Reconnection / Reconnective Healing (Eric Pearl)</li>
+                            <li data-i18n="meth5">Reiki Master, SRT, Diagnostyka GDV i VedaPulse</li>
+                            <li data-i18n="meth6">Healing Tao (Master Mantak Chia), praktyki szamańskie</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Services -->
+<section class="services" id="uslugi">
+    <div class="services-texture"></div>
+    <div class="services-inner">
+        <div class="section-label reveal" data-i18n="servicesLabel">Usługi</div>
+        <h2 class="section-title reveal" data-i18n="servicesTitle">Jak mogę Ci pomóc</h2>
+        <div class="section-divider reveal"></div>
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card reveal">
+                <div class="service-icon"><img src="designs/7. abstract-symbolic-illustration-of-body-m_6UX32Mw6QrWSu8xuCAjC9w_Llckx14FQv-TcbVPA1FRoQ_cover_hd.png" alt=""></div>
+                <h3 data-i18n="s1title">Psychoterapia Integracyjna</h3>
+                <p data-i18n="s1desc">Praca z szerokim spektrum stanów psychologicznych i emocjonalnych, w tym zaburzenia osobowości, depresja, lęki, traumy, żałoba i problemy w relacjach.</p>
+                <button class="read-more-btn" onclick="toggleService(this)" data-i18n="readMore">Czytaj więcej</button>
+                <div class="service-detail">
+                    <div class="service-detail-inner">
+                        <p data-i18n="s1d1">Moja integracyjna metoda terapeutyczna opiera się na szybkości i skuteczności. Podczas kilku skupionych sesji identyfikujemy podświadome wzorce wyzwalaczy — „programy wirusowe" — głęboko zakorzenione wzorce z dzieciństwa lub znaczących doświadczeń życiowych.</p>
+                        <p data-i18n="s1d2">Obszary, w których pomagam:</p>
+                        <ul>
+                            <li data-i18n="s1l1">Zaburzenia osobowości i zachowania</li>
+                            <li data-i18n="s1l2">Dolegliwości psychosomatyczne</li>
+                            <li data-i18n="s1l3">Zaburzenia depresyjne</li>
+                            <li data-i18n="s1l4">Zaburzenia lękowe i paniczne</li>
+                            <li data-i18n="s1l5">Trauma i PTSD, w tym trauma nadużycia seksualnego</li>
+                            <li data-i18n="s1l6">Skomplikowana żałoba i strata</li>
+                            <li data-i18n="s1l7">Objawy obsesyjno-kompulsyjne</li>
+                            <li data-i18n="s1l8">Problemy w relacjach</li>
+                            <li data-i18n="s1l9">Zachowania autoagresywne i trudności tożsamościowe</li>
+                        </ul>
+                        <p data-i18n="s1d3">Stosowane metody: EMDR, EFT, TAT, TFT, WHEE, Rebirthing, Mindfulness.</p>
+                        <div class="price" data-i18n="s1price">€130 / godzina</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 2 -->
+            <div class="service-card reveal">
+                <div class="service-icon"><img src="designs/7. abstract-symbolic-illustration-of-body-m_6UX32Mw6QrWSu8xuCAjC9w_Llckx14FQv-TcbVPA1FRoQ_cover_hd.png" alt=""></div>
+                <h3 data-i18n="s2title">Dolegliwości Fizyczne i Psychosomatyczne</h3>
+                <p data-i18n="s2desc">Leczenie dolegliwości fizycznych, w tym korekcja kręgosłupa, bóle szyi i pleców, oraz terapie manualne i ciałowe.</p>
+                <button class="read-more-btn" onclick="toggleService(this)" data-i18n="readMore">Czytaj więcej</button>
+                <div class="service-detail">
+                    <div class="service-detail-inner">
+                        <p data-i18n="s2d1">Stosuję różnorodne terapie zorientowane na ciało, aby pomóc w dolegliwościach fizycznych i objawach psychosomatycznych:</p>
+                        <ul>
+                            <li data-i18n="s2l1">Metoda Dorn-Breuss — korekcja i ustawianie kręgosłupa</li>
+                            <li data-i18n="s2l2">Bańki lekarskie (Cupping Therapy)</li>
+                            <li data-i18n="s2l3">Terapia misami dźwiękowymi wg Petera Hessa</li>
+                            <li data-i18n="s2l4">Masaż miodem</li>
+                            <li data-i18n="s2l5">Terapia punktów spustowych (Trigger Point)</li>
+                            <li data-i18n="s2l6">Body Drum Release</li>
+                        </ul>
+                        <p data-i18n="s2d2">Pomoc w: korekcji bioder, bólach szyi/pleców, problemach z kręgosłupem, napięciach mięśniowych i dolegliwościach psychosomatycznych.</p>
+                        <div class="price" data-i18n="s2price">€130 / godzina</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 3 -->
+            <div class="service-card reveal">
+                <div class="service-icon"><img src="designs/7. abstract-symbolic-illustration-of-body-m_6UX32Mw6QrWSu8xuCAjC9w_Llckx14FQv-TcbVPA1FRoQ_cover_hd.png" alt=""></div>
+                <h3 data-i18n="s3title">Diagnostyka GDV i VedaPulse</h3>
+                <p data-i18n="s3desc">Zaawansowana diagnostyka energetyczna ciała: komputerowa analiza aury (metoda Kirliana) oraz cyfrowa diagnostyka pulsu łącząca nowoczesną technologię z medycyną ajurwedyjską.</p>
+                <button class="read-more-btn" onclick="toggleService(this)" data-i18n="readMore">Czytaj więcej</button>
+                <div class="service-detail">
+                    <div class="service-detail-inner">
+                        <p data-i18n="s3d1"><strong>Kamera GDV (prof. Korotkov)</strong> — Technika Wizualizacji Wyładowań Gazowych to komputerowa rejestracja i analiza świecenia wyładowań gazowych obiektów biologicznych. Na podstawie efektu Kirliana, zespół naukowców pod kierunkiem prof. Korotkova opracował tę metodę ekspresowej diagnostyki ciała ludzkiego.</p>
+                        <p data-i18n="s3d2"><strong>VedaPulse (Oleg Sorokin)</strong> — cyfrowy system diagnostyki pulsu, który ocenia: równowagę autonomicznego układu nerwowego, poziom stresu fizycznego i emocjonalnego, zdolność organizmu do regeneracji, stan funkcjonalny różnych układów ciała oraz ogólny bilans energetyczny i witalność.</p>
+                        <div class="price" data-i18n="s3price">VedaPulse: €90 (z pełnym raportem pisemnym)</div>
+                        <p style="margin-top:1rem"><a href="gdv-camera.html" class="read-more-btn" data-i18n="s3link" style="display:inline">GDV Camera →</a>&nbsp;&nbsp;<a href="vedapulse.html" class="read-more-btn" data-i18n="s3link2" style="display:inline">VedaPulse →</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 4 -->
+            <div class="service-card reveal">
+                <div class="service-icon"><img src="designs/7. abstract-symbolic-illustration-of-body-m_6UX32Mw6QrWSu8xuCAjC9w_Llckx14FQv-TcbVPA1FRoQ_cover_hd.png" alt=""></div>
+                <h3 data-i18n="s4title">The Reconnection i Reconnective Healing</h3>
+                <p data-i18n="s4desc">Metody uzdrawiania wprowadzone przez dr. Erica Pearla, oparte na dostępie do szerszego spektrum częstotliwości uzdrawiających obejmujących energię, światło i informację.</p>
+                <button class="read-more-btn" onclick="toggleService(this)" data-i18n="readMore">Czytaj więcej</button>
+                <div class="service-detail">
+                    <div class="service-detail-inner">
+                        <p data-i18n="s4d1"><strong>Reconnective Healing</strong> — metoda, w której praktyk pracuje z częstotliwościami uzdrawiającymi, wspierając naturalne zdolności ciała do przywracania równowagi. Nie stosuje się manipulacji ciałem ani technik takich jak masaż. Klienci często doświadczają: głębokiego relaksu, poczucia wewnętrznej równowagi, uwolnienia emocjonalnego i zwiększonej jasności.</p>
+                        <p data-i18n="s4d2"><strong>The Reconnection</strong> — jednorazowy proces składający się z dwóch sesji. Jego celem jest ponowne połączenie linii energetycznych osoby z uniwersalną siatką energetyczną, wspierając pełniejsze wyrównanie ze ścieżką życiową i potencjałem.</p>
+                        <p data-i18n="s4d3">Reconnective Healing można wykonywać wielokrotnie. The Reconnection przeprowadza się tylko raz w życiu.</p>
+                        <div class="price" data-i18n="s4price">Reconnective Healing: €80 | The Reconnection: €333 (cena ustalona przez Erica Pearla)</div>
+                        <p style="margin-top:1rem"><a href="reconnection.html" class="read-more-btn" data-i18n="s4link" style="display:inline">Dowiedz się więcej →</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Visual Break -->
+<div class="visual-break">
+    <div class="visual-break-bg"></div>
+    <div class="visual-break-overlay"></div>
+    <blockquote data-i18n="visualQuote">Prawdziwe uzdrowienie zaczyna się od wewnątrz</blockquote>
+</div>
+
+<!-- Testimonials -->
+<section class="testimonials" id="opinie">
+    <div class="testimonials-inner">
+        <div class="section-label reveal" data-i18n="testimonialsLabel">Opinie</div>
+        <h2 class="section-title reveal" data-i18n="testimonialsTitle">Co mówią moi klienci</h2>
+        <div class="section-divider reveal"></div>
+        <div class="carousel-wrapper reveal">
+            <div class="carousel-track" id="carouselTrack"></div>
+        </div>
+        <div class="carousel-controls reveal">
+            <button class="carousel-btn" onclick="carouselMove(-1)"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></button>
+            <div class="carousel-dots" id="carouselDots"></div>
+            <button class="carousel-btn" onclick="carouselMove(1)"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="kontakt">
+    <div class="contact-texture"></div>
+    <div class="contact-inner">
+        <div class="section-label reveal" data-i18n="contactLabel">Kontakt</div>
+        <h2 class="section-title reveal" data-i18n="contactTitle">Zacznij swoją podróż<br>ku uzdrowieniu</h2>
+        <p class="contact-sub reveal" data-i18n="contactSub">Skontaktuj się, aby umówić bezpłatną konsultację wstępną</p>
+        <form class="contact-form reveal" id="contactForm" onsubmit="return handleSubmit(event)">
+            <div class="form-group"><label data-i18n="formName">Imię</label><input type="text" id="cfName" required></div>
+            <div class="form-group"><label>Email</label><input type="email" id="cfEmail" required></div>
+            <div class="form-group"><label data-i18n="formPhone">Telefon</label><input type="tel" id="cfPhone"></div>
+            <div class="form-group"><label data-i18n="formCaptcha">Weryfikacja</label><div style="display:flex;align-items:center;gap:.8rem"><span id="captchaQ" style="color:var(--gold);font-weight:600;font-size:.95rem;white-space:nowrap"></span><input type="text" id="cfCaptcha" required style="width:80px" placeholder="?"></div></div>
+            <div class="form-group full"><label data-i18n="formMsg">Wiadomość</label><textarea id="cfMsg" required></textarea></div>
+            <div class="form-group full" style="display:flex;align-items:flex-start;gap:.6rem">
+                <input type="checkbox" id="cfGdpr" required style="margin-top:.35rem;accent-color:var(--gold);width:16px;height:16px;flex-shrink:0">
+                <label for="cfGdpr" style="font-size:.78rem;text-transform:none;letter-spacing:0;line-height:1.5;cursor:pointer" data-i18n="formGdpr">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu odpowiedzi na zapytanie, zgodnie z <a href="privacy-policy.html" style="color:var(--gold)">Polityką Prywatności</a>.</label>
+            </div>
+            <div class="full"><button type="submit" class="btn" data-i18n="formSend">Wyślij wiadomość</button></div>
+            <div class="full" id="formFeedback" style="display:none;padding:.8rem;font-size:.85rem;text-align:center;margin-top:.5rem"></div>
+        </form>
+        <div class="contact-info reveal">
+            <div class="contact-info-item"><span>Email</span><p><a href="mailto:tamara@bodymindhealing.nl" style="color:rgba(255,248,238,.6);text-decoration:none">tamara@bodymindhealing.nl</a></p></div>
+            <div class="contact-info-item"><span>WhatsApp</span><p>+31 6 41450762</p></div>
+            <div class="contact-info-item">
+                <span data-i18n="contactLoc">Lokalizacja</span>
+                <p>Blekerstraat 119<br>1315 AD Almere<br data-i18n="contactCountry">Holandia</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-columns">
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColGallery">Galeria i CV</div>
+            <a href="gallery.html" data-i18n="footGallery">Galeria</a>
+            <a href="cv.html">Curriculum Vitae</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColServices">Usługi</div>
+            <a href="reconnection.html">Reconnection & Reconnective Healing</a>
+            <a href="gdv-camera.html">GDV Camera</a>
+            <a href="vedapulse.html">VedaPulse</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColLegal">Informacje prawne</div>
+            <a href="privacy-policy.html" data-i18n="footPrivacy">Polityka Prywatności</a>
+            <a href="terms.html" data-i18n="footTerms">Regulamin</a>
+        </div>
+    </div>
+    <div class="footer-bottom" data-i18n="footer">&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+// ═══════ TRANSLATIONS ═══════
+const T = {
+pl: {
+    navAbout:'O mnie', navServices:'Usługi', navTestimonials:'Opinie', navContact:'Kontakt',
+    heroTitle:'Uzdrawianie Ciała,<br>Umysłu i Duszy', heroSub:'Holistyczne podejście do zdrowia i harmonii wewnętrznej', heroCta:'Umów wizytę',
+    aboutLabel:'O mnie',
+    aboutIntro:'Jestem niezależnym terapeutą z wieloletnim doświadczeniem w leczeniu stanów psychologicznych, emocjonalnych, fizycznych i energetycznych. Urodziłam się w Związku Radzieckim, a od 1989 roku mieszkam i pracuję w Holandii.',
+    aboutMethod:'Centralną zasadą mojej pracy terapeutycznej jest szybkość i skuteczność. Podczas kilku intensywnych sesji wspólnie identyfikujemy podświadome wzorce wyzwalaczy — to, co nazywam „programami wirusowymi". Te głęboko zakorzenione wzorce, często pochodzące z dzieciństwa, nieświadomie wpływają na emocje, zachowanie i codzienne funkcjonowanie. Po ich zidentyfikowaniu neutralizujemy ich emocjonalny wpływ. Wspomnienie pozostaje, ale ładunek emocjonalny znika.',
+    readMore:'Czytaj więcej', readLess:'Zwiń',
+    aboutWhy:'Klienci często wybierają moje podejście, ponieważ koncentruje się na bezpośrednich rezultatach i znaczących zmianach. Zamiast spędzać lata na rozmowach o problemach, moja metoda pracuje nad identyfikacją głębszych podświadomych wzorców. Wielu klientów doświadcza silnego poczucia jasności, ulgi i wewnętrznej stabilności.',
+    qualsTitle:'Wykształcenie i kwalifikacje', methodsTitle:'Metody i certyfikacje',
+    qual1:'Studia uniwersyteckie: Pedagogika i Psychologia',
+    qual2:'Akademia Psychoterapii Integralnej (HBO), Amersfoort, Holandia',
+    qual3:'Podstawy Nauk Medycznych — Anatomia, Fizjologia, Patologia (HBO)',
+    qual4:'Wiedza Psychospołeczna (HBO), Utrecht, Holandia',
+    qual5:'Terapeuta w instytucji psychiatrycznej dla dzieci (ZSRR)',
+    meth1:'Rebirthing, Mindfulness, Trening Komunikacji',
+    meth2:'Metoda Dorn-Breuss, Bańki lekarskie, Terapia misami dźwiękowymi',
+    meth3:'Quantum-Touch, Matrix Energetics, Regenesis Healing',
+    meth4:'The Reconnection / Reconnective Healing (Eric Pearl)',
+    meth5:'Reiki Master, SRT, Diagnostyka GDV i VedaPulse',
+    meth6:'Healing Tao (Master Mantak Chia), praktyki szamańskie',
+    servicesLabel:'Usługi', servicesTitle:'Jak mogę Ci pomóc',
+    s1title:'Psychoterapia Integracyjna',
+    s1desc:'Praca z szerokim spektrum stanów psychologicznych i emocjonalnych, w tym zaburzenia osobowości, depresja, lęki, traumy, żałoba i problemy w relacjach.',
+    s1d1:'Moja integracyjna metoda terapeutyczna opiera się na szybkości i skuteczności. Podczas kilku skupionych sesji identyfikujemy podświadome wzorce wyzwalaczy — „programy wirusowe" — głęboko zakorzenione wzorce z dzieciństwa lub znaczących doświadczeń życiowych.',
+    s1d2:'Obszary, w których pomagam:', s1d3:'Stosowane metody: EMDR, EFT, TAT, TFT, WHEE, Rebirthing, Mindfulness.',
+    s1l1:'Zaburzenia osobowości i zachowania', s1l2:'Dolegliwości psychosomatyczne', s1l3:'Zaburzenia depresyjne',
+    s1l4:'Zaburzenia lękowe i paniczne', s1l5:'Trauma i PTSD, w tym trauma nadużycia seksualnego',
+    s1l6:'Skomplikowana żałoba i strata', s1l7:'Objawy obsesyjno-kompulsyjne', s1l8:'Problemy w relacjach',
+    s1l9:'Zachowania autoagresywne i trudności tożsamościowe', s1price:'€130 / godzina',
+    s2title:'Dolegliwości Fizyczne i Psychosomatyczne',
+    s2desc:'Leczenie dolegliwości fizycznych, w tym korekcja kręgosłupa, bóle szyi i pleców, oraz terapie manualne i ciałowe.',
+    s2d1:'Stosuję różnorodne terapie zorientowane na ciało, aby pomóc w dolegliwościach fizycznych i objawach psychosomatycznych:',
+    s2l1:'Metoda Dorn-Breuss — korekcja i ustawianie kręgosłupa', s2l2:'Bańki lekarskie (Cupping Therapy)',
+    s2l3:'Terapia misami dźwiękowymi wg Petera Hessa', s2l4:'Masaż miodem',
+    s2l5:'Terapia punktów spustowych (Trigger Point)', s2l6:'Body Drum Release',
+    s2d2:'Pomoc w: korekcji bioder, bólach szyi/pleców, problemach z kręgosłupem, napięciach mięśniowych i dolegliwościach psychosomatycznych.',
+    s2price:'€130 / godzina',
+    s3title:'Diagnostyka GDV i VedaPulse',
+    s3desc:'Zaawansowana diagnostyka energetyczna ciała: komputerowa analiza aury (metoda Kirliana) oraz cyfrowa diagnostyka pulsu łącząca nowoczesną technologię z medycyną ajurwedyjską.',
+    s3d1:'<strong>Kamera GDV (prof. Korotkov)</strong> — Technika Wizualizacji Wyładowań Gazowych to komputerowa rejestracja i analiza świecenia wyładowań gazowych obiektów biologicznych. Na podstawie efektu Kirliana, zespół naukowców pod kierunkiem prof. Korotkova opracował tę metodę ekspresowej diagnostyki ciała ludzkiego.',
+    s3d2:'<strong>VedaPulse (Oleg Sorokin)</strong> — cyfrowy system diagnostyki pulsu, który ocenia: równowagę autonomicznego układu nerwowego, poziom stresu fizycznego i emocjonalnego, zdolność organizmu do regeneracji, stan funkcjonalny różnych układów ciała oraz ogólny bilans energetyczny i witalność.',
+    s3price:'VedaPulse: €90 (z pełnym raportem pisemnym)',
+    s4title:'The Reconnection i Reconnective Healing',
+    s4desc:'Metody uzdrawiania wprowadzone przez dr. Erica Pearla, oparte na dostępie do szerszego spektrum częstotliwości uzdrawiających obejmujących energię, światło i informację.',
+    s4d1:'<strong>Reconnective Healing</strong> — metoda, w której praktyk pracuje z częstotliwościami uzdrawiającymi, wspierając naturalne zdolności ciała do przywracania równowagi. Nie stosuje się manipulacji ciałem ani technik takich jak masaż. Klienci często doświadczają: głębokiego relaksu, poczucia wewnętrznej równowagi, uwolnienia emocjonalnego i zwiększonej jasności.',
+    s4d2:'<strong>The Reconnection</strong> — jednorazowy proces składający się z dwóch sesji. Jego celem jest ponowne połączenie linii energetycznych osoby z uniwersalną siatką energetyczną, wspierając pełniejsze wyrównanie ze ścieżką życiową i potencjałem.',
+    s4d3:'Reconnective Healing można wykonywać wielokrotnie. The Reconnection przeprowadza się tylko raz w życiu.',
+    s4price:'Reconnective Healing: €80 | The Reconnection: €333 (cena ustalona przez Erica Pearla)',
+    testimonialsLabel:'Opinie', testimonialsTitle:'Co mówią moi klienci',
+    contactLabel:'Kontakt', contactTitle:'Zacznij swoją podróż<br>ku uzdrowieniu',
+    contactSub:'Skontaktuj się, aby umówić bezpłatną konsultację wstępną',
+    formName:'Imię', formPhone:'Telefon', formMsg:'Wiadomość', formSend:'Wyślij wiadomość',
+    contactLoc:'Lokalizacja', contactCountry:'Holandia',
+    footer:'&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.',
+    expandText:'rozwiń', collapseText:'zwiń',
+    visualQuote:'Prawdziwe uzdrowienie zaczyna się od wewnątrz',
+    navGallery:'Galeria', footGallery:'Galeria', footPrivacy:'Polityka Prywatności', footTerms:'Regulamin',
+    s3link:'GDV Camera →', s3link2:'VedaPulse →', s4link:'Dowiedz się więcej →',
+    formCaptcha:'Weryfikacja',
+    formGdpr:'Wyrażam zgodę na przetwarzanie moich danych osobowych w celu odpowiedzi na zapytanie, zgodnie z <a href="privacy-policy.html" style="color:var(--gold)">Polityką Prywatności</a>.',
+    formSuccess:'Dziękujemy! Wiadomość została wysłana.', formCaptchaError:'Błędna odpowiedź na pytanie weryfikacyjne.',
+    footColGallery:'Galeria i CV', footColServices:'Usługi', footColLegal:'Informacje prawne'
+},
+en: {
+    navAbout:'About', navServices:'Services', navTestimonials:'Testimonials', navContact:'Contact',
+    heroTitle:'Healing Body,<br>Mind & Soul', heroSub:'A holistic approach to health and inner harmony', heroCta:'Book a session',
+    aboutLabel:'About me',
+    aboutIntro:'I am an independent therapist with extensive experience in the treatment of psychological, emotional, physical and energetic conditions. Originally born in the Soviet Union, I have been living and working in the Netherlands since 1989.',
+    aboutMethod:'The central principle of my therapeutic work is speed and effectiveness. During several focused sessions, I work together with clients to identify subconscious trigger patterns — what I describe as "viral programs." These deeply rooted patterns, often originating from childhood, unconsciously influence emotions, behavior, and daily functioning. Once identified, we neutralize their emotional impact. The memory remains, but the emotional charge disappears.',
+    readMore:'Read more', readLess:'Show less',
+    aboutWhy:'Clients often choose my approach because it focuses on direct results and meaningful change. Rather than spending years only talking about problems, my method works to identify deeper subconscious patterns. Many clients experience a strong sense of clarity, relief, and inner stability.',
+    qualsTitle:'Education & qualifications', methodsTitle:'Methods & certifications',
+    qual1:'University studies in Education and Psychology',
+    qual2:'Academy for Integral Psychotherapy (HBO), Amersfoort, Netherlands',
+    qual3:'Medical Basic Sciences — Anatomy, Physiology, Pathology (HBO)',
+    qual4:'Psychosocial Basic Knowledge (HBO), Utrecht, Netherlands',
+    qual5:'Therapist in a psychiatric institution for children (USSR)',
+    meth1:'Rebirthing, Mindfulness, Communication Skills Training',
+    meth2:'Dorn-Breuss Method, Cupping Therapy, Sound Bowl Therapy',
+    meth3:'Quantum-Touch, Matrix Energetics, Regenesis Healing',
+    meth4:'The Reconnection / Reconnective Healing (Eric Pearl)',
+    meth5:'Reiki Master, SRT, GDV and VedaPulse Diagnostics',
+    meth6:'Healing Tao (Master Mantak Chia), Shamanic Practices',
+    servicesLabel:'Services', servicesTitle:'How I can help you',
+    s1title:'Integrative Psychotherapy',
+    s1desc:'Working with a broad spectrum of psychological and emotional conditions including personality disorders, depression, anxiety, trauma, grief and relationship issues.',
+    s1d1:'My integrative therapeutic method focuses on speed and effectiveness. During several focused sessions, we identify subconscious trigger patterns — "viral programs" — deeply rooted patterns from childhood or significant life experiences.',
+    s1d2:'Areas I can help with:', s1d3:'Methods used: EMDR, EFT, TAT, TFT, WHEE, Rebirthing, Mindfulness.',
+    s1l1:'Personality and behavioral disorders', s1l2:'Psychosomatic complaints', s1l3:'Depressive disorders',
+    s1l4:'Anxiety and panic disorders', s1l5:'Trauma and PTSD, including sexual abuse trauma',
+    s1l6:'Complicated grief and loss', s1l7:'Obsessive-compulsive symptoms', s1l8:'Relationship problems',
+    s1l9:'Self-injurious behavior and identity-related difficulties', s1price:'€130 / hour',
+    s2title:'Physical Complaints & Psychosomatic Symptoms',
+    s2desc:'Treatment of physical conditions including spinal correction, neck/back pain, and body-oriented manual therapies.',
+    s2d1:'I use various body-oriented therapies to help with physical complaints and psychosomatic symptoms:',
+    s2l1:'Dorn-Breuss Method — spinal alignment and correction', s2l2:'Cupping Therapy',
+    s2l3:'Sound Bowl Therapy (Peter Hess method)', s2l4:'Honey Massage Therapy',
+    s2l5:'Trigger Point Therapy', s2l6:'Body Drum Release',
+    s2d2:'Help with: hip adjustment, neck/back pain, spinal problems, muscle tension and psychosomatic complaints.',
+    s2price:'€130 / hour',
+    s3title:'GDV Camera & VedaPulse Diagnostics',
+    s3desc:'Advanced body energy diagnostics: computerized aura analysis (Kirlian method) and digital pulse diagnostics combining modern technology with Ayurvedic medicine.',
+    s3d1:'<strong>GDV Camera (Prof. Korotkov)</strong> — Gas Discharge Visualization Technique is computer registration and analysis of gas discharge glow of biological objects. Based on the Kirlian effect, Prof. Korotkov\'s team developed this method for comprehensive express diagnostics of the human body.',
+    s3d2:'<strong>VedaPulse (Oleg Sorokin)</strong> — a digital pulse diagnostic system evaluating: autonomic nervous system balance, physical and emotional stress levels, body\'s recovery capacity, functional state of body systems, and overall energy balance and vitality.',
+    s3price:'VedaPulse: €90 (including full written report)',
+    s4title:'The Reconnection & Reconnective Healing',
+    s4desc:'Healing approaches introduced by Dr. Eric Pearl, based on accessing a wider spectrum of healing frequencies involving energy, light, and information.',
+    s4d1:'<strong>Reconnective Healing</strong> — a method where the practitioner works with healing frequencies to support the body\'s natural ability to restore balance. No body manipulation or techniques like massage are used. Clients often report: deep relaxation, inner balance, emotional release, and increased clarity.',
+    s4d2:'<strong>The Reconnection</strong> — a one-time process consisting of two sessions, designed to reconnect a person\'s energy lines with the universal energy grid, supporting fuller alignment with life path and potential.',
+    s4d3:'Reconnective Healing can be done as many times as you wish. The Reconnection is performed only once in a lifetime.',
+    s4price:'Reconnective Healing: €80 | The Reconnection: €333 (price set by Eric Pearl)',
+    testimonialsLabel:'Testimonials', testimonialsTitle:'What my clients say',
+    contactLabel:'Contact', contactTitle:'Begin your journey<br>toward healing',
+    contactSub:'Get in touch to schedule a free initial consultation',
+    formName:'Name', formPhone:'Phone', formMsg:'Message', formSend:'Send message',
+    contactLoc:'Location', contactCountry:'The Netherlands',
+    footer:'&copy; 2026 Body Mind Healing — Tamara Hofland. All rights reserved.',
+    expandText:'expand', collapseText:'collapse',
+    visualQuote:'True healing begins from within',
+    navGallery:'Gallery', footGallery:'Gallery', footPrivacy:'Privacy Policy', footTerms:'Terms of Use',
+    s3link:'GDV Camera →', s3link2:'VedaPulse →', s4link:'Learn more →',
+    formCaptcha:'Verification',
+    formGdpr:'I consent to the processing of my personal data for the purpose of responding to my inquiry, in accordance with the <a href="privacy-policy.html" style="color:var(--gold)">Privacy Policy</a>.',
+    formSuccess:'Thank you! Your message has been sent.', formCaptchaError:'Incorrect verification answer.',
+    footColGallery:'Gallery & CV', footColServices:'Services', footColLegal:'Legal'
+}
+};
+
+// ═══════ TESTIMONIALS DATA ═══════
+const testimonials = [
+{name:'Kasia i Mariusz',loc:'Luxemburg',
+pl:'Sesje z Tamarą to dla nas coś naprawdę wyjątkowego. Każde spotkanie jest jak odkrywanie nowej części siebie – nie tylko na poziomie ciała, ale też umysłu i ducha. Tamara ma ogromną wiedzę i niesamowite wyczucie, a jej wskazówki dotyczące tego, jak „obsługiwać" siebie, w realny sposób zmieniły nasze codzienne funkcjonowanie. Z całego serca dziękujemy i polecamy.',
+en:'Sessions with Tamara are truly exceptional for us. Each meeting is like discovering a new part of yourself — body, mind and spirit. Tamara has vast knowledge and incredible intuition. Her guidance on how to navigate ourselves has genuinely changed our daily functioning. We wholeheartedly thank and recommend her.'},
+{name:'Bogdan',loc:'Norwegia',
+pl:'Przez długi czas miałem problemy z kręgosłupem oraz trudny okres psychiczny. Miałem też problemy mentalne i czułem duże napięcie w głowie. Po spotkaniu z Tobą poczułem dużą ulgę. Ból w kręgosłupie znikł, a w mojej głowie pojawił się spokój i równowaga. Pomogłaś również mojej mamie, która po wizycie u Ciebie także poczuła wyraźną poprawę.',
+en:'I had long-standing spine problems and a difficult psychological period with mental tension. After meeting Tamara, I felt great relief. The back pain disappeared and my mind found peace and balance. She also helped my mother, who felt clear improvement after her visit.'},
+{name:'Hubert',loc:'',
+pl:'Pierwszy raz do Tamary trafiłem mając 20 lat w 2023 r. Na pierwszej wizycie przeprowadziliśmy badanie skanujące aurę i analizę opartą o datę urodzenia — dosłownie wszystko co Tamara odczytała miało odzwierciedlenie w moim życiu. Tamara przeprowadziła zabieg Reconnection wg metody E. Pearla i od tamtego momentu wszystko zaczęło mi sprzyjać i „układać się". Z całego serca polecam każdemu odwiedzić Tamarę.',
+en:'I first visited Tamara at age 20 in 2023. She conducted an aura scan and birth date analysis — everything she read was shockingly accurate. She performed The Reconnection (Eric Pearl method), and since then everything started falling into place. I wholeheartedly recommend visiting Tamara.'},
+{name:'Joanna',loc:'Melbourne, Australia',
+pl:'Moje doświadczenie z Tamarą było fantastyczne. Tamara szybko mnie „odczytała" i zrozumiała z czym się mierzę. Poświęciła mi kilka godzin i udało nam się dotrzeć do wielu głęboko zakorzenionych problemów. Gdy wyszłam z sesji, poczułam ulgę, spokój i wewnętrzną klarowność. Od tamtej pory w moim życiu zaszło wiele dobrych zmian.',
+en:'My experience with Tamara was fantastic. She quickly "read" me and understood what I was facing. She spent several hours reaching deeply rooted problems. I left feeling relief, peace, and inner clarity. Since then, many positive changes have happened in my life.'},
+{name:'Bartek',loc:'',
+pl:'Bardzo polecam terapie u Tamary, jest niesamowitą osobą i potrafi czynić cuda.',
+en:'I highly recommend therapy with Tamara — she is an amazing person who can work wonders.'},
+{name:'Grzegorz S.',loc:'',
+pl:'Tamarę poznałem pod koniec 2024 roku z problemem kręgosłupa i nogi. Po spotkaniu i po zaleceniach Tamary problem naprawdę zniknął. Wspaniała, serdeczna terapeutka, którą każdemu mogę polecić.',
+en:'I met Tamara in late 2024 with spine and leg problems. After her session and recommendations, the problem truly disappeared. A wonderful, warm therapist I can recommend to everyone.'},
+{name:'Adam Johman',loc:'',
+pl:'Kiedy do niej trafiłem, byłem w bardzo ciemnym miejscu. Niosłem w sobie ogrom traum z dzieciństwa, zmagałem się z ciężką depresją i myślami samobójczymi. Spotkanie z Tamarą było przełomem. Już jedna sesja sprawiła, że coś się poukładało. Depresja totalnie zniknęła, a życie zaczęło nabierać kolorów. Zmiana była tak ogromna, że przyprowadziłem Tamarze całą moją rodzinę. Z pełnym przekonaniem mogę powiedzieć: Tamara uratowała mi życie.',
+en:'When I came to Tamara, I was in a very dark place — carrying childhood trauma, battling severe depression with suicidal thoughts. Meeting her was my breakthrough. After just one session, something clicked. Depression completely vanished, life gained color. The change was so profound I brought my entire family. Tamara saved my life.'},
+{name:'Ania',loc:'',
+pl:'To było przepiękne doświadczenie, które przebudziło we mnie moją autentyczną naturę składającą się z dwóch biegunów: światła i cienia, tworzących spójność i prostotę z akceptacją i uwolnieniem blokad. Polecam bardzo.',
+en:'A beautiful experience that awakened my authentic nature — the interplay of light and shadow, creating coherence with acceptance and release of blockages. Highly recommended.'},
+{name:'Magdalena B.',loc:'',
+pl:'Tamara jest jedną z najlepszych specjalistek, jakie znam. Jej poziom terapeutyczny zdecydowanie wykracza poza standardowe podejście. Potrafi niezwykle szybko i trafnie dotrzeć do prawdziwej przyczyny problemu. Pracuje bardzo wielopoziomowo — emocje, ciało fizyczne oraz sfera duchowa — co daje naprawdę spektakularne efekty.',
+en:'Tamara is one of the best specialists I know. Her therapeutic level far exceeds the standard approach. She reaches the true cause incredibly fast. She works on multiple levels — emotions, physical body, and spiritual sphere — with truly spectacular results.'},
+{name:'Krzysztof B.',loc:'',
+pl:'Do Tamary trafiłem w bardzo trudnym momencie mojego życia. Na początku byłem bardzo sceptyczny. Jednak już po pierwszej wizycie poczułem wyraźną zmianę — ogromną ulgę i znaczną poprawę samopoczucia. Z każdą kolejną wizytą efekty były coraz bardziej widoczne. Z pełnym przekonaniem mogę polecić Tamarę każdemu, kto naprawdę chce rozwiązać swoje problemy u źródła.',
+en:'I came to Tamara at a very difficult time. Though initially very skeptical, after the first visit I felt clear change — enormous relief and significant improvement. With each visit, results became more visible. I fully recommend Tamara to anyone who truly wants to solve their problems at the root.'},
+{name:'Iwona P.',loc:'Luxemburg',
+pl:'Pani Tamara jest doświadczonym specjalistą łączącym podejście holistyczne, empatyczne i oparte na głębokim zrozumieniu człowieka. Jej praca obejmuje zarówno obszar ciała, jak i psychiki. Jako wieloletni praktyk metody Reconnection Healing stosuje ją z dużą uważnością i odpowiedzialnością. Rzetelna, zaangażowana, stale rozwijająca swoje kompetencje.',
+en:'Tamara is an experienced specialist combining a holistic, empathetic approach with deep understanding. Her work encompasses body and psyche. As a long-time Reconnection Healing practitioner, she works with great mindfulness and responsibility. Reliable, engaged, continuously developing her competencies.'},
+{name:'Anna K.P.',loc:'',
+pl:'The session with Tamara was an interesting and healing experience. I highly recommend it and I look forward to our next meeting.',
+en:'The session with Tamara was an interesting and healing experience. I highly recommend it and I look forward to our next meeting.'},
+{name:'K.K.',loc:'',
+pl:'For open-minded people. My headaches became less frequent and even if present, it is easier to disarm them with manual therapy. I also got rid of at least one thing that was bothering me for most part of my life. A good step forward.',
+en:'For open-minded people. My headaches became less frequent and easier to manage with manual therapy. I also got rid of something that had been bothering me for most of my life. A good step forward.'},
+{name:'Kazik M.',loc:'',
+pl:'Po wizycie ból w plecach ustąpił! Polecam!',
+en:'After the visit, my back pain disappeared! Highly recommend!'},
+{name:'Joanna',loc:'',
+pl:'Do Tamary trafiłam po śmierci mojego męża. Podczas sesji poczułam obecność mojego męża. Tamara przekazała mi pytania, które w tamtej chwili mógł znać tylko on. Dzięki temu doświadczeniu mogłam się z nim pożegnać i pozwolić mu odejść do światła. Zrobiłam też badanie VedaPulse, co w 100% potwierdziło moje przewlekłe schorzenia. Wyszłam z gabinetu dużo lżejsza.',
+en:'I came to Tamara after my husband\'s death. During the session, I felt his presence — she asked questions only he could have known. I could say goodbye and let him go to the light. The VedaPulse test confirmed all my chronic conditions. I left feeling much lighter — as if someone lifted an enormous weight.'},
+{name:'Jolanta',loc:'',
+pl:'Tamara jest niesamowita, uzdrawia nie tylko ciało, ale i duszę. Pojechałam do niej z bólem nogi. Wędrowałam po różnych specjalistach od 1998 roku. Tamara ustawiła kości, doradziła ćwiczenia i minęły dolegliwości bólowe. Gdyby nie spontaniczna wizyta u niej, nie wiem jak by wyglądało moje życie. Zaczęłam inaczej postrzegać świat, który nabrał kolorów.',
+en:'Tamara is incredible — she heals not just the body but the soul. I went to her with leg pain I\'d been seeing specialists about since 1998. She aligned my bones, recommended exercises, and the pain went away. If not for my spontaneous visit, I don\'t know what my life would look like. I began seeing the world differently.'},
+{name:'Radosław',loc:'',
+pl:'Tamara podchodzi indywidualnie do każdego klienta. Uważnie słucha i obserwuje, a na podstawie wstępnej rozmowy dobiera odpowiednie metody. Bardzo dobrze wspominam swoją pierwszą sesję, podczas której spędziliśmy kilka godzin na przepracowaniu moich problemów. Po spotkaniu otrzymałem wiele wspierających materiałów.',
+en:'Tamara approaches each client individually. She listens carefully and selects appropriate methods based on the initial conversation. I remember my first session well — several hours working through my problems. Afterward, I received many supporting materials.'},
+{name:'Dominik',loc:'',
+pl:'Tamara pomogła mi przepracować pewne wzorce zachowań oraz traumy, które nosiłem w sobie przez lata. Dzięki jej uważności wiele rzeczy zaczęło się dla mnie układać i nabierać sensu. Po sesji wyszedłem z poczuciem lekkości i przekonaniem, że zaczynam nowy rozdział w swoim życiu.',
+en:'Tamara helped me work through behavioral patterns and traumas I\'d carried for years. Thanks to her attentiveness, many things started making sense. I left feeling lightness and the conviction that I was beginning a new chapter.'},
+{name:'Wojtek',loc:'',
+pl:'Z pełnym przekonaniem polecam wizytę u Tamary. Trafiłem tam w trudnym dla mnie czasie i otrzymałem ogromne wsparcie zarówno na poziomie psychicznym, jak i poprzez pracę z ciałem. Już po pierwszym spotkaniu poczułem wyraźną ulgę, więcej spokoju i rozluźnienia.',
+en:'I fully recommend visiting Tamara. I came during a difficult time and received enormous support on both psychological and physical levels. After the very first session, I felt clear relief, more peace and relaxation.'},
+{name:'Sylwia',loc:'',
+pl:'Z pełnym przekonaniem polecam Tamarę. Jej praca z energią oraz podejście do pracy z ciałem i duszą są niezwykle profesjonalne, a jednocześnie bardzo empatyczne. Z jej wiedzy korzystaliśmy w naszej rodzinie kilka razy i za każdym razem czuliśmy realne wsparcie oraz poprawę samopoczucia.',
+en:'I fully recommend Tamara. Her energy work and approach to body and soul are incredibly professional yet empathetic. Our family has benefited from her knowledge several times — each time feeling real support and improvement.'},
+{name:'Wojtek',loc:'',
+pl:'Współpraca z Tamarą była dla mnie bardzo wartościowym doświadczeniem. W stosunkowo krótkim, ale intensywnym czasie pomogła mi przepracować tematy, z którymi zmagałem się na terapii przez wiele miesięcy. Nawet po zakończeniu terapii Tamara pozostawała otwarta na kontakt.',
+en:'Working with Tamara was very valuable. In a relatively short but intensive time, she helped me work through issues I\'d struggled with in therapy for many months. Even after therapy ended, she remained open to contact.'},
+{name:'Mirosław',loc:'',
+pl:'Z całego serca polecam Tamarę. Kiedy ona pracowała z moją energią, było to odczuwalne. Ma sporą wiedzę o tym jak działa organizm i jak po nim przepływa energia. Od wizyty u Tamary zaczęło się moje doświadczenie z energopraktykami i rozwojem duchowym.',
+en:'I wholeheartedly recommend Tamara. When she worked with my energy, it was truly palpable. She has extensive knowledge of how the body works and how energy flows. My visit was the beginning of my experience with energy practices and spiritual development.'},
+{name:'Agnieszka',loc:'',
+pl:'Jestem pod wrażeniem profesjonalizmu pani Tamary. Już kilka razy pomogła mi przy problemach z kręgosłupem i nie tylko. Jej wiedza jest wszechstronna! Polecam z całego serca!',
+en:'I\'m impressed by Tamara\'s professionalism. She\'s helped me several times with spine problems and more. Her knowledge is comprehensive! I wholeheartedly recommend her!'},
+{name:'Krzysztof Z.',loc:'',
+pl:'Sesja z Tamarą to coś znacznie więcej niż rozmowa — to prawdziwe doświadczenie, które zostaje w człowieku na bardzo długo. To podróż zarówno w przeszłość, jak i w przyszłość. Bywa intensywnie, ale przede wszystkim skutecznie. Dla mnie było to przełomowe spotkanie. Tamara jest wspaniałą osobą, pełną intuicji i ogromnego talentu. To konkretna, precyzyjna praca nastawiona na realną zmianę.',
+en:'A session with Tamara is far more than a conversation — it\'s a real experience that stays with you. A journey into both past and future. It can be intense, but above all, it works. For me, it was a breakthrough. Tamara is a wonderful person full of intuition and enormous talent. Concrete, precise work aimed at real change.'},
+{name:'Wojtek',loc:'',
+pl:'Z polecenia znajomego skorzystałem z konsultacji u Tamary. Mimo tego że jestem otwarty na alternatywne sposoby, metoda Tamary przerosła moje wszelkie oczekiwania. W ciągu godzin dowiedziałem się więcej niż podczas dwóch lat terapii u psychologa. Polecam każdemu kto ma otwarty umysł.',
+en:'On a friend\'s recommendation, I consulted Tamara. Her method exceeded all my expectations. In hours, I learned more than in two years of therapy with a psychologist. I recommend to anyone with an open mind.'},
+{name:'Patryk K.',loc:'',
+pl:'Z przyjemnością polecam współpracę z Tamarą. Jest osobą bardzo profesjonalną, zaangażowaną i dokładną w tym, co robi. Współpraca przebiegała sprawnie, komunikacja była bardzo dobra, a wszystkie ustalenia realizowane były terminowo i na wysokim poziomie.',
+en:'I gladly recommend working with Tamara. She is very professional, engaged, and thorough. Communication was excellent, and everything was delivered on time and at the highest level.'},
+{name:'Magda',loc:'',
+pl:'Bardzo cieszę się że miałam okazję spotkać się z Tamarą na sesji głównej, która dała mi nową, nieznaną dotąd siłę do tego by radzić sobie z zewnętrznym przytłoczeniem. To była również bardzo interesująca rozmowa ze względu na tematy osobowości, relacji i naszej świadomości. Czekam na kolejne sesje.',
+en:'I\'m very glad I had the opportunity to meet Tamara for a main session, which gave me a new, previously unknown strength to cope with external overwhelm. It was also a very interesting conversation about personality, relationships and our consciousness. I look forward to more sessions.'},
+{name:'Adam',loc:'',
+pl:'Moje spotkanie z Tamarą było niezwykle głębokim doświadczeniem. Uczestniczyłem zarówno w sesji głównej, jak i w sesji Reconnection i do dziś jestem pod ogromnym wrażeniem jej intuicji, wrażliwości i zdolności odczytywania informacji z pola energetycznego człowieka. Już na początku naszej pracy Tamara z niezwykłą trafnością rozpoznała ważne wydarzenia i powiązania w moim życiu. Pomogła mi dostrzec wiele zależności między ludźmi, relacjami i wydarzeniami, które wcześniej były dla mnie niejasne. Wiele problemów po prostu przestało mieć nade mną taką władzę. Z całego serca polecam spotkanie z Tamarą każdemu, kto chce głębiej zrozumieć siebie i swoje życie.',
+en:'My meeting with Tamara was an incredibly deep experience. I participated in both a main session and a Reconnection session, and I\'m still deeply impressed by her intuition, sensitivity, and ability to read information from the human energy field. From the very beginning, she recognized important events and connections in my life with remarkable accuracy. She helped me see many dependencies between people, relationships and events that were previously unclear. Many problems simply lost their power over me. I wholeheartedly recommend meeting Tamara to anyone who wants to understand themselves and their life more deeply.'},
+{name:'Krzysztof R.',loc:'',
+pl:'Bardzo polecam Panią Tamarę do współpracy. Już przy pierwszym spotkaniu udało nam się rozpracować kilka hamujących mnie schematów. Po sesji znacząco wzrósł mój poziom energii, a także poprawiły się moje relacje z bliskimi. Od tamtego czasu korzystałem z usług Pani Tamary jeszcze kilkukrotnie. Sesje które u niej odbyłem stały się bardzo znaczące dla mojego wewnętrznego rozwoju.',
+en:'I highly recommend Tamara. Already at the first meeting, we managed to work through several patterns that were holding me back. After the session, my energy level significantly increased and my relationships with loved ones improved. Since then, I\'ve used Tamara\'s services several more times. The sessions became very significant for my inner development.'}
+];
+
+// ═══════ STATE ═══════
+let currentLang = 'pl';
+let carouselPos = 0;
+let cardsPerView = 3;
+
+// ═══════ LANGUAGE ═══════
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (T[lang][key]) el.innerHTML = T[lang][key];
+    });
+    // Update read-more buttons state
+    document.querySelectorAll('.read-more-btn').forEach(btn => {
+        const isOpen = btn.previousElementSibling?.classList?.contains('open') ||
+                       btn.nextElementSibling?.classList?.contains('open') ||
+                       btn.closest('.about-text')?.querySelector('.about-extra.open');
+        if (btn.closest('.about-text') && document.querySelector('.about-extra.open')) {
+            btn.textContent = T[lang].readLess;
+        } else if (btn.nextElementSibling?.classList?.contains('open')) {
+            btn.textContent = T[lang].readLess;
+        } else {
+            btn.textContent = T[lang].readMore;
+        }
+    });
+    renderCarousel();
+}
+
+// ═══════ EXPAND/COLLAPSE ═══════
+function toggleExtra(btn) {
+    const extra = btn.closest('.about-text').querySelector('.about-extra');
+    extra.classList.toggle('open');
+    btn.textContent = extra.classList.contains('open') ? T[currentLang].readLess : T[currentLang].readMore;
+}
+function toggleService(btn) {
+    const detail = btn.nextElementSibling;
+    detail.classList.toggle('open');
+    btn.textContent = detail.classList.contains('open') ? T[currentLang].readLess : T[currentLang].readMore;
+}
+
+// ═══════ CAROUSEL ═══════
+function getCardsPerView() {
+    if (window.innerWidth < 769) return 1;
+    if (window.innerWidth < 1025) return 2;
+    return 3;
+}
+
+function renderCarousel() {
+    cardsPerView = getCardsPerView();
+    const track = document.getElementById('carouselTrack');
+    track.innerHTML = testimonials.map((t, i) => `
+        <div class="carousel-card">
+            <div class="t-text" id="ttext${i}">${t[currentLang]}</div>
+            <button class="t-expand" onclick="this.previousElementSibling.classList.toggle('expanded'); this.textContent = this.previousElementSibling.classList.contains('expanded') ? '${T[currentLang].collapseText}' : '${T[currentLang].expandText}'">${T[currentLang].expandText}</button>
+            <div class="t-author">— ${t.name}</div>
+            ${t.loc ? `<div class="t-location">${t.loc}</div>` : ''}
+        </div>
+    `).join('');
+    const totalPages = Math.ceil(testimonials.length / cardsPerView);
+    if (carouselPos >= totalPages) carouselPos = totalPages - 1;
+    const dots = document.getElementById('carouselDots');
+    dots.innerHTML = Array.from({length: totalPages}, (_, i) =>
+        `<button class="carousel-dot ${i === carouselPos ? 'active' : ''}" onclick="carouselGo(${i})"></button>`
+    ).join('');
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const track = document.getElementById('carouselTrack');
+    const card = track.querySelector('.carousel-card');
+    if (!card) return;
+    const cardWidth = card.offsetWidth + parseInt(getComputedStyle(card).marginRight);
+    track.style.transform = `translateX(-${carouselPos * cardsPerView * cardWidth}px)`;
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === carouselPos));
+}
+
+function carouselMove(dir) {
+    const totalPages = Math.ceil(testimonials.length / cardsPerView);
+    carouselPos = (carouselPos + dir + totalPages) % totalPages;
+    updateCarousel();
+}
+function carouselGo(idx) { carouselPos = idx; updateCarousel(); }
+
+// ═══════ INIT ═══════
+window.addEventListener('DOMContentLoaded', () => {
+    renderCarousel();
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    // Nav scroll
+    window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', scrollY > 50));
+});
+window.addEventListener('resize', () => { const nv = getCardsPerView(); if (nv !== cardsPerView) { cardsPerView = nv; carouselPos = 0; renderCarousel(); } });
+
+// ═══════ CAPTCHA ═══════
+let captchaA, captchaB;
+function genCaptcha() {
+    captchaA = Math.floor(Math.random() * 8) + 2;
+    captchaB = Math.floor(Math.random() * 8) + 2;
+    const q = document.getElementById('captchaQ');
+    if (q) q.textContent = `${captchaA} + ${captchaB} = `;
+}
+genCaptcha();
+
+// ═══════ FORM SUBMIT ═══════
+function handleSubmit(e) {
+    e.preventDefault();
+    const answer = parseInt(document.getElementById('cfCaptcha').value);
+    const fb = document.getElementById('formFeedback');
+    if (answer !== captchaA + captchaB) {
+        fb.style.display = 'block';
+        fb.style.background = 'rgba(200,50,50,.15)';
+        fb.style.color = '#c33';
+        fb.textContent = T[currentLang].formCaptchaError;
+        genCaptcha();
+        document.getElementById('cfCaptcha').value = '';
+        return false;
+    }
+    const name = document.getElementById('cfName').value;
+    const email = document.getElementById('cfEmail').value;
+    const phone = document.getElementById('cfPhone').value;
+    const msg = document.getElementById('cfMsg').value;
+    const subject = encodeURIComponent('Kontakt z strony Body Mind Healing - ' + name);
+    const body = encodeURIComponent(`Imię: ${name}\nEmail: ${email}\nTelefon: ${phone}\n\nWiadomość:\n${msg}`);
+    window.location.href = `mailto:tamara@bodymindhealing.nl?subject=${subject}&body=${body}`;
+    fb.style.display = 'block';
+    fb.style.background = 'rgba(200,150,62,.15)';
+    fb.style.color = 'var(--gold)';
+    fb.textContent = T[currentLang].formSuccess;
+    return false;
+}
+
+// Auto-advance carousel
+let autoplay = setInterval(() => carouselMove(1), 6000);
+document.querySelector('.carousel-wrapper')?.addEventListener('mouseenter', () => clearInterval(autoplay));
+document.querySelector('.carousel-wrapper')?.addEventListener('mouseleave', () => { autoplay = setInterval(() => carouselMove(1), 6000); });
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pl" class="lang-pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria — Body Mind Healing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #C8963E; --amber: #D4A855; --violet: #7B6D8E; --plum: #4A3B5C;
+            --cream: #FFF8EE; --off-white: #FFFDF9; --text: #3A2E2A; --text-sec: #6B5D56;
+            --heading: 'Cormorant Garamond', Georgia, serif;
+            --body: 'Nunito Sans', 'Segoe UI', sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body); color: var(--text); background: var(--plum); line-height: 1.7; overflow-x: hidden; }
+
+        /* ── Nav ── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(74,59,92,.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 2px 30px rgba(0,0,0,.2); border-bottom: 1px solid transparent; transition: background .5s, box-shadow .4s, border-color .5s; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { height: 38px; filter: brightness(0) invert(1); transition: filter .5s; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,248,238,.7); text-decoration: none; transition: color .3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .lang-switch { display: flex; gap: 0; border: 1px solid rgba(200,150,62,.35); margin-left: .5rem; }
+        .lang-btn { padding: .35rem .7rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; background: transparent; color: rgba(255,248,238,.7); border: none; cursor: pointer; transition: all .3s; font-family: var(--body); }
+        .lang-btn.active { background: var(--gold); color: var(--off-white); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: .5rem; }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--cream); margin: 4px 0; transition: all .3s; }
+
+        /* ── Hero ── */
+        .gallery-hero { padding: 8rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
+        .gallery-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(200,150,62,.08) 0%, transparent 70%); }
+        .gallery-hero .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; position: relative; z-index: 1; }
+        .gallery-hero h1 { font-family: var(--heading); font-size: clamp(2.2rem,4vw,3.2rem); font-weight: 500; color: var(--cream); line-height: 1.2; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .gallery-hero .section-divider { width: 36px; height: 1px; background: var(--gold); margin: 0 auto; position: relative; z-index: 1; }
+
+        /* ── Gallery Grid ── */
+        .gallery-section { max-width: 1200px; margin: 0 auto; padding: 0 2rem 5rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .gallery-item { position: relative; cursor: pointer; overflow: hidden; aspect-ratio: 4/3; border: 1px solid rgba(200,150,62,.15); transition: border-color .4s, transform .4s, box-shadow .4s; }
+        .gallery-item:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.22,1,.36,1); }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: .8rem 1rem; background: linear-gradient(transparent, rgba(0,0,0,.7)); font-size: .82rem; color: var(--cream); font-weight: 300; opacity: 0; transform: translateY(8px); transition: opacity .4s, transform .4s; }
+        .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
+
+        /* ── Lightbox ── */
+        .lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .lightbox-content { position: relative; max-width: 90vw; max-height: 85vh; display: flex; align-items: center; justify-content: center; }
+        .lightbox-content img { max-width: 90vw; max-height: 85vh; object-fit: contain; border: 1px solid rgba(200,150,62,.2); box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+        .lightbox-caption { position: absolute; bottom: -2.5rem; left: 0; right: 0; text-align: center; font-size: .9rem; color: rgba(255,248,238,.7); font-weight: 300; }
+        .lightbox-close { position: fixed; top: 1.5rem; right: 1.5rem; width: 44px; height: 44px; background: rgba(200,150,62,.15); border: 1px solid rgba(200,150,62,.3); color: var(--cream); font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; z-index: 1001; font-family: var(--body); line-height: 1; }
+        .lightbox-close:hover { background: var(--gold); color: var(--plum); }
+        .lightbox-nav { position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; background: rgba(200,150,62,.15); border: 1px solid rgba(200,150,62,.3); color: var(--cream); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; z-index: 1001; }
+        .lightbox-nav:hover { background: var(--gold); color: var(--plum); }
+        .lightbox-prev { left: 1.5rem; }
+        .lightbox-next { right: 1.5rem; }
+
+        /* ── Footer ── */
+        footer { padding: 3rem 2rem 2rem; background: var(--plum); border-top: 1px solid rgba(200,150,62,.1); }
+        .footer-columns { max-width: 900px; margin: 0 auto 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .footer-col { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-col-title { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+        .footer-col a { font-size: .82rem; color: rgba(255,248,238,.55); text-decoration: none; transition: color .3s; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; font-size: .75rem; color: rgba(255,248,238,.35); padding-top: 1.5rem; border-top: 1px solid rgba(200,150,62,.08); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(74,59,92,.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(200,150,62,.15); }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-hero { padding: 7rem 1.5rem 3rem; }
+            .gallery-section { padding: 0 1.5rem 4rem; }
+            .gallery-caption { opacity: 1; transform: translateY(0); }
+            .footer-columns { grid-template-columns: 1fr; text-align: center; }
+            .lightbox-nav { width: 40px; height: 40px; }
+            .lightbox-prev { left: .5rem; }
+            .lightbox-next { right: .5rem; }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html"><img src="designs/2. elegant-wordmark-logo-design-body-mind-h_Qj_ze_0vRre_VeCI6uUQnw_F8akWxZZTeuudA0Ohr32dQ_cover_hd.png" alt="Body Mind Healing" class="nav-logo"></a>
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="index.html#o-mnie" data-i18n="navAbout">O mnie</a></li>
+            <li><a href="index.html#uslugi" data-i18n="navServices">Usługi</a></li>
+            <li><a href="index.html#opinie" data-i18n="navTestimonials">Opinie</a></li>
+            <li><a href="gallery.html" data-i18n="navGallery">Galeria</a></li>
+            <li><a href="index.html#kontakt" data-i18n="navContact">Kontakt</a></li>
+            <li>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+                    <button class="lang-btn" onclick="setLang('en')">EN</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="gallery-hero">
+    <div class="section-label">Body Mind Healing</div>
+    <h1 data-i18n="galleryTitle">Galeria</h1>
+    <div class="section-divider"></div>
+</section>
+
+<!-- Gallery Grid -->
+<section class="gallery-section">
+    <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8249;</button>
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8250;</button>
+    <div class="lightbox-content">
+        <img id="lightboxImg" src="" alt="">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-columns">
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColGallery">Galeria i CV</div>
+            <a href="gallery.html" data-i18n="footGallery">Galeria</a>
+            <a href="cv.html">Curriculum Vitae</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColServices">Usługi</div>
+            <a href="reconnection.html">Reconnection & Reconnective Healing</a>
+            <a href="gdv-camera.html">GDV Camera</a>
+            <a href="vedapulse.html">VedaPulse</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColLegal">Informacje prawne</div>
+            <a href="privacy-policy.html" data-i18n="footPrivacy">Polityka Prywatności</a>
+            <a href="terms.html" data-i18n="footTerms">Regulamin</a>
+        </div>
+    </div>
+    <div class="footer-bottom" data-i18n="footer">&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+// ═══════ TRANSLATIONS ═══════
+const T = {
+pl: {
+    navAbout:'O mnie', navServices:'Usługi', navTestimonials:'Opinie', navContact:'Kontakt',
+    navGallery:'Galeria', footGallery:'Galeria', footPrivacy:'Polityka Prywatności', footTerms:'Regulamin',
+    footColGallery:'Galeria i CV', footColServices:'Usługi', footColLegal:'Informacje prawne',
+    galleryTitle:'Galeria',
+    footer:'&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.'
+},
+en: {
+    navAbout:'About', navServices:'Services', navTestimonials:'Testimonials', navContact:'Contact',
+    navGallery:'Gallery', footGallery:'Gallery', footPrivacy:'Privacy Policy', footTerms:'Terms of Use',
+    footColGallery:'Gallery & CV', footColServices:'Services', footColLegal:'Legal',
+    galleryTitle:'Gallery',
+    footer:'&copy; 2026 Body Mind Healing — Tamara Hofland. All rights reserved.'
+}
+};
+
+let currentLang = 'pl';
+
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (T[lang][key]) el.innerHTML = T[lang][key];
+    });
+    renderGallery();
+}
+
+// ═══════ PHOTOS DATA ═══════
+const photos = [
+    { src: 'photos/Eric Pearl.jpg', pl: 'Tamara z Dr. Ericiem Pearlem', en: 'Tamara with Dr. Eric Pearl' },
+    { src: 'photos/Reconnection.JPG', pl: 'Szkolenie Reconnection', en: 'Reconnection Training' },
+    { src: 'photos/Prof. K. Korotkov.JPG', pl: 'Tamara z Prof. K. Korotkovem', en: 'Tamara with Prof. K. Korotkov' },
+    { src: 'photos/K.Korotkov.jpg', pl: 'Prof. Konstantin Korotkov', en: 'Prof. Konstantin Korotkov' },
+    { src: 'photos/Frank Kinslow.JPG', pl: 'Tamara z Frankiem Kinslowem', en: 'Tamara with Frank Kinslow' },
+    { src: 'photos/Mantak Chia.JPG', pl: 'Tamara z Mistrzem Mantak Chia', en: 'Tamara with Master Mantak Chia' },
+    { src: 'photos/O. Sorokin.jpg', pl: 'Tamara z Olegiem Sorokinem', en: 'Tamara with Oleg Sorokin' },
+    { src: 'photos/A. Kashpirovsky.JPG', pl: 'Tamara z A. Kashpirovskym', en: 'Tamara with A. Kashpirovsky' },
+    { src: 'photos/V. Bronnikov.JPG', pl: 'Tamara z V. Bronnikovem', en: 'Tamara with V. Bronnikov' },
+    { src: 'photos/Conference.JPG', pl: 'Konferencja', en: 'Conference' },
+    { src: 'photos/conference1.JPG', pl: 'Konferencja', en: 'Conference' },
+    { src: 'photos/viber_image_2023-09-16_19-12-22-907.jpg', pl: 'Body Mind Healing', en: 'Body Mind Healing' }
+];
+
+let currentPhoto = 0;
+
+// ═══════ RENDER GALLERY ═══════
+function renderGallery() {
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = photos.map((p, i) => `
+        <div class="gallery-item" onclick="openLightbox(${i})">
+            <img src="${p.src}" alt="${p[currentLang]}" loading="lazy">
+            <div class="gallery-caption">${p[currentLang]}</div>
+        </div>
+    `).join('');
+}
+
+// ═══════ LIGHTBOX ═══════
+function openLightbox(index) {
+    currentPhoto = index;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function navLightbox(dir) {
+    currentPhoto = (currentPhoto + dir + photos.length) % photos.length;
+    updateLightbox();
+}
+
+function updateLightbox() {
+    const p = photos[currentPhoto];
+    document.getElementById('lightboxImg').src = p.src;
+    document.getElementById('lightboxImg').alt = p[currentLang];
+    document.getElementById('lightboxCaption').textContent = p[currentLang];
+}
+
+// Close on background click
+document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this || e.target.classList.contains('lightbox-content')) {
+        closeLightbox();
+    }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navLightbox(-1);
+    if (e.key === 'ArrowRight') navLightbox(1);
+});
+
+// Init
+renderGallery();
+</script>
+</body>
+</html>

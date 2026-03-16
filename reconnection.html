@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pl" class="lang-pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reconnective Healing & The Reconnection — Body Mind Healing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #C8963E; --amber: #D4A855; --violet: #7B6D8E; --plum: #4A3B5C;
+            --cream: #FFF8EE; --off-white: #FFFDF9; --text: #3A2E2A; --text-sec: #6B5D56;
+            --heading: 'Cormorant Garamond', Georgia, serif;
+            --body: 'Nunito Sans', 'Segoe UI', sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body); color: var(--text); background: var(--off-white); line-height: 1.7; overflow-x: hidden; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── Nav ── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(74,59,92,.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 2px 30px rgba(0,0,0,.2); border-bottom: 1px solid transparent; transition: background .5s, box-shadow .4s; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { height: 38px; filter: brightness(0) invert(1); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,248,238,.7); text-decoration: none; transition: color .3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .lang-switch { display: flex; gap: 0; border: 1px solid rgba(200,150,62,.35); margin-left: .5rem; }
+        .lang-btn { padding: .35rem .7rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; background: transparent; color: rgba(255,248,238,.7); border: none; cursor: pointer; transition: all .3s; font-family: var(--body); }
+        .lang-btn.active { background: var(--gold); color: var(--off-white); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: .5rem; }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--cream); margin: 4px 0; transition: all .3s; }
+
+        /* ── Hero ── */
+        .hero { min-height: 55vh; display: flex; align-items: flex-end; justify-content: flex-start; position: relative; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; background: url('designs/5. soft-decorative-background-panel-warm-go__EyqEqpMRbmxGb2xCDddGg_ti-dzQy4Q9SOVv7oKHtV4Q_cover_hd.png') center/cover; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,59,92,.88) 0%, rgba(74,59,92,.65) 40%, rgba(74,59,92,.5) 70%, rgba(74,59,92,.8) 100%); }
+        .hero-content { position: relative; z-index: 2; padding: 8rem 3rem 4rem; max-width: 800px; }
+        .hero-breadcrumb { font-size: .78rem; color: rgba(255,248,238,.5); margin-bottom: 1.5rem; }
+        .hero-breadcrumb a { color: rgba(255,248,238,.6); text-decoration: none; transition: color .3s; }
+        .hero-breadcrumb a:hover { color: var(--gold); }
+        .hero h1 { font-family: var(--heading); font-size: clamp(2.4rem,5vw,3.8rem); font-weight: 500; line-height: 1.1; color: var(--cream); margin-bottom: 1rem; opacity: 0; animation: fadeUp .9s .3s cubic-bezier(.22,1,.36,1) forwards; }
+        .hero p { font-size: 1.1rem; color: rgba(255,248,238,.7); font-weight: 300; max-width: 600px; opacity: 0; animation: fadeUp .9s .5s cubic-bezier(.22,1,.36,1) forwards; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ── Sections ── */
+        .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
+        .section-title { font-family: var(--heading); font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 500; line-height: 1.2; margin-bottom: 1.2rem; }
+        .section-divider { width: 36px; height: 1px; background: var(--gold); margin-bottom: 2.5rem; }
+
+        /* ── Intro (Dark) ── */
+        .intro-section { background: var(--plum); padding: 5rem 2rem; position: relative; overflow: hidden; }
+        .intro-texture { position: absolute; inset: 0; background: url('designs/4. seamless-subtle-repeating-pattern-very-f_7qy31mcGRKKr2MV8vfhB9Q_GIseaBiVRlaqlG2CGkyLMQ_cover_hd.png') center/400px repeat; opacity: .06; }
+        .intro-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+        .intro-inner .section-title { color: var(--cream); }
+        .intro-inner p { font-size: 1rem; color: rgba(255,248,238,.7); line-height: 1.85; margin-bottom: 1.2rem; }
+        .intro-photo-row { display: flex; gap: 2.5rem; align-items: flex-start; margin-top: 2.5rem; }
+        .intro-photo { flex-shrink: 0; width: 280px; position: relative; }
+        .intro-photo img { width: 100%; height: auto; display: block; position: relative; z-index: 1; }
+        .intro-photo::after { content: ''; position: absolute; top: 10px; left: 10px; right: -10px; bottom: -10px; border: 1px solid rgba(200,150,62,.35); z-index: 0; }
+        .intro-text-block { flex: 1; }
+
+        /* ── Detail sections (Light) ── */
+        .detail-section { background: var(--off-white); padding: 5rem 2rem; }
+        .detail-inner { max-width: 900px; margin: 0 auto; }
+        .detail-inner .section-title { color: var(--plum); }
+        .detail-inner p { font-size: 1rem; color: var(--text-sec); line-height: 1.85; margin-bottom: 1rem; }
+        .detail-inner ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+        .detail-inner li { font-size: .95rem; color: var(--text-sec); padding: .3rem 0 .3rem 1.4rem; position: relative; line-height: 1.7; }
+        .detail-inner li::before { content: ''; position: absolute; left: 0; top: .7rem; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+        .price-badge { display: inline-block; font-weight: 700; color: var(--gold); background: rgba(200,150,62,.1); padding: .5rem 1.2rem; font-size: .95rem; margin-top: .5rem; border: 1px solid rgba(200,150,62,.2); }
+
+        /* ── Reconnection Detail (Dark) ── */
+        .reconnection-section { background: var(--plum); padding: 5rem 2rem; position: relative; overflow: hidden; }
+        .reconnection-texture { position: absolute; inset: 0; background: url('designs/4. seamless-subtle-repeating-pattern-very-f_7qy31mcGRKKr2MV8vfhB9Q_GIseaBiVRlaqlG2CGkyLMQ_cover_hd.png') center/400px repeat; opacity: .06; }
+        .reconnection-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+        .reconnection-inner .section-title { color: var(--cream); }
+        .reconnection-inner p { font-size: 1rem; color: rgba(255,248,238,.7); line-height: 1.85; margin-bottom: 1rem; }
+        .reconnection-inner ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+        .reconnection-inner li { font-size: .95rem; color: rgba(255,248,238,.65); padding: .3rem 0 .3rem 1.4rem; position: relative; line-height: 1.7; }
+        .reconnection-inner li::before { content: ''; position: absolute; left: 0; top: .7rem; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+        .reconnection-inner .price-badge { color: var(--gold); background: rgba(200,150,62,.12); border-color: rgba(200,150,62,.25); }
+        .session-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+        .session-card { padding: 2rem; background: rgba(0,0,0,.2); border: 1px solid rgba(200,150,62,.25); position: relative; }
+        .session-card h4 { font-family: var(--heading); font-size: 1.25rem; font-weight: 600; color: var(--cream); margin-bottom: .6rem; }
+        .session-card p { font-size: .9rem; color: rgba(255,248,238,.6); }
+
+        /* ── Why 333 (Light) ── */
+        .why333-section { background: var(--off-white); padding: 5rem 2rem; }
+        .why333-inner { max-width: 900px; margin: 0 auto; }
+        .why333-inner .section-title { color: var(--plum); }
+        .why333-inner p { font-size: 1rem; color: var(--text-sec); line-height: 1.85; margin-bottom: 1rem; }
+        .why333-inner ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+        .why333-inner li { font-size: .95rem; color: var(--text-sec); padding: .3rem 0 .3rem 1.4rem; position: relative; line-height: 1.7; }
+        .why333-inner li::before { content: ''; position: absolute; left: 0; top: .7rem; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+        .number-highlight { font-family: var(--heading); font-size: 4rem; font-weight: 700; color: var(--gold); opacity: .25; line-height: 1; margin-bottom: 1rem; }
+
+        /* ── Photo section ── */
+        .photo-feature { width: 100%; position: relative; overflow: hidden; }
+        .photo-feature img { width: 100%; max-height: 450px; object-fit: cover; display: block; }
+        .photo-feature-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(74,59,92,.3) 0%, rgba(74,59,92,.6) 100%); }
+
+        /* ── Videos (Dark) ── */
+        .videos-section { background: var(--plum); padding: 5rem 2rem; position: relative; overflow: hidden; }
+        .videos-texture { position: absolute; inset: 0; background: url('designs/4. seamless-subtle-repeating-pattern-very-f_7qy31mcGRKKr2MV8vfhB9Q_GIseaBiVRlaqlG2CGkyLMQ_cover_hd.png') center/400px repeat; opacity: .06; }
+        .videos-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; text-align: center; }
+        .videos-inner .section-title { color: var(--cream); }
+        .videos-inner .section-divider { margin: 0 auto 2.5rem; }
+        .videos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+        .video-card { background: rgba(0,0,0,.25); border: 1px solid rgba(200,150,62,.2); overflow: hidden; }
+        .video-card .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-card iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .video-card .video-label { padding: .8rem 1rem; font-size: .82rem; color: rgba(255,248,238,.6); text-align: left; }
+
+        /* ── Book section ── */
+        .book-section { background: var(--off-white); padding: 4rem 2rem; }
+        .book-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 2rem; }
+        .book-inner .book-text { flex: 1; }
+        .book-inner .section-title { color: var(--plum); }
+        .book-inner p { font-size: 1rem; color: var(--text-sec); line-height: 1.85; }
+        .book-title-name { font-family: var(--heading); font-style: italic; font-size: 1.3rem; color: var(--plum); }
+
+        /* ── CTA ── */
+        .cta-section { background: var(--plum); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+        .cta-texture { position: absolute; inset: 0; background: url('designs/4. seamless-subtle-repeating-pattern-very-f_7qy31mcGRKKr2MV8vfhB9Q_GIseaBiVRlaqlG2CGkyLMQ_cover_hd.png') center/400px repeat; opacity: .04; }
+        .cta-inner { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+        .cta-inner .section-title { color: var(--cream); margin-bottom: 1.5rem; }
+        .cta-inner p { color: rgba(255,248,238,.6); margin-bottom: 2rem; }
+        .cta-btn { display: inline-flex; align-items: center; gap: .8rem; font-family: var(--body); font-size: .82rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--plum); background: var(--gold); border: 1px solid var(--gold); padding: .95rem 2.5rem; cursor: pointer; text-decoration: none; transition: all .4s cubic-bezier(.22,1,.36,1); }
+        .cta-btn:hover { background: var(--cream); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+        .cta-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+        .cta-btn:hover svg { transform: translateX(4px); }
+
+        /* ── Footer ── */
+        footer { padding: 3rem 2rem 2rem; background: var(--plum); border-top: 1px solid rgba(200,150,62,.1); }
+        .footer-columns { max-width: 900px; margin: 0 auto 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .footer-col { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-col-title { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+        .footer-col a { font-size: .82rem; color: rgba(255,248,238,.55); text-decoration: none; transition: color .3s; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; font-size: .75rem; color: rgba(255,248,238,.35); padding-top: 1.5rem; border-top: 1px solid rgba(200,150,62,.08); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(74,59,92,.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(200,150,62,.15); }
+            .hero-content { padding: 7rem 1.5rem 3rem; }
+            .intro-photo-row { flex-direction: column; gap: 1.5rem; }
+            .intro-photo { width: 100%; max-width: 320px; margin: 0 auto; }
+            .session-cards { grid-template-columns: 1fr; }
+            .videos-grid { grid-template-columns: 1fr; }
+            .book-inner { flex-direction: column; text-align: center; }
+            .intro-section, .reconnection-section, .detail-section, .why333-section, .videos-section, .cta-section, .book-section { padding: 3.5rem 1.5rem; }
+            .footer-columns { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="nav">
+    <div class="nav-inner">
+        <a href="index.html"><img src="designs/2. elegant-wordmark-logo-design-body-mind-h_Qj_ze_0vRre_VeCI6uUQnw_F8akWxZZTeuudA0Ohr32dQ_cover_hd.png" alt="Body Mind Healing" class="nav-logo"></a>
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="index.html#o-mnie" data-i18n="navAbout">O mnie</a></li>
+            <li><a href="index.html#uslugi" data-i18n="navServices">Us&#322;ugi</a></li>
+            <li><a href="index.html#opinie" data-i18n="navTestimonials">Opinie</a></li>
+            <li><a href="gallery.html" data-i18n="navGallery">Galeria</a></li>
+            <li><a href="index.html#kontakt" data-i18n="navContact">Kontakt</a></li>
+            <li>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+                    <button class="lang-btn" onclick="setLang('en')">EN</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-breadcrumb"><a href="index.html" data-i18n="breadHome">Strona g&#322;&#243;wna</a> &nbsp;/&nbsp; <span data-i18n="breadReconnection">Reconnection</span></div>
+        <h1 data-i18n="heroTitle">Reconnective Healing<sup>&reg;</sup><br>&amp; The Reconnection<sup>&reg;</sup></h1>
+        <p data-i18n="heroSub">Metody uzdrawiania dr. Erica Pearla oparte na energii, &#347;wietle i informacji</p>
+    </div>
+</section>
+
+<!-- Intro -->
+<section class="intro-section">
+    <div class="intro-texture"></div>
+    <div class="intro-inner">
+        <div class="intro-photo-row reveal">
+            <div class="intro-photo">
+                <img src="photos/Eric Pearl.jpg" alt="Dr. Eric Pearl">
+            </div>
+            <div class="intro-text-block">
+                <div class="section-label" data-i18n="introLabel">Wprowadzenie</div>
+                <h2 class="section-title" data-i18n="introTitle">Czym jest Reconnective Healing?</h2>
+                <p data-i18n="introP1"><strong>Reconnective Healing&reg;</strong> i <strong>The Reconnection&reg;</strong> to podej&#347;cia uzdrawiaj&#261;ce wprowadzone przez dr. Erica Pearla, chiropraktyka i autora ze Stan&#243;w Zjednoczonych. Metody te opieraj&#261; si&#281; na za&#322;o&#380;eniu, &#380;e ludzkie cia&#322;o mo&#380;e uzyska&#263; dost&#281;p do szerszego spektrum cz&#281;stotliwo&#347;ci uzdrawiaj&#261;cych obejmuj&#261;cych energi&#281;, &#347;wiat&#322;o i informacj&#281;.</p>
+                <p data-i18n="introP2">To nie jest tradycyjna terapia energetyczna. Praktyk nie manipuluje cia&#322;em, nie stosuje masazu ani ucisku. Zamiast tego tworzy &#347;rodowisko, w kt&#243;rym klient mo&#380;e wchodzi&#263; w interakcj&#281; z cz&#281;stotliwo&#347;ciami uzdrawiaj&#261;cymi, wspieraj&#261;c naturalne zdolno&#347;ci organizmu do przywracania r&#243;wnowagi i dobrego samopoczucia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Reconnective Healing Detail -->
+<section class="detail-section">
+    <div class="detail-inner">
+        <div class="reveal">
+            <div class="section-label" data-i18n="rhLabel">Reconnective Healing&reg;</div>
+            <h2 class="section-title" data-i18n="rhTitle">Uzdrawianie przez cz&#281;stotliwo&#347;ci</h2>
+            <div class="section-divider"></div>
+            <p data-i18n="rhP1">Reconnective Healing to metoda, w kt&#243;rej praktyk pracuje z cz&#281;stotliwo&#347;ciami uzdrawiaj&#261;cymi, wspieraj&#261;c naturalne zdolno&#347;ci cia&#322;a do przywracania r&#243;wnowagi i dobrego samopoczucia. Praktyk nie manipuluje cia&#322;em ani nie stosuje konkretnych technik, takich jak masa&#380; czy ucisk.</p>
+            <p data-i18n="rhP2">Celem jest wsparcie cia&#322;a i umys&#322;u w powr&#243;cie do naturalnej r&#243;wnowagi i harmonii. Sesj&#281; Reconnective Healing mo&#380;na wykonywa&#263; tyle razy, ile si&#281; chce.</p>
+            <p data-i18n="rhP3">Osoby, kt&#243;re do&#347;wiadczy&#322;y Reconnective Healing, cz&#281;sto zg&#322;aszaj&#261;:</p>
+            <ul>
+                <li data-i18n="rhL1">G&#322;&#281;boki relaks i odpr&#281;&#380;enie</li>
+                <li data-i18n="rhL2">Poczucie wewn&#281;trznej r&#243;wnowagi</li>
+                <li data-i18n="rhL3">Uwolnienie emocjonalne</li>
+                <li data-i18n="rhL4">Zwi&#281;kszon&#261; jasno&#347;&#263; umys&#322;u</li>
+            </ul>
+            <div class="price-badge" data-i18n="rhPrice">Cena: &euro;80 za sesj&#281;</div>
+        </div>
+    </div>
+</section>
+
+<!-- Photo break -->
+<div class="photo-feature">
+    <img src="photos/Reconnection.JPG" alt="Reconnection">
+    <div class="photo-feature-overlay"></div>
+</div>
+
+<!-- The Reconnection Detail -->
+<section class="reconnection-section">
+    <div class="reconnection-texture"></div>
+    <div class="reconnection-inner">
+        <div class="reveal">
+            <div class="section-label" data-i18n="trLabel">The Reconnection&reg;</div>
+            <h2 class="section-title" data-i18n="trTitle">Jednorazowy proces transformacji</h2>
+            <div class="section-divider"></div>
+            <p data-i18n="trP1">The Reconnection to odr&#281;bny, jednorazowy proces sk&#322;adaj&#261;cy si&#281; z dw&#243;ch sesji. Jego celem jest ponowne po&#322;&#261;czenie linii energetycznych i meridian&#243;w osoby z uniwersaln&#261; siatk&#261; energetyczn&#261;, wspieraj&#261;c pe&#322;niejsze wyr&#243;wnanie ze &#347;cie&#380;k&#261; &#380;yciow&#261; i potencja&#322;em.</p>
+        </div>
+        <div class="session-cards reveal">
+            <div class="session-card">
+                <h4 data-i18n="day1Title">Dzie&#324; 1</h4>
+                <p data-i18n="day1Desc">Reconnective Healing + pierwsza cz&#281;&#347;&#263; The Reconnection (ok. 1 godziny)</p>
+            </div>
+            <div class="session-card">
+                <h4 data-i18n="day2Title">Dzie&#324; 2</h4>
+                <p data-i18n="day2Desc">Druga cz&#281;&#347;&#263; The Reconnection (25-30 minut)</p>
+            </div>
+        </div>
+        <div class="reveal">
+            <p data-i18n="trP2">The Reconnection przeprowadza si&#281; tylko raz w &#380;yciu. Jest to g&#322;&#281;boki proces, kt&#243;ry wspiera wyr&#243;wnanie z pe&#322;ni&#261; naszego potencja&#322;u &#380;yciowego.</p>
+            <div class="price-badge" data-i18n="trPrice">Cena ca&#322;kowita: &euro;413 (&euro;80 + &euro;333)</div>
+            <p style="margin-top:1rem;font-size:.88rem;color:rgba(255,248,238,.5)" data-i18n="trPriceNote">Cena &euro;333 jest ustalona przez Erica Pearla na ca&#322;ym &#347;wiecie.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Why 333 -->
+<section class="why333-section">
+    <div class="why333-inner">
+        <div class="reveal">
+            <div class="number-highlight">333</div>
+            <div class="section-label" data-i18n="whyLabel">Dlaczego 333?</div>
+            <h2 class="section-title" data-i18n="whyTitle">Znaczenie liczby 333</h2>
+            <div class="section-divider"></div>
+            <ul>
+                <li data-i18n="whyL1">Liczba 333 odnosi si&#281; do &#347;wiadomo&#347;ci i energetycznego wyr&#243;wnania</li>
+                <li data-i18n="whyL2">Jest zwi&#261;zana z cz&#281;stotliwo&#347;ci&#261;, w kt&#243;rej &#347;wiat fizyczny spotyka si&#281; z wy&#380;sz&#261; &#347;wiadomo&#347;ci&#261;</li>
+                <li data-i18n="whyL3">Opisywana jako poziom &bdquo;planu&rdquo; lub &bdquo;szablonu&rdquo; &mdash; warstwa energetyczna naszego planu &#380;yciowego</li>
+                <li data-i18n="whyL4">Symbolizuje ponowne po&#322;&#261;czenie, wyr&#243;wnanie i wy&#380;sz&#261; &#347;wiadomo&#347;&#263;</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Videos -->
+<section class="videos-section">
+    <div class="videos-texture"></div>
+    <div class="videos-inner">
+        <div class="section-label reveal" data-i18n="videosLabel">Filmy</div>
+        <h2 class="section-title reveal" data-i18n="videosTitle">Dowiedz si&#281; wi&#281;cej</h2>
+        <div class="section-divider reveal"></div>
+        <div class="videos-grid">
+            <div class="video-card reveal">
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/Fm04s0npA2A" title="Eric Pearl intro" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="video-label" data-i18n="vid1">Eric Pearl &mdash; Wprowadzenie</div>
+            </div>
+            <div class="video-card reveal">
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/ilhSdp3hhOU" title="Medytacja Rekonektywna" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="video-label" data-i18n="vid2">Medytacja Rekonektywna</div>
+            </div>
+            <div class="video-card reveal">
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/xfivGT9xiU0" title="Eric Pearl exercises" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="video-label" data-i18n="vid3">Eric Pearl &mdash; &#262;wiczenia</div>
+            </div>
+            <div class="video-card reveal">
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/OUxf5Lcm_EI" title="Why is Reconnective Healing so powerful?" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="video-label" data-i18n="vid4">Dlaczego Reconnective Healing jest tak pot&#281;&#380;ne?</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Book -->
+<section class="book-section">
+    <div class="book-inner reveal">
+        <div class="book-text">
+            <div class="section-label" data-i18n="bookLabel">Polecana lektura</div>
+            <h2 class="section-title" data-i18n="bookTitle">Ksi&#261;&#380;ka Erica Pearla</h2>
+            <p class="book-title-name" data-i18n="bookName">&bdquo;Po&#322;&#261;czenie ze &#377;r&#243;d&#322;em&rdquo;</p>
+            <p data-i18n="bookDesc">Ksi&#261;&#380;ka dr. Erica Pearla opisuje jego osobiste do&#347;wiadczenia z odkryciem Reconnective Healing oraz przedstawia podstawy filozoficzne i praktyczne tej metody. Polecana lektura dla wszystkich zainteresowanych g&#322;&#281;bszym zrozumieniem procesu Reconnection.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="cta-texture"></div>
+    <div class="cta-inner reveal">
+        <h2 class="section-title" data-i18n="ctaTitle">Gotowy na do&#347;wiadczenie<br>Reconnective Healing?</h2>
+        <p data-i18n="ctaSub">Skontaktuj si&#281;, aby um&#243;wi&#263; sesj&#281; lub zada&#263; pytania</p>
+        <a href="index.html#kontakt" class="cta-btn" data-i18n="ctaBtn">Um&#243;w wizyt&#281;<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-columns">
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColGallery">Galeria i CV</div>
+            <a href="gallery.html" data-i18n="footGallery">Galeria</a>
+            <a href="cv.html">Curriculum Vitae</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColServices">Usługi</div>
+            <a href="reconnection.html">Reconnection & Reconnective Healing</a>
+            <a href="gdv-camera.html">GDV Camera</a>
+            <a href="vedapulse.html">VedaPulse</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColLegal">Informacje prawne</div>
+            <a href="privacy-policy.html" data-i18n="footPrivacy">Polityka Prywatności</a>
+            <a href="terms.html" data-i18n="footTerms">Regulamin</a>
+        </div>
+    </div>
+    <div class="footer-bottom" data-i18n="footer">&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+// ═══════ TRANSLATIONS ═══════
+const T = {
+pl: {
+    navAbout:'O mnie', navServices:'Us\u0142ugi', navTestimonials:'Opinie', navContact:'Kontakt', navGallery:'Galeria',
+    breadHome:'Strona g\u0142\u00f3wna', breadReconnection:'Reconnection',
+    heroTitle:'Reconnective Healing<sup>\u00ae</sup><br>& The Reconnection<sup>\u00ae</sup>',
+    heroSub:'Metody uzdrawiania dr. Erica Pearla oparte na energii, \u015bwietle i informacji',
+    introLabel:'Wprowadzenie',
+    introTitle:'Czym jest Reconnective Healing?',
+    introP1:'<strong>Reconnective Healing\u00ae</strong> i <strong>The Reconnection\u00ae</strong> to podej\u015bcia uzdrawiaj\u0105ce wprowadzone przez dr. Erica Pearla, chiropraktyka i autora ze Stan\u00f3w Zjednoczonych. Metody te opieraj\u0105 si\u0119 na za\u0142o\u017ceniu, \u017ce ludzkie cia\u0142o mo\u017ce uzyska\u0107 dost\u0119p do szerszego spektrum cz\u0119stotliwo\u015bci uzdrawiaj\u0105cych obejmuj\u0105cych energi\u0119, \u015bwiat\u0142o i informacj\u0119.',
+    introP2:'To nie jest tradycyjna terapia energetyczna. Praktyk nie manipuluje cia\u0142em, nie stosuje masa\u017cu ani ucisku. Zamiast tego tworzy \u015brodowisko, w kt\u00f3rym klient mo\u017ce wchodzi\u0107 w interakcj\u0119 z cz\u0119stotliwo\u015bciami uzdrawiaj\u0105cymi, wspieraj\u0105c naturalne zdolno\u015bci organizmu do przywracania r\u00f3wnowagi i dobrego samopoczucia.',
+    rhLabel:'Reconnective Healing\u00ae',
+    rhTitle:'Uzdrawianie przez cz\u0119stotliwo\u015bci',
+    rhP1:'Reconnective Healing to metoda, w kt\u00f3rej praktyk pracuje z cz\u0119stotliwo\u015bciami uzdrawiaj\u0105cymi, wspieraj\u0105c naturalne zdolno\u015bci cia\u0142a do przywracania r\u00f3wnowagi i dobrego samopoczucia. Praktyk nie manipuluje cia\u0142em ani nie stosuje konkretnych technik, takich jak masa\u017c czy ucisk.',
+    rhP2:'Celem jest wsparcie cia\u0142a i umys\u0142u w powr\u00f3cie do naturalnej r\u00f3wnowagi i harmonii. Sesj\u0119 Reconnective Healing mo\u017cna wykonywa\u0107 tyle razy, ile si\u0119 chce.',
+    rhP3:'Osoby, kt\u00f3re do\u015bwiadczy\u0142y Reconnective Healing, cz\u0119sto zg\u0142aszaj\u0105:',
+    rhL1:'G\u0142\u0119boki relaks i odpr\u0119\u017cenie',
+    rhL2:'Poczucie wewn\u0119trznej r\u00f3wnowagi',
+    rhL3:'Uwolnienie emocjonalne',
+    rhL4:'Zwi\u0119kszon\u0105 jasno\u015b\u0107 umys\u0142u',
+    rhPrice:'Cena: \u20ac80 za sesj\u0119',
+    trLabel:'The Reconnection\u00ae',
+    trTitle:'Jednorazowy proces transformacji',
+    trP1:'The Reconnection to odr\u0119bny, jednorazowy proces sk\u0142adaj\u0105cy si\u0119 z dw\u00f3ch sesji. Jego celem jest ponowne po\u0142\u0105czenie linii energetycznych i meridian\u00f3w osoby z uniwersaln\u0105 siatk\u0105 energetyczn\u0105, wspieraj\u0105c pe\u0142niejsze wyr\u00f3wnanie ze \u015bcie\u017ck\u0105 \u017cyciow\u0105 i potencja\u0142em.',
+    day1Title:'Dzie\u0144 1',
+    day1Desc:'Reconnective Healing + pierwsza cz\u0119\u015b\u0107 The Reconnection (ok. 1 godziny)',
+    day2Title:'Dzie\u0144 2',
+    day2Desc:'Druga cz\u0119\u015b\u0107 The Reconnection (25\u201330 minut)',
+    trP2:'The Reconnection przeprowadza si\u0119 tylko raz w \u017cyciu. Jest to g\u0142\u0119boki proces, kt\u00f3ry wspiera wyr\u00f3wnanie z pe\u0142ni\u0105 naszego potencja\u0142u \u017cyciowego.',
+    trPrice:'Cena ca\u0142kowita: \u20ac413 (\u20ac80 + \u20ac333)',
+    trPriceNote:'Cena \u20ac333 jest ustalona przez Erica Pearla na ca\u0142ym \u015bwiecie.',
+    whyLabel:'Dlaczego 333?',
+    whyTitle:'Znaczenie liczby 333',
+    whyL1:'Liczba 333 odnosi si\u0119 do \u015bwiadomo\u015bci i energetycznego wyr\u00f3wnania',
+    whyL2:'Jest zwi\u0105zana z cz\u0119stotliwo\u015bci\u0105, w kt\u00f3rej \u015bwiat fizyczny spotyka si\u0119 z wy\u017csz\u0105 \u015bwiadomo\u015bci\u0105',
+    whyL3:'Opisywana jako poziom \u201eplanu\u201d lub \u201eszablonu\u201d \u2014 warstwa energetyczna naszego planu \u017cyciowego',
+    whyL4:'Symbolizuje ponowne po\u0142\u0105czenie, wyr\u00f3wnanie i wy\u017csz\u0105 \u015bwiadomo\u015b\u0107',
+    videosLabel:'Filmy',
+    videosTitle:'Dowiedz si\u0119 wi\u0119cej',
+    vid1:'Eric Pearl \u2014 Wprowadzenie',
+    vid2:'Medytacja Rekonektywna',
+    vid3:'Eric Pearl \u2014 \u0106wiczenia',
+    vid4:'Dlaczego Reconnective Healing jest tak pot\u0119\u017cne?',
+    bookLabel:'Polecana lektura',
+    bookTitle:'Ksi\u0105\u017cka Erica Pearla',
+    bookName:'\u201ePo\u0142\u0105czenie ze \u0179r\u00f3d\u0142em\u201d',
+    bookDesc:'Ksi\u0105\u017cka dr. Erica Pearla opisuje jego osobiste do\u015bwiadczenia z odkryciem Reconnective Healing oraz przedstawia podstawy filozoficzne i praktyczne tej metody. Polecana lektura dla wszystkich zainteresowanych g\u0142\u0119bszym zrozumieniem procesu Reconnection.',
+    ctaTitle:'Gotowy na do\u015bwiadczenie<br>Reconnective Healing?',
+    ctaSub:'Skontaktuj si\u0119, aby um\u00f3wi\u0107 sesj\u0119 lub zada\u0107 pytania',
+    ctaBtn:'Um\u00f3w wizyt\u0119',
+    footGallery:'Galeria', footPrivacy:'Polityka Prywatno\u015bci', footTerms:'Regulamin',
+    footColGallery:'Galeria i CV', footColServices:'Us\u0142ugi', footColLegal:'Informacje prawne',
+    footer:'\u00a9 2026 Body Mind Healing \u2014 Tamara Hofland. Wszelkie prawa zastrze\u017cone.'
+},
+en: {
+    navAbout:'About', navServices:'Services', navTestimonials:'Testimonials', navContact:'Contact', navGallery:'Gallery',
+    breadHome:'Home', breadReconnection:'Reconnection',
+    heroTitle:'Reconnective Healing<sup>\u00ae</sup><br>& The Reconnection<sup>\u00ae</sup>',
+    heroSub:'Healing approaches by Dr. Eric Pearl based on energy, light, and information',
+    introLabel:'Introduction',
+    introTitle:'What is Reconnective Healing?',
+    introP1:'<strong>Reconnective Healing\u00ae</strong> and <strong>The Reconnection\u00ae</strong> are healing approaches introduced by Dr. Eric Pearl, a chiropractor and author from the United States. These methods are based on the idea that the human body can access a wider spectrum of healing frequencies involving energy, light, and information.',
+    introP2:'This is not traditional energy therapy. The practitioner does not manipulate the body or use specific techniques such as massage or pressure. Instead, an environment is created where the client can interact with healing frequencies, supporting the body\u2019s natural ability to restore balance and well-being.',
+    rhLabel:'Reconnective Healing\u00ae',
+    rhTitle:'Healing through frequencies',
+    rhP1:'Reconnective Healing is a method where the practitioner works with healing frequencies to support the body\u2019s natural ability to restore balance and well-being. The practitioner does not manipulate the body or use specific techniques such as massage or pressure.',
+    rhP2:'The goal is to support body and mind in returning to natural balance and harmony. Reconnective Healing sessions can be done as many times as you wish.',
+    rhP3:'People who have experienced Reconnective Healing often report:',
+    rhL1:'Deep relaxation',
+    rhL2:'A sense of inner balance',
+    rhL3:'Emotional release',
+    rhL4:'Increased clarity of mind',
+    rhPrice:'Price: \u20ac80 per session',
+    trLabel:'The Reconnection\u00ae',
+    trTitle:'A one-time transformational process',
+    trP1:'The Reconnection is a separate, one-time process consisting of two sessions. It reconnects a person\u2019s energy lines and meridians with the universal energy grid, supporting alignment more fully with one\u2019s life path and potential.',
+    day1Title:'Day 1',
+    day1Desc:'Reconnective Healing + first part of The Reconnection (approx. 1 hour)',
+    day2Title:'Day 2',
+    day2Desc:'Second part of The Reconnection (25\u201330 minutes)',
+    trP2:'The Reconnection is performed only once in a lifetime. It is a profound process that supports alignment with the fullness of our life potential.',
+    trPrice:'Total price: \u20ac413 (\u20ac80 + \u20ac333)',
+    trPriceNote:'The price of \u20ac333 is set by Eric Pearl worldwide.',
+    whyLabel:'Why 333?',
+    whyTitle:'The meaning of the number 333',
+    whyL1:'The number 333 relates to consciousness and energetic alignment',
+    whyL2:'It is associated with the frequency where the physical world and higher consciousness meet',
+    whyL3:'Described as the \u201cblueprint\u201d or \u201ctemplate\u201d level \u2014 the energetic layer of our life plan',
+    whyL4:'Represents reconnection, alignment, and higher consciousness',
+    videosLabel:'Videos',
+    videosTitle:'Learn more',
+    vid1:'Eric Pearl \u2014 Introduction',
+    vid2:'Reconnective Meditation',
+    vid3:'Eric Pearl \u2014 Exercises',
+    vid4:'Why is Reconnective Healing so powerful?',
+    bookLabel:'Recommended reading',
+    bookTitle:'Book by Eric Pearl',
+    bookName:'\u201cThe Reconnection: Heal Others, Heal Yourself\u201d',
+    bookDesc:'Dr. Eric Pearl\u2019s book describes his personal experiences discovering Reconnective Healing and presents the philosophical and practical foundations of this method. Recommended reading for anyone interested in a deeper understanding of the Reconnection process.',
+    ctaTitle:'Ready to experience<br>Reconnective Healing?',
+    ctaSub:'Get in touch to book a session or ask any questions',
+    ctaBtn:'Book a session',
+    footGallery:'Gallery', footPrivacy:'Privacy Policy', footTerms:'Terms of Use',
+    footColGallery:'Gallery & CV', footColServices:'Services', footColLegal:'Legal',
+    footer:'\u00a9 2026 Body Mind Healing \u2014 Tamara Hofland. All rights reserved.'
+}
+};
+
+// ═══════ STATE ═══════
+let currentLang = 'pl';
+
+// ═══════ LANGUAGE ═══════
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (T[lang][key]) el.innerHTML = T[lang][key];
+    });
+}
+
+// ═══════ INIT ═══════
+window.addEventListener('DOMContentLoaded', () => {
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+});
+</script>
+</body>
+</html>

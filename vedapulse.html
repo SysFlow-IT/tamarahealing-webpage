@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pl" class="lang-pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VedaPulse Diagnostics — Body Mind Healing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #C8963E; --amber: #D4A855; --violet: #7B6D8E; --plum: #4A3B5C;
+            --cream: #FFF8EE; --off-white: #FFFDF9; --text: #3A2E2A; --text-sec: #6B5D56;
+            --heading: 'Cormorant Garamond', Georgia, serif;
+            --body: 'Nunito Sans', 'Segoe UI', sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body); color: var(--text); background: var(--plum); line-height: 1.7; overflow-x: hidden; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* -- Nav -- */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: transparent; border-bottom: 1px solid rgba(255,255,255,.1); transition: background .5s, box-shadow .4s, border-color .5s; }
+        nav.scrolled { background: rgba(74,59,92,.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 2px 30px rgba(0,0,0,.2); border-color: transparent; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { height: 38px; filter: brightness(0) invert(1); transition: filter .5s; }
+        nav.scrolled .nav-logo { filter: brightness(0) invert(1); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,248,238,.85); text-decoration: none; transition: color .3s; }
+        .nav-links a:hover { color: var(--gold); }
+        nav.scrolled .nav-links a { color: rgba(255,248,238,.7); }
+        nav.scrolled .nav-links a:hover { color: var(--gold); }
+        .lang-switch { display: flex; gap: 0; border: 1px solid rgba(255,248,238,.3); margin-left: .5rem; }
+        nav.scrolled .lang-switch { border-color: rgba(200,150,62,.35); }
+        .lang-btn { padding: .35rem .7rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; background: transparent; color: rgba(255,248,238,.7); border: none; cursor: pointer; transition: all .3s; font-family: var(--body); }
+        .lang-btn.active { background: var(--gold); color: var(--off-white); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: .5rem; }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--cream); margin: 4px 0; transition: all .3s; }
+        nav.scrolled .nav-toggle span { background: var(--cream); }
+
+        /* -- Hero -- */
+        .hero { min-height: 55vh; display: flex; align-items: flex-end; justify-content: flex-start; position: relative; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; background: url('designs/6. soft-abstract-background-with-warm-golde_PMasHbVBTHmzyoXl4paXng_8uN3meO4SfmZDsk9-S29yg_cover_hd.png') center/cover; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,59,92,.88) 0%, rgba(74,59,92,.65) 40%, rgba(74,59,92,.5) 70%, rgba(74,59,92,.8) 100%); }
+        .hero-content { position: relative; z-index: 2; padding: 4rem 3rem 4rem; max-width: 800px; }
+        .hero-badge { display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--cream); border: 1px solid rgba(255,248,238,.4); padding: .45rem 1.2rem; margin-bottom: 2rem; }
+        .hero h1 { font-family: var(--heading); font-size: clamp(2.4rem,5vw,3.8rem); font-weight: 500; line-height: 1.1; color: var(--cream); margin-bottom: 1rem; opacity: 0; animation: fadeUp .9s .5s cubic-bezier(.22,1,.36,1) forwards; }
+        .hero p { font-size: 1.05rem; color: rgba(255,248,238,.7); font-weight: 300; max-width: 560px; margin-bottom: 0; opacity: 0; animation: fadeUp .9s .7s cubic-bezier(.22,1,.36,1) forwards; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* -- Content Sections -- */
+        .section-texture { position: absolute; inset: 0; background: url('designs/4. seamless-subtle-repeating-pattern-very-f_7qy31mcGRKKr2MV8vfhB9Q_GIseaBiVRlaqlG2CGkyLMQ_cover_hd.png') center/400px repeat; opacity: .06; pointer-events: none; }
+
+        .content-section { position: relative; padding: 5rem 2rem; overflow: hidden; }
+        .content-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 2; }
+        .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
+        .section-title { font-family: var(--heading); font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 500; color: var(--cream); line-height: 1.2; margin-bottom: 1.2rem; }
+        .section-divider { width: 36px; height: 1px; background: var(--gold); margin-bottom: 2rem; }
+
+        .content-inner p { font-size: 1rem; color: rgba(255,248,238,.65); line-height: 1.85; margin-bottom: 1.2rem; }
+        .content-inner p strong { color: var(--cream); font-weight: 600; }
+
+        .content-inner ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+        .content-inner li { font-size: .95rem; color: rgba(255,248,238,.6); padding: .35rem 0 .35rem 1.2rem; position: relative; line-height: 1.7; }
+        .content-inner li::before { content: ''; position: absolute; left: 0; top: .7rem; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+
+        /* -- Author Photo -- */
+        .author-block { display: flex; gap: 2.5rem; align-items: flex-start; margin: 2.5rem 0; }
+        .author-photo { flex-shrink: 0; width: 200px; position: relative; }
+        .author-photo img { width: 100%; height: auto; display: block; position: relative; z-index: 1; }
+        .author-photo::after { content: ''; position: absolute; top: 10px; left: 10px; right: -10px; bottom: -10px; border: 1px solid var(--gold); z-index: 0; }
+        .author-text { flex: 1; }
+        .author-text p { margin-bottom: 1rem; }
+        .author-name { font-family: var(--heading); font-size: 1.3rem; font-weight: 600; color: var(--cream); margin-bottom: .3rem; }
+        .author-role { font-size: .82rem; color: var(--gold); letter-spacing: .05em; margin-bottom: 1rem; }
+
+        /* -- Price Card -- */
+        .price-card { background: rgba(0,0,0,.2); border: 1px solid rgba(200,150,62,.3); padding: 2rem 2.5rem; margin: 2.5rem 0; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+        .price-card .price-label { font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+        .price-card .price-value { font-family: var(--heading); font-size: 2rem; font-weight: 600; color: var(--cream); }
+        .price-card .price-note { font-size: .88rem; color: rgba(255,248,238,.5); }
+
+        /* -- Video Section -- */
+        .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; margin: 2.5rem 0; background: rgba(0,0,0,.3); border: 1px solid rgba(200,150,62,.2); }
+        .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+        /* -- CTA -- */
+        .cta-section { text-align: center; padding: 4rem 2rem 5rem; position: relative; }
+        .cta-section .section-texture { opacity: .04; }
+        .cta-btn { display: inline-flex; align-items: center; gap: .8rem; font-family: var(--body); font-size: .82rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--cream); background: transparent; border: 1px solid var(--gold); padding: .95rem 2.5rem; cursor: pointer; text-decoration: none; transition: all .4s cubic-bezier(.22,1,.36,1); }
+        .cta-btn:hover { background: var(--gold); color: var(--plum); }
+        .cta-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+        .cta-btn:hover svg { transform: translateX(4px); }
+
+        /* -- Footer -- */
+        footer { padding: 3rem 2rem 2rem; background: var(--plum); border-top: 1px solid rgba(200,150,62,.1); }
+        .footer-columns { max-width: 900px; margin: 0 auto 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .footer-col { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-col-title { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+        .footer-col a { font-size: .82rem; color: rgba(255,248,238,.55); text-decoration: none; transition: color .3s; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; font-size: .75rem; color: rgba(255,248,238,.35); padding-top: 1.5rem; border-top: 1px solid rgba(200,150,62,.08); }
+
+        /* -- Responsive -- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(74,59,92,.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(200,150,62,.15); }
+            .hero-content { padding: 2rem 1.5rem 3rem; }
+            .hero { min-height: 45vh; }
+            .content-section { padding: 3.5rem 1.5rem; }
+            .author-block { flex-direction: column; align-items: center; text-align: center; }
+            .author-photo { width: 160px; }
+            .price-card { flex-direction: column; text-align: center; padding: 1.5rem; }
+            .footer-columns { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="nav">
+    <div class="nav-inner">
+        <a href="index.html"><img src="designs/2. elegant-wordmark-logo-design-body-mind-h_Qj_ze_0vRre_VeCI6uUQnw_F8akWxZZTeuudA0Ohr32dQ_cover_hd.png" alt="Body Mind Healing" class="nav-logo"></a>
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="index.html#o-mnie" data-i18n="navAbout">O mnie</a></li>
+            <li><a href="index.html#uslugi" data-i18n="navServices">Us&#322;ugi</a></li>
+            <li><a href="index.html#opinie" data-i18n="navTestimonials">Opinie</a></li>
+            <li><a href="gallery.html" data-i18n="navGallery">Galeria</a></li>
+            <li><a href="index.html#kontakt" data-i18n="navContact">Kontakt</a></li>
+            <li>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+                    <button class="lang-btn" onclick="setLang('en')">EN</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-badge">Body Mind Healing</div>
+        <h1 data-i18n="vpHeroTitle">Diagnostyka<br>VedaPulse</h1>
+        <p data-i18n="vpHeroSub">Pierwszy system diagnostyczny oparty na technologii HRV i zasadach tradycyjnej analizy pulsu.</p>
+    </div>
+</section>
+
+<!-- Intro Section -->
+<section class="content-section">
+    <div class="section-texture"></div>
+    <div class="content-inner">
+        <div class="section-label reveal" data-i18n="vpIntroLabel">Diagnostyka</div>
+        <h2 class="section-title reveal" data-i18n="vpIntroTitle">VedaPulse&reg; &mdash; Cyfrowa Diagnostyka Pulsu</h2>
+        <div class="section-divider reveal"></div>
+        <p class="reveal" data-i18n="vpIntro1">VedaPulse&reg; to pierwszy system diagnostyczny oparty na wiedzy, wykorzystuj&#261;cy technologi&#281; HRV (zmienno&#347;&#263; rytmu serca) oraz zasady tradycyjnej analizy pulsu. Za pomoc&#261; jednego urz&#261;dzenia mo&#380;na oceni&#263; stan zdrowia i natychmiast wygenerowa&#263; spersonalizowane zalecenia oparte na podej&#347;ciu medycyny holistycznej.</p>
+
+        <!-- Author block -->
+        <div class="author-block reveal">
+            <div class="author-photo">
+                <img src="photos/O. Sorokin.jpg" alt="Oleg Sorokin">
+            </div>
+            <div class="author-text">
+                <div class="author-name">Oleg Sorokin</div>
+                <div class="author-role" data-i18n="vpAuthorRole">Autor systemu VedaPulse</div>
+                <p data-i18n="vpAuthorDesc">Tw&#243;rca systemu VedaPulse, kt&#243;ry &#322;&#261;czy wsp&#243;&#322;czesn&#261; analiz&#281; komputerow&#261; z zasadami tradycyjnej medycyny ajurwedyjskiej, tworz&#261;c unikalne narz&#281;dzie diagnostyczne wspieraj&#261;ce holistyczne podej&#347;cie do zdrowia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What VedaPulse Can Show -->
+<section class="content-section">
+    <div class="section-texture"></div>
+    <div class="content-inner">
+        <div class="section-label reveal" data-i18n="vpShowLabel">Mo&#380;liwo&#347;ci</div>
+        <h2 class="section-title reveal" data-i18n="vpShowTitle">Co VedaPulse mo&#380;e pokaza&#263; o Twoim zdrowiu</h2>
+        <div class="section-divider reveal"></div>
+        <p class="reveal" data-i18n="vpShowIntro">VedaPulse to cyfrowy system diagnostyki pulsu, kt&#243;ry dostarcza wgl&#261;du w funkcjonowanie Twojego organizmu. Analizuj&#261;c puls i rytm serca, system pozwala oceni&#263;:</p>
+        <ul class="reveal">
+            <li data-i18n="vpItem1">R&#243;wnowag&#281; autonomicznego uk&#322;adu nerwowego</li>
+            <li data-i18n="vpItem2">Poziom stresu fizycznego i emocjonalnego</li>
+            <li data-i18n="vpItem3">Zdolno&#347;&#263; organizmu do regeneracji i adaptacji</li>
+            <li data-i18n="vpItem4">Stan funkcjonalny r&#243;&#380;nych uk&#322;ad&#243;w cia&#322;a</li>
+            <li data-i18n="vpItem5">Og&#243;lny bilans energetyczny i witalno&#347;&#263;</li>
+        </ul>
+        <p class="reveal" data-i18n="vpShowOutro">Metoda &#322;&#261;czy wsp&#243;&#322;czesn&#261; analiz&#281; komputerow&#261; z zasadami tradycyjnej medycyny ajurwedyjskiej, pomagaj&#261;c stworzy&#263; pe&#322;niejszy obraz aktualnej kondycji fizycznej i energetycznej. Informacje te mog&#261; wspiera&#263; bardziej zindywidualizowane i holistyczne podej&#347;cie do terapii.</p>
+    </div>
+</section>
+
+<!-- Video Section -->
+<section class="content-section">
+    <div class="section-texture"></div>
+    <div class="content-inner">
+        <div class="section-label reveal" data-i18n="vpVideoLabel">Prezentacja</div>
+        <h2 class="section-title reveal" data-i18n="vpVideoTitle">Demonstracja VedaPulse</h2>
+        <div class="section-divider reveal"></div>
+        <div class="video-wrapper reveal">
+            <iframe src="https://www.youtube.com/embed/IpNec7e63SI" title="VedaPulse demonstration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- Price + CTA -->
+<section class="content-section cta-section">
+    <div class="section-texture"></div>
+    <div class="content-inner">
+        <div class="price-card reveal">
+            <div>
+                <div class="price-label" data-i18n="vpPriceLabel">Cena</div>
+                <div class="price-value">&euro;90</div>
+                <div class="price-note" data-i18n="vpPriceNote">W tym pe&#322;ny raport pisemny</div>
+            </div>
+            <a href="index.html#kontakt" class="cta-btn" data-i18n="vpCta">Um&#243;w wizyt&#281;<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-columns">
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColGallery">Galeria i CV</div>
+            <a href="gallery.html" data-i18n="footGallery">Galeria</a>
+            <a href="cv.html">Curriculum Vitae</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColServices">Usługi</div>
+            <a href="reconnection.html">Reconnection & Reconnective Healing</a>
+            <a href="gdv-camera.html">GDV Camera</a>
+            <a href="vedapulse.html">VedaPulse</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColLegal">Informacje prawne</div>
+            <a href="privacy-policy.html" data-i18n="footPrivacy">Polityka Prywatności</a>
+            <a href="terms.html" data-i18n="footTerms">Regulamin</a>
+        </div>
+    </div>
+    <div class="footer-bottom" data-i18n="footer">&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+// Translations
+const T = {
+pl: {
+    navAbout:'O mnie', navServices:'Uslugi', navTestimonials:'Opinie', navContact:'Kontakt', navGallery:'Galeria',
+    footGallery:'Galeria', footPrivacy:'Polityka Prywatnosci', footTerms:'Regulamin',
+    footColGallery:'Galeria i CV', footColServices:'Usługi', footColLegal:'Informacje prawne',
+    footer:'&copy; 2026 Body Mind Healing &mdash; Tamara Hofland. Wszelkie prawa zastrzezone.',
+    vpHeroTitle:'Diagnostyka<br>VedaPulse',
+    vpHeroSub:'Pierwszy system diagnostyczny oparty na technologii HRV i zasadach tradycyjnej analizy pulsu',
+    vpIntroLabel:'Diagnostyka',
+    vpIntroTitle:'VedaPulse&reg; &mdash; Cyfrowa Diagnostyka Pulsu',
+    vpIntro1:'VedaPulse&reg; to pierwszy system diagnostyczny oparty na wiedzy, wykorzystuj\u0105cy technologi\u0119 HRV (zmienno\u015b\u0107 rytmu serca) oraz zasady tradycyjnej analizy pulsu. Za pomoc\u0105 jednego urz\u0105dzenia mo\u017cna oceni\u0107 stan zdrowia i natychmiast wygenerowa\u0107 spersonalizowane zalecenia oparte na podej\u015bciu medycyny holistycznej.',
+    vpAuthorRole:'Autor systemu VedaPulse',
+    vpAuthorDesc:'Tw\u00f3rca systemu VedaPulse, kt\u00f3ry \u0142\u0105czy wsp\u00f3\u0142czesn\u0105 analiz\u0119 komputerow\u0105 z zasadami tradycyjnej medycyny ajurwedyjskiej, tworz\u0105c unikalne narz\u0119dzie diagnostyczne wspieraj\u0105ce holistyczne podej\u015bcie do zdrowia.',
+    vpShowLabel:'Mo\u017cliwo\u015bci',
+    vpShowTitle:'Co VedaPulse mo\u017ce pokaza\u0107 o Twoim zdrowiu',
+    vpShowIntro:'VedaPulse to cyfrowy system diagnostyki pulsu, kt\u00f3ry dostarcza wgl\u0105du w funkcjonowanie Twojego organizmu. Analizuj\u0105c puls i rytm serca, system pozwala oceni\u0107:',
+    vpItem1:'R\u00f3wnowag\u0119 autonomicznego uk\u0142adu nerwowego',
+    vpItem2:'Poziom stresu fizycznego i emocjonalnego',
+    vpItem3:'Zdolno\u015b\u0107 organizmu do regeneracji i adaptacji',
+    vpItem4:'Stan funkcjonalny r\u00f3\u017cnych uk\u0142ad\u00f3w cia\u0142a',
+    vpItem5:'Og\u00f3lny bilans energetyczny i witalno\u015b\u0107',
+    vpShowOutro:'Metoda \u0142\u0105czy wsp\u00f3\u0142czesn\u0105 analiz\u0119 komputerow\u0105 z zasadami tradycyjnej medycyny ajurwedyjskiej, pomagaj\u0105c stworzy\u0107 pe\u0142niejszy obraz aktualnej kondycji fizycznej i energetycznej. Informacje te mog\u0105 wspiera\u0107 bardziej zindywidualizowane i holistyczne podej\u015bcie do terapii.',
+    vpVideoLabel:'Prezentacja',
+    vpVideoTitle:'Demonstracja VedaPulse',
+    vpPriceLabel:'Cena',
+    vpPriceNote:'W tym pe\u0142ny raport pisemny',
+    vpCta:'Um\u00f3w wizyt\u0119'
+},
+en: {
+    navAbout:'About', navServices:'Services', navTestimonials:'Testimonials', navContact:'Contact', navGallery:'Gallery',
+    footGallery:'Gallery', footPrivacy:'Privacy Policy', footTerms:'Terms of Use',
+    footColGallery:'Gallery & CV', footColServices:'Services', footColLegal:'Legal',
+    footer:'&copy; 2026 Body Mind Healing &mdash; Tamara Hofland. All rights reserved.',
+    vpHeroTitle:'VedaPulse<br>Diagnostics',
+    vpHeroSub:'The first knowledge-based diagnostic system using HRV technology and principles of traditional pulse analysis',
+    vpIntroLabel:'Diagnostics',
+    vpIntroTitle:'VedaPulse&reg; &mdash; Digital Pulse Diagnostics',
+    vpIntro1:'VedaPulse&reg; is the first knowledge-based diagnostic system using HRV (heart rate variability) technology and principles of traditional pulse analysis. With one device, evaluate health condition and form instant personalized recommendations based on approaches of holistic medicine.',
+    vpAuthorRole:'Author of the VedaPulse system',
+    vpAuthorDesc:'Creator of the VedaPulse system, which combines modern computer analysis with principles of traditional Ayurvedic medicine, creating a unique diagnostic tool supporting a holistic approach to health.',
+    vpShowLabel:'Capabilities',
+    vpShowTitle:'What VedaPulse Can Show About Your Health',
+    vpShowIntro:'VedaPulse is a digital pulse diagnostic system that provides insight into how your body is functioning. By analyzing the pulse and heart rhythm, the system can help evaluate:',
+    vpItem1:'The balance of the autonomic nervous system',
+    vpItem2:'The level of physical and emotional stress',
+    vpItem3:'The body\'s ability to recover and adapt',
+    vpItem4:'The functional state of different body systems',
+    vpItem5:'Overall energy balance and vitality',
+    vpShowOutro:'The method combines modern computer analysis with principles from traditional Ayurvedic medicine, helping to create a clearer picture of your current physical and energetic condition. This information can support a more individualized and holistic approach to therapy.',
+    vpVideoLabel:'Presentation',
+    vpVideoTitle:'VedaPulse Demonstration',
+    vpPriceLabel:'Price',
+    vpPriceNote:'Including full written report',
+    vpCta:'Book a session'
+}
+};
+
+// Language switching
+let currentLang = 'pl';
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (T[lang] && T[lang][key]) el.innerHTML = T[lang][key];
+    });
+}
+
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+// Start scrolled since we may already be scrolled
+if (window.scrollY > 60) nav.classList.add('scrolled');
+
+// Reveal on scroll
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>

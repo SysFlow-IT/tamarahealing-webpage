@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pl" class="lang-pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae — Tamara Hofland-Doloechanova</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #C8963E; --amber: #D4A855; --violet: #7B6D8E; --plum: #4A3B5C;
+            --cream: #FFF8EE; --off-white: #FFFDF9; --text: #3A2E2A; --text-sec: #6B5D56;
+            --heading: 'Cormorant Garamond', Georgia, serif;
+            --body: 'Nunito Sans', 'Segoe UI', sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body); color: var(--cream); background: var(--plum); line-height: 1.7; overflow-x: hidden; }
+
+        /* ── Nav ── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(74,59,92,.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 2px 30px rgba(0,0,0,.2); border-bottom: 1px solid transparent; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { height: 38px; filter: brightness(0) invert(1); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,248,238,.7); text-decoration: none; transition: color .3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .lang-switch { display: flex; gap: 0; border: 1px solid rgba(200,150,62,.35); margin-left: .5rem; }
+        .lang-btn { padding: .35rem .7rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; background: transparent; color: rgba(255,248,238,.7); border: none; cursor: pointer; transition: all .3s; font-family: var(--body); }
+        .lang-btn.active { background: var(--gold); color: var(--off-white); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: .5rem; }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--cream); margin: 4px 0; transition: all .3s; }
+
+        /* ── Page Hero ── */
+        .page-hero { padding: 8rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(200,150,62,.1) 0%, transparent 70%); }
+        .page-hero h1 { font-family: var(--heading); font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 500; color: var(--cream); position: relative; }
+        .page-hero .subtitle { font-family: var(--heading); font-size: clamp(1.1rem,2.5vw,1.5rem); font-weight: 400; font-style: italic; color: var(--gold); margin-top: .6rem; position: relative; }
+        .page-hero .gold-bar { width: 50px; height: 2px; background: var(--gold); margin: 1.2rem auto 0; position: relative; }
+
+        /* ── CV Content ── */
+        .cv { max-width: 900px; margin: 0 auto; padding: 0 2rem 5rem; }
+
+        .cv-section { margin-bottom: 3rem; }
+        .cv-section-title { font-family: var(--heading); font-size: 1.8rem; font-weight: 600; color: var(--gold); margin-bottom: .3rem; }
+        .cv-section-bar { width: 40px; height: 2px; background: var(--gold); margin-bottom: 1.5rem; }
+
+        .cv-subsection { margin-bottom: 2rem; }
+        .cv-subsection-title { font-family: var(--heading); font-size: 1.25rem; font-weight: 600; font-style: italic; color: var(--cream); margin-bottom: .8rem; padding-left: .5rem; border-left: 3px solid rgba(200,150,62,.4); }
+
+        .cv ul { list-style: none; padding: 0; }
+        .cv li { font-size: .93rem; color: rgba(255,248,238,.7); padding: .35rem 0 .35rem 1.4rem; position: relative; line-height: 1.7; }
+        .cv li::before { content: ''; position: absolute; left: 0; top: .75rem; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); opacity: .7; }
+
+        .cv-experience { display: flex; flex-direction: column; gap: .6rem; }
+        .cv-experience-item { font-size: .95rem; color: rgba(255,248,238,.7); padding-left: 1.4rem; position: relative; line-height: 1.7; }
+        .cv-experience-item::before { content: ''; position: absolute; left: 0; top: .6rem; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); opacity: .7; }
+        .cv-experience-item strong { color: var(--cream); font-weight: 600; }
+
+        /* ── Footer ── */
+        footer { padding: 3rem 2rem 2rem; background: var(--plum); border-top: 1px solid rgba(200,150,62,.1); }
+        .footer-columns { max-width: 900px; margin: 0 auto 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .footer-col { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-col-title { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+        .footer-col a { font-size: .82rem; color: rgba(255,248,238,.55); text-decoration: none; transition: color .3s; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; font-size: .75rem; color: rgba(255,248,238,.35); padding-top: 1.5rem; border-top: 1px solid rgba(200,150,62,.08); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(74,59,92,.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(200,150,62,.15); }
+            .page-hero { padding: 7rem 1.5rem 2.5rem; }
+            .cv { padding: 0 1.5rem 4rem; }
+            .footer-columns { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html"><img src="designs/2. elegant-wordmark-logo-design-body-mind-h_Qj_ze_0vRre_VeCI6uUQnw_F8akWxZZTeuudA0Ohr32dQ_cover_hd.png" alt="Body Mind Healing" class="nav-logo"></a>
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="index.html#o-mnie" data-i18n="navAbout">O mnie</a></li>
+            <li><a href="index.html#uslugi" data-i18n="navServices">Usługi</a></li>
+            <li><a href="index.html#opinie" data-i18n="navTestimonials">Opinie</a></li>
+            <li><a href="gallery.html" data-i18n="navGallery">Galeria</a></li>
+            <li><a href="index.html#kontakt" data-i18n="navContact">Kontakt</a></li>
+            <li>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+                    <button class="lang-btn" onclick="setLang('en')">EN</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<section class="page-hero">
+    <h1>Tamara Hofland-Doloechanova</h1>
+    <div class="subtitle" data-i18n="pageSubtitle">Curriculum Vitae</div>
+    <div class="gold-bar"></div>
+</section>
+
+<div class="cv">
+
+    <!-- Academic Education -->
+    <div class="cv-section">
+        <h2 class="cv-section-title" data-i18n="cvEduTitle">Wykształcenie akademickie</h2>
+        <div class="cv-section-bar"></div>
+        <ul>
+            <li data-i18n="cvEdu1">Studia uniwersyteckie: Pedagogika i Psychologia, Związek Radziecki</li>
+            <li data-i18n="cvEdu2">Akademia Psychoterapii Integralnej (HBO), Amersfoort, Holandia</li>
+            <li data-i18n="cvEdu3">Podstawy Nauk Medycznych — Anatomia, Fizjologia, Patologia (poziom HBO), Zeewolde</li>
+            <li data-i18n="cvEdu4">Wiedza Psychospołeczna (poziom HBO), Utrecht</li>
+        </ul>
+    </div>
+
+    <!-- Professional Experience -->
+    <div class="cv-section">
+        <h2 class="cv-section-title" data-i18n="cvExpTitle">Doświadczenie zawodowe</h2>
+        <div class="cv-section-bar"></div>
+        <div class="cv-experience">
+            <div class="cv-experience-item" data-i18n="cvExp1">Terapeuta w instytucji psychiatrycznej dla dzieci, Związek Radziecki</div>
+            <div class="cv-experience-item" data-i18n="cvExp2">Terapeuta we własnej praktyce <strong>"BODY MIND HEALING"</strong>, Holandia</div>
+        </div>
+    </div>
+
+    <!-- Professional Trainings -->
+    <div class="cv-section">
+        <h2 class="cv-section-title" data-i18n="cvTrainTitle">Szkolenia i certyfikacje zawodowe</h2>
+        <div class="cv-section-bar"></div>
+
+        <!-- Psychological -->
+        <div class="cv-subsection">
+            <h3 class="cv-subsection-title" data-i18n="cvCat1">Metody psychologiczne i terapeutyczne</h3>
+            <ul>
+                <li data-i18n="cvT01">EMDR — Eye Movement Desensitization and Reprocessing, instruktor Alexander Bund</li>
+                <li data-i18n="cvT02">EFT — Emotional Freedom Techniques (2007), instruktor M.M. Liew-On</li>
+                <li data-i18n="cvT03">TAT — Tapas Acupressure Technique (2007), instruktor M.M. Liew-On</li>
+                <li data-i18n="cvT04">TFT — Thought Field Therapy (Callahan Techniques)</li>
+                <li data-i18n="cvT05">WHEE — Wholistic Hybrid (wywodzący się z EMDR i EFT)</li>
+                <li data-i18n="cvT06">Terapia Rebirthing, Saavdhana Lokker (BIVT)</li>
+                <li data-i18n="cvT07">Trening Mindfulness, Nathalie Wilkers (BIVT)</li>
+                <li data-i18n="cvT08">Trening Umiejętności Komunikacyjnych, ROC Flevoland (1998)</li>
+            </ul>
+        </div>
+
+        <!-- Body-Oriented -->
+        <div class="cv-subsection">
+            <h3 class="cv-subsection-title" data-i18n="cvCat2">Terapie ciałowe i manualne</h3>
+            <ul>
+                <li data-i18n="cvT09">Metoda Dorn-Breuss — korekcja i ustawianie kręgosłupa, instruktor Jos Dassen</li>
+                <li data-i18n="cvT10">Bańki lekarskie (Cupping Therapy), instruktor Wim Zewald, Arnhem</li>
+                <li data-i18n="cvT11">Terapia misami dźwiękowymi / masaż, wg Petera Hessa</li>
+                <li data-i18n="cvT12">Terapia masażem miodowym, szkolenie w Sankt Petersburgu i Holandii</li>
+                <li data-i18n="cvT13">Terapia punktów spustowych (Trigger Point), instruktor Maxim Eshenko</li>
+                <li data-i18n="cvT14">Body Drum Release, instruktor Peter Krijger, Amersfoort</li>
+            </ul>
+        </div>
+
+        <!-- Energy-Based -->
+        <div class="cv-subsection">
+            <h3 class="cv-subsection-title" data-i18n="cvCat3">Metody energetyczne i komplementarne</h3>
+            <ul>
+                <li data-i18n="cvT15">Metoda Quantum-Touch, opracowana przez Richarda Gordona</li>
+                <li data-i18n="cvT16">Quantum-Touch Supercharging, instruktor Denise Godfrey, Antwerpia</li>
+                <li data-i18n="cvT17">Quantum Entrainment, instruktor Frank Kinslow, USA</li>
+                <li data-i18n="cvT18">Matrix Energetics, instruktor Richard Bartlett, USA</li>
+                <li data-i18n="cvT19">Regenesis Healing, Quantum Academy, Huizen</li>
+                <li data-i18n="cvT20">The Reconnection / Reconnective Healing, instruktor Eric Pearl</li>
+                <li data-i18n="cvT21">Healing Tao, Mistrz Mantak Chia (2006)</li>
+            </ul>
+        </div>
+
+        <!-- Spiritual -->
+        <div class="cv-subsection">
+            <h3 class="cv-subsection-title" data-i18n="cvCat4">Rozwój duchowy i świadomościowy</h3>
+            <ul>
+                <li data-i18n="cvT22">Uzdrawianie duchowe, instruktorzy Boris Son i Larisa Bunina, Moskwa</li>
+                <li data-i18n="cvT23">Rozwój duchowy / intuicyjny (od 1997)</li>
+                <li data-i18n="cvT24">Reiki — poziomy 1, 2, 3, Reiki Master Hans Spijker (1997)</li>
+                <li data-i18n="cvT25">Szkolenie Biotensor, instruktor Roel Nuijt (2007)</li>
+                <li data-i18n="cvT26">SRT — Spiritual Response Therapy (zaawansowany), instruktor Carmen Pluciennik</li>
+                <li data-i18n="cvT27">SRT — Spiritual Response Therapy (powtórzenie), instruktorzy Mary Ann Detzler i Kathryn Hamilton</li>
+                <li data-i18n="cvT28">Uzdrawianie głębokiej traumy poprzez praktyki szamańskie, Shaman Dancing Thunder</li>
+                <li data-i18n="cvT29">Odzyskiwanie duszy — szamańska praca z duszą, inicjacja przez Inca Shaman Don Mariano (Peru)</li>
+            </ul>
+        </div>
+
+        <!-- Diagnostic -->
+        <div class="cv-subsection">
+            <h3 class="cv-subsection-title" data-i18n="cvCat5">Metody diagnostyczne</h3>
+            <ul>
+                <li data-i18n="cvT30">Diagnostyka GDV, metoda Kirliana, instruktorzy K. Korotkov, Orlov, Yanovskaya, Sankt Petersburg</li>
+                <li data-i18n="cvT31">VedaPulse — cyfrowa diagnostyka pulsu, instruktor O. Sorokin, Nowosybirsk</li>
+            </ul>
+        </div>
+
+        <!-- Additional -->
+        <div class="cv-subsection">
+            <h3 class="cv-subsection-title" data-i18n="cvCat6">Dodatkowe szkolenia zawodowe</h3>
+            <ul>
+                <li data-i18n="cvT32">Pierwsza pomoc i RKO — BHV Nederland, Utrecht</li>
+                <li data-i18n="cvT33">Kosmetyka terapeutyczna, Vita Opleidingen B.V., Zeewolde</li>
+                <li data-i18n="cvT34">Warsztaty EMF Balancing Technique, Trust in Balance, Etten-Leur</li>
+                <li data-i18n="cvT35">Szkolenie systemu Norbekowa, Kolonia (2006)</li>
+                <li data-i18n="cvT36">Seminaria metody Bronnikova, instruktor W.M. Bronnikov (2007)</li>
+                <li data-i18n="cvT37">Metoda „Płaczącego Oddechu" wg Jurija Vilunasa, Sankt Petersburg</li>
+                <li data-i18n="cvT38">Dynamiczna Medytacja Osho, instruktor Veet Mano, USA</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="footer-columns">
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColGallery">Galeria i CV</div>
+            <a href="gallery.html" data-i18n="footGallery">Galeria</a>
+            <a href="cv.html">Curriculum Vitae</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColServices">Usługi</div>
+            <a href="reconnection.html">Reconnection & Reconnective Healing</a>
+            <a href="gdv-camera.html">GDV Camera</a>
+            <a href="vedapulse.html">VedaPulse</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColLegal">Informacje prawne</div>
+            <a href="privacy-policy.html" data-i18n="footPrivacy">Polityka Prywatności</a>
+            <a href="terms.html" data-i18n="footTerms">Regulamin</a>
+        </div>
+    </div>
+    <div class="footer-bottom" data-i18n="footer">&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+const T = {
+pl: {
+    navAbout:'O mnie', navServices:'Usługi', navTestimonials:'Opinie', navContact:'Kontakt',
+    navGallery:'Galeria', footGallery:'Galeria', footPrivacy:'Polityka Prywatności', footTerms:'Regulamin',
+    footColGallery:'Galeria i CV', footColServices:'Usługi', footColLegal:'Informacje prawne',
+    footer:'&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.',
+    pageSubtitle:'Curriculum Vitae',
+    cvEduTitle:'Wykształcenie akademickie',
+    cvEdu1:'Studia uniwersyteckie: Pedagogika i Psychologia, Związek Radziecki',
+    cvEdu2:'Akademia Psychoterapii Integralnej (HBO), Amersfoort, Holandia',
+    cvEdu3:'Podstawy Nauk Medycznych — Anatomia, Fizjologia, Patologia (poziom HBO), Zeewolde',
+    cvEdu4:'Wiedza Psychospołeczna (poziom HBO), Utrecht',
+    cvExpTitle:'Doświadczenie zawodowe',
+    cvExp1:'Terapeuta w instytucji psychiatrycznej dla dzieci, Związek Radziecki',
+    cvExp2:'Terapeuta we własnej praktyce <strong>"BODY MIND HEALING"</strong>, Holandia',
+    cvTrainTitle:'Szkolenia i certyfikacje zawodowe',
+    cvCat1:'Metody psychologiczne i terapeutyczne',
+    cvT01:'EMDR — Eye Movement Desensitization and Reprocessing, instruktor Alexander Bund',
+    cvT02:'EFT — Emotional Freedom Techniques (2007), instruktor M.M. Liew-On',
+    cvT03:'TAT — Tapas Acupressure Technique (2007), instruktor M.M. Liew-On',
+    cvT04:'TFT — Thought Field Therapy (Callahan Techniques)',
+    cvT05:'WHEE — Wholistic Hybrid (wywodzący się z EMDR i EFT)',
+    cvT06:'Terapia Rebirthing, Saavdhana Lokker (BIVT)',
+    cvT07:'Trening Mindfulness, Nathalie Wilkers (BIVT)',
+    cvT08:'Trening Umiejętności Komunikacyjnych, ROC Flevoland (1998)',
+    cvCat2:'Terapie ciałowe i manualne',
+    cvT09:'Metoda Dorn-Breuss — korekcja i ustawianie kręgosłupa, instruktor Jos Dassen',
+    cvT10:'Bańki lekarskie (Cupping Therapy), instruktor Wim Zewald, Arnhem',
+    cvT11:'Terapia misami dźwiękowymi / masaż, wg Petera Hessa',
+    cvT12:'Terapia masażem miodowym, szkolenie w Sankt Petersburgu i Holandii',
+    cvT13:'Terapia punktów spustowych (Trigger Point), instruktor Maxim Eshenko',
+    cvT14:'Body Drum Release, instruktor Peter Krijger, Amersfoort',
+    cvCat3:'Metody energetyczne i komplementarne',
+    cvT15:'Metoda Quantum-Touch, opracowana przez Richarda Gordona',
+    cvT16:'Quantum-Touch Supercharging, instruktor Denise Godfrey, Antwerpia',
+    cvT17:'Quantum Entrainment, instruktor Frank Kinslow, USA',
+    cvT18:'Matrix Energetics, instruktor Richard Bartlett, USA',
+    cvT19:'Regenesis Healing, Quantum Academy, Huizen',
+    cvT20:'The Reconnection / Reconnective Healing, instruktor Eric Pearl',
+    cvT21:'Healing Tao, Mistrz Mantak Chia (2006)',
+    cvCat4:'Rozwój duchowy i świadomościowy',
+    cvT22:'Uzdrawianie duchowe, instruktorzy Boris Son i Larisa Bunina, Moskwa',
+    cvT23:'Rozwój duchowy / intuicyjny (od 1997)',
+    cvT24:'Reiki — poziomy 1, 2, 3, Reiki Master Hans Spijker (1997)',
+    cvT25:'Szkolenie Biotensor, instruktor Roel Nuijt (2007)',
+    cvT26:'SRT — Spiritual Response Therapy (zaawansowany), instruktor Carmen Pluciennik',
+    cvT27:'SRT — Spiritual Response Therapy (powtórzenie), instruktorzy Mary Ann Detzler i Kathryn Hamilton',
+    cvT28:'Uzdrawianie głębokiej traumy poprzez praktyki szamańskie, Shaman Dancing Thunder',
+    cvT29:'Odzyskiwanie duszy — szamańska praca z duszą, inicjacja przez Inca Shaman Don Mariano (Peru)',
+    cvCat5:'Metody diagnostyczne',
+    cvT30:'Diagnostyka GDV, metoda Kirliana, instruktorzy K. Korotkov, Orlov, Yanovskaya, Sankt Petersburg',
+    cvT31:'VedaPulse — cyfrowa diagnostyka pulsu, instruktor O. Sorokin, Nowosybirsk',
+    cvCat6:'Dodatkowe szkolenia zawodowe',
+    cvT32:'Pierwsza pomoc i RKO — BHV Nederland, Utrecht',
+    cvT33:'Kosmetyka terapeutyczna, Vita Opleidingen B.V., Zeewolde',
+    cvT34:'Warsztaty EMF Balancing Technique, Trust in Balance, Etten-Leur',
+    cvT35:'Szkolenie systemu Norbekowa, Kolonia (2006)',
+    cvT36:'Seminaria metody Bronnikova, instruktor W.M. Bronnikov (2007)',
+    cvT37:'Metoda „Płaczącego Oddechu" wg Jurija Vilunasa, Sankt Petersburg',
+    cvT38:'Dynamiczna Medytacja Osho, instruktor Veet Mano, USA'
+},
+en: {
+    navAbout:'About', navServices:'Services', navTestimonials:'Testimonials', navContact:'Contact',
+    navGallery:'Gallery', footGallery:'Gallery', footPrivacy:'Privacy Policy', footTerms:'Terms of Use',
+    footColGallery:'Gallery & CV', footColServices:'Services', footColLegal:'Legal',
+    footer:'&copy; 2026 Body Mind Healing — Tamara Hofland. All rights reserved.',
+    pageSubtitle:'Curriculum Vitae',
+    cvEduTitle:'Academic Education',
+    cvEdu1:'University studies in Education and Psychology, Soviet Union',
+    cvEdu2:'Academy for Integral Psychotherapy (HBO), Amersfoort, The Netherlands',
+    cvEdu3:'Medical Basic Sciences — Anatomy, Physiology, Pathology (HBO level), Zeewolde',
+    cvEdu4:'Psychosocial Basic Knowledge (HBO level), Utrecht',
+    cvExpTitle:'Professional Experience',
+    cvExp1:'Therapist in a psychiatric institution for children, Soviet Union',
+    cvExp2:'Therapist in own practice <strong>"BODY MIND HEALING"</strong>, The Netherlands',
+    cvTrainTitle:'Professional Trainings and Certifications',
+    cvCat1:'Psychological and Therapeutic Methods',
+    cvT01:'EMDR — Eye Movement Desensitization and Reprocessing, instructor Alexander Bund',
+    cvT02:'EFT — Emotional Freedom Techniques (2007), instructor M.M. Liew-On',
+    cvT03:'TAT — Tapas Acupressure Technique (2007), instructor M.M. Liew-On',
+    cvT04:'TFT — Thought Field Therapy (Callahan Techniques)',
+    cvT05:'WHEE — Wholistic Hybrid (derived from EMDR and EFT)',
+    cvT06:'Rebirthing Therapy, Saavdhana Lokker (BIVT)',
+    cvT07:'Mindfulness Training, Nathalie Wilkers (BIVT)',
+    cvT08:'Communication Skills Training, ROC Flevoland (1998)',
+    cvCat2:'Body-Oriented and Manual Therapies',
+    cvT09:'Dorn-Breuss Method for Spinal Alignment and Correction, instructor Jos Dassen',
+    cvT10:'Cupping Therapy, instructor Wim Zewald, Arnhem',
+    cvT11:'Sound Bowl Therapy / Massage, according to Peter Hess',
+    cvT12:'Honey Massage Therapy, training in St. Petersburg and Netherlands',
+    cvT13:'Trigger Point Therapy, instructor Maxim Eshenko',
+    cvT14:'Body Drum Release, instructor Peter Krijger, Amersfoort',
+    cvCat3:'Energy-Based and Complementary Healing Methods',
+    cvT15:'Quantum-Touch Method, developed by Richard Gordon',
+    cvT16:'Quantum-Touch Supercharging, instructor Denise Godfrey, Antwerp',
+    cvT17:'Quantum Entrainment, instructor Frank Kinslow, USA',
+    cvT18:'Matrix Energetics, instructor Richard Bartlett, USA',
+    cvT19:'Regenesis Healing, Quantum Academy, Huizen',
+    cvT20:'The Reconnection / Reconnective Healing, instructor Eric Pearl',
+    cvT21:'Healing Tao, Master Mantak Chia (2006)',
+    cvCat4:'Spiritual and Consciousness-Based Development',
+    cvT22:'Spiritual Healing, instructors Boris Son and Larisa Bunina, Moscow',
+    cvT23:'Spiritual / Intuitive Development (since 1997)',
+    cvT24:'Reiki Levels 1, 2, 3 — Reiki Master Hans Spijker (1997)',
+    cvT25:'Biotensor Training, instructor Roel Nuijt (2007)',
+    cvT26:'SRT — Spiritual Response Therapy (Advanced), instructor Carmen Pluciennik',
+    cvT27:'SRT — Spiritual Response Therapy (Review), instructors Mary Ann Detzler and Kathryn Hamilton',
+    cvT28:'Healing of Deep Trauma through Shamanic Practices, Shaman Dancing Thunder',
+    cvT29:'Soul Retrieval — Shamanic Soul Work, initiation by Inca Shaman Don Mariano (Peru)',
+    cvCat5:'Diagnostic and Assessment Methods',
+    cvT30:'GDV Diagnostics, Kirlian Method, instructors K. Korotkov, Orlov, Yanovskaya, St. Petersburg',
+    cvT31:'VedaPulse — Digital Pulse Diagnostics, instructor O. Sorokin, Novosibirsk',
+    cvCat6:'Additional Professional Trainings',
+    cvT32:'First Aid and CPR — BHV Nederland, Utrecht',
+    cvT33:'Therapeutic Cosmetics, Vita Opleidingen B.V., Zeewolde',
+    cvT34:'EMF Balancing Technique Workshop, Trust in Balance, Etten-Leur',
+    cvT35:'Norbekov System Training, Cologne (2006)',
+    cvT36:'Bronnikov Method Seminars, instructor V.M. Bronnikov (2007)',
+    cvT37:'"Crying Breath" Method according to Jury Vilunas, St. Petersburg',
+    cvT38:'Osho Dynamic Meditation, instructor Veet Mano, USA'
+}
+};
+
+let currentLang = 'pl';
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (T[lang][key]) el.innerHTML = T[lang][key];
+    });
+}
+</script>
+</body>
+</html>
