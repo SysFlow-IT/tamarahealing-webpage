@@ -401,16 +401,24 @@
         <h2 class="section-title reveal" data-i18n="contactTitle">Zacznij swoją podróż<br>ku uzdrowieniu</h2>
         <p class="contact-sub reveal" data-i18n="contactSub">Skontaktuj się, aby umówić bezpłatną konsultację wstępną</p>
         <form class="contact-form reveal" id="contactForm" onsubmit="return handleSubmit(event)">
-            <div class="form-group"><label data-i18n="formName">Imię</label><input type="text" id="cfName" required></div>
-            <div class="form-group"><label>Email</label><input type="email" id="cfEmail" required></div>
-            <div class="form-group"><label data-i18n="formPhone">Telefon</label><input type="tel" id="cfPhone"></div>
+            <input type="hidden" name="_subject" id="fsSubject" value="Nowa wiadomość z tamarahealing.pl">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" style="display:none">
+            <div class="form-group"><label data-i18n="formName">Imię</label><input type="text" name="name" id="cfName" required></div>
+            <div class="form-group"><label>Email</label><input type="email" name="email" id="cfEmail" required></div>
+            <div class="form-group"><label data-i18n="formPhone">Telefon</label><input type="tel" name="phone" id="cfPhone"></div>
             <div class="form-group"><label data-i18n="formCaptcha">Weryfikacja</label><div style="display:flex;align-items:center;gap:.8rem"><span id="captchaQ" style="color:var(--gold);font-weight:600;font-size:.95rem;white-space:nowrap"></span><input type="text" id="cfCaptcha" required style="width:80px" placeholder="?"></div></div>
-            <div class="form-group full"><label data-i18n="formMsg">Wiadomość</label><textarea id="cfMsg" required></textarea></div>
+            <div class="form-group full"><label data-i18n="formMsg">Wiadomość</label><textarea name="message" id="cfMsg" required></textarea></div>
+            <div class="form-group full" style="display:flex;align-items:flex-start;gap:.6rem">
+                <input type="checkbox" id="cfCc" style="margin-top:.35rem;accent-color:var(--gold);width:16px;height:16px;flex-shrink:0">
+                <label for="cfCc" style="font-size:.78rem;text-transform:none;letter-spacing:0;line-height:1.5;cursor:pointer" data-i18n="formCc">Wyślij kopię wiadomości na mój adres email</label>
+            </div>
             <div class="form-group full" style="display:flex;align-items:flex-start;gap:.6rem">
                 <input type="checkbox" id="cfGdpr" required style="margin-top:.35rem;accent-color:var(--gold);width:16px;height:16px;flex-shrink:0">
                 <label for="cfGdpr" style="font-size:.78rem;text-transform:none;letter-spacing:0;line-height:1.5;cursor:pointer" data-i18n="formGdpr">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu odpowiedzi na zapytanie, zgodnie z <a href="privacy-policy.html" style="color:var(--gold)">Polityką Prywatności</a>.</label>
             </div>
-            <div class="full"><button type="submit" class="btn" data-i18n="formSend">Wyślij wiadomość</button></div>
+            <div class="full"><button type="submit" class="btn" id="submitBtn" data-i18n="formSend">Wyślij wiadomość</button></div>
             <div class="full" id="formFeedback" style="display:none;padding:.8rem;font-size:.85rem;text-align:center;margin-top:.5rem"></div>
         </form>
         <div class="contact-info reveal">
@@ -509,7 +517,11 @@ pl: {
     s3link:'GDV Camera →', s3link2:'VedaPulse →', s4link:'Dowiedz się więcej →',
     formCaptcha:'Weryfikacja',
     formGdpr:'Wyrażam zgodę na przetwarzanie moich danych osobowych w celu odpowiedzi na zapytanie, zgodnie z <a href="privacy-policy.html" style="color:var(--gold)">Polityką Prywatności</a>.',
+    formCc:'Wyślij kopię wiadomości na mój adres email',
+    formSending:'Wysyłanie...',
+    formAutoReply:'Dziękujemy za wiadomość! Odpowiemy najszybciej jak to możliwe. — Body Mind Healing, Tamara Hofland',
     formSuccess:'Dziękujemy! Wiadomość została wysłana.', formCaptchaError:'Błędna odpowiedź na pytanie weryfikacyjne.',
+    formError:'Wystąpił błąd. Spróbuj ponownie lub napisz bezpośrednio na tamara@bodymindhealing.nl.',
     footColGallery:'Galeria i CV', footColServices:'Usługi', footColLegal:'Informacje prawne'
 },
 en: {
@@ -572,7 +584,11 @@ en: {
     s3link:'GDV Camera →', s3link2:'VedaPulse →', s4link:'Learn more →',
     formCaptcha:'Verification',
     formGdpr:'I consent to the processing of my personal data for the purpose of responding to my inquiry, in accordance with the <a href="privacy-policy.html" style="color:var(--gold)">Privacy Policy</a>.',
+    formCc:'Send a copy of the message to my email',
+    formSending:'Sending...',
+    formAutoReply:'Thank you for your message! We will respond as soon as possible. — Body Mind Healing, Tamara Hofland',
     formSuccess:'Thank you! Your message has been sent.', formCaptchaError:'Incorrect verification answer.',
+    formError:'An error occurred. Please try again or email tamara@bodymindhealing.nl directly.',
     footColGallery:'Gallery & CV', footColServices:'Services', footColLegal:'Legal'
 }
 };
@@ -785,6 +801,7 @@ function handleSubmit(e) {
     e.preventDefault();
     const answer = parseInt(document.getElementById('cfCaptcha').value);
     const fb = document.getElementById('formFeedback');
+    const btn = document.getElementById('submitBtn');
     if (answer !== captchaA + captchaB) {
         fb.style.display = 'block';
         fb.style.background = 'rgba(200,50,50,.15)';
@@ -794,17 +811,43 @@ function handleSubmit(e) {
         document.getElementById('cfCaptcha').value = '';
         return false;
     }
-    const name = document.getElementById('cfName').value;
     const email = document.getElementById('cfEmail').value;
-    const phone = document.getElementById('cfPhone').value;
-    const msg = document.getElementById('cfMsg').value;
-    const subject = encodeURIComponent('Kontakt z strony Body Mind Healing - ' + name);
-    const body = encodeURIComponent(`Imię: ${name}\nEmail: ${email}\nTelefon: ${phone}\n\nWiadomość:\n${msg}`);
-    window.location.href = `mailto:tamara@bodymindhealing.nl?subject=${subject}&body=${body}`;
-    fb.style.display = 'block';
-    fb.style.background = 'rgba(200,150,62,.15)';
-    fb.style.color = 'var(--gold)';
-    fb.textContent = T[currentLang].formSuccess;
+    const wantCc = document.getElementById('cfCc').checked;
+    // Build FormData
+    const form = document.getElementById('contactForm');
+    const formData = new FormData(form);
+    formData.delete('_honey');
+    if (wantCc) formData.set('_cc', email);
+    formData.set('_autoresponse', T[currentLang].formAutoReply);
+    formData.set('_subject', 'Nowa wiadomość z tamarahealing.pl - ' + formData.get('name'));
+    // Disable button
+    btn.disabled = true;
+    btn.textContent = T[currentLang].formSending || 'Wysyłanie...';
+    // Send via FormSubmit.co
+    fetch('https://formsubmit.co/ajax/tamara@bodymindhealing.nl', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData))
+    })
+    .then(r => r.json())
+    .then(data => {
+        fb.style.display = 'block';
+        fb.style.background = 'rgba(200,150,62,.15)';
+        fb.style.color = 'var(--gold)';
+        fb.textContent = T[currentLang].formSuccess;
+        form.reset();
+        genCaptcha();
+        btn.disabled = false;
+        btn.textContent = T[currentLang].formSend || 'Wyślij wiadomość';
+    })
+    .catch(err => {
+        fb.style.display = 'block';
+        fb.style.background = 'rgba(200,50,50,.15)';
+        fb.style.color = '#c33';
+        fb.textContent = T[currentLang].formError;
+        btn.disabled = false;
+        btn.textContent = T[currentLang].formSend || 'Wyślij wiadomość';
+    });
     return false;
 }
 
