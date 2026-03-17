@@ -773,6 +773,17 @@ function carouselGo(idx) { carouselPos = idx; updateCarousel(); }
 // ═══════ INIT ═══════
 window.addEventListener('DOMContentLoaded', () => {
     renderCarousel();
+    // Check if redirected back after form submission
+    if (new URLSearchParams(window.location.search).get('sent') === '1') {
+        const fb = document.getElementById('formFeedback');
+        if (fb) {
+            fb.style.display = 'block';
+            fb.style.background = 'rgba(200,150,62,.15)';
+            fb.style.color = 'var(--gold)';
+            fb.textContent = T[currentLang].formSuccess;
+        }
+        window.history.replaceState({}, '', window.location.pathname + '#kontakt');
+    }
     // Scroll reveal
     const obs = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
@@ -808,54 +819,32 @@ function handleSubmit(e) {
         document.getElementById('cfCaptcha').value = '';
         return false;
     }
-    const name = document.getElementById('cfName').value;
-    const email = document.getElementById('cfEmail').value;
-    const phone = document.getElementById('cfPhone').value;
-    const msg = document.getElementById('cfMsg').value;
-    const wantCc = document.getElementById('cfCc').checked;
-    const formData = new FormData();
-    formData.append('access_key', 'a59136a1-0369-424f-aba8-8d747b1bed0d');
-    formData.append('subject', 'Nowa wiadomość z tamarahealing.pl - ' + name);
-    formData.append('from_name', 'Body Mind Healing');
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('phone', phone);
-    formData.append('message', msg);
-    if (wantCc) formData.append('ccemail', email);
-    // Disable button
-    btn.disabled = true;
-    btn.textContent = T[currentLang].formSending || 'Wysyłanie...';
-    // Send via Web3Forms
-    fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-    })
-    .then(r => r.json())
-    .then(data => {
-        if (data.success) {
-            fb.style.display = 'block';
-            fb.style.background = 'rgba(200,150,62,.15)';
-            fb.style.color = 'var(--gold)';
-            fb.textContent = T[currentLang].formSuccess;
-            form.reset();
-            genCaptcha();
-        } else {
-            fb.style.display = 'block';
-            fb.style.background = 'rgba(200,50,50,.15)';
-            fb.style.color = '#c33';
-            fb.textContent = T[currentLang].formError;
-        }
-        btn.disabled = false;
-        btn.textContent = T[currentLang].formSend || 'Wyślij wiadomość';
-    })
-    .catch(err => {
-        fb.style.display = 'block';
-        fb.style.background = 'rgba(200,50,50,.15)';
-        fb.style.color = '#c33';
-        fb.textContent = T[currentLang].formError;
-        btn.disabled = false;
-        btn.textContent = T[currentLang].formSend || 'Wyślij wiadomość';
-    });
+    // Build a temporary form and submit it natively to Web3Forms
+    const tmpForm = document.createElement('form');
+    tmpForm.method = 'POST';
+    tmpForm.action = 'https://api.web3forms.com/submit';
+    const fields = {
+        access_key: 'a59136a1-0369-424f-aba8-8d747b1bed0d',
+        subject: 'Nowa wiadomość z tamarahealing.pl - ' + document.getElementById('cfName').value,
+        from_name: 'Body Mind Healing',
+        redirect: window.location.href.split('#')[0] + '?sent=1#kontakt',
+        name: document.getElementById('cfName').value,
+        email: document.getElementById('cfEmail').value,
+        phone: document.getElementById('cfPhone').value,
+        message: document.getElementById('cfMsg').value
+    };
+    if (document.getElementById('cfCc').checked) {
+        fields.ccemail = document.getElementById('cfEmail').value;
+    }
+    for (const [k, v] of Object.entries(fields)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = k;
+        input.value = v;
+        tmpForm.appendChild(input);
+    }
+    document.body.appendChild(tmpForm);
+    tmpForm.submit();
     return false;
 }
 
