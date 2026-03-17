@@ -812,19 +812,29 @@ function handleSubmit(e) {
         document.getElementById('cfCaptcha').value = '';
         return false;
     }
+    const name = document.getElementById('cfName').value;
     const email = document.getElementById('cfEmail').value;
+    const phone = document.getElementById('cfPhone').value;
+    const msg = document.getElementById('cfMsg').value;
     const wantCc = document.getElementById('cfCc').checked;
-    const form = document.getElementById('contactForm');
-    const formData = new FormData(form);
-    formData.set('subject', 'Nowa wiadomość z tamarahealing.pl - ' + formData.get('name'));
-    if (wantCc) formData.set('ccemail', email);
+    const payload = {
+        access_key: 'a59136a1-0369-424f-aba8-8d747b1bed0d',
+        subject: 'Nowa wiadomość z tamarahealing.pl - ' + name,
+        from_name: 'Body Mind Healing',
+        name: name,
+        email: email,
+        phone: phone,
+        message: msg
+    };
+    if (wantCc) payload.ccemail = email;
     // Disable button
     btn.disabled = true;
     btn.textContent = T[currentLang].formSending || 'Wysyłanie...';
     // Send via Web3Forms
     fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formData
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
     })
     .then(r => r.json())
     .then(data => {
