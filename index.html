@@ -404,10 +404,6 @@
             <div class="form-group"><label data-i18n="formCaptcha">Weryfikacja</label><div style="display:flex;align-items:center;gap:.8rem"><span id="captchaQ" style="color:var(--gold);font-weight:600;font-size:.95rem;white-space:nowrap"></span><input type="text" id="cfCaptcha" required style="width:80px" placeholder="?"></div></div>
             <div class="form-group full"><label data-i18n="formMsg">Wiadomość</label><textarea name="message" id="cfMsg" required></textarea></div>
             <div class="form-group full" style="display:flex;align-items:flex-start;gap:.6rem">
-                <input type="checkbox" id="cfCc" style="margin-top:.35rem;accent-color:var(--gold);width:16px;height:16px;flex-shrink:0">
-                <label for="cfCc" style="font-size:.78rem;text-transform:none;letter-spacing:0;line-height:1.5;cursor:pointer" data-i18n="formCc">Wyślij kopię wiadomości na mój adres email</label>
-            </div>
-            <div class="form-group full" style="display:flex;align-items:flex-start;gap:.6rem">
                 <input type="checkbox" id="cfGdpr" required style="margin-top:.35rem;accent-color:var(--gold);width:16px;height:16px;flex-shrink:0">
                 <label for="cfGdpr" style="font-size:.78rem;text-transform:none;letter-spacing:0;line-height:1.5;cursor:pointer" data-i18n="formGdpr">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu odpowiedzi na zapytanie, zgodnie z <a href="privacy-policy.html" style="color:var(--gold)">Polityką Prywatności</a>.</label>
             </div>
@@ -833,9 +829,6 @@ function handleSubmit(e) {
         phone: document.getElementById('cfPhone').value,
         message: document.getElementById('cfMsg').value
     };
-    if (document.getElementById('cfCc').checked) {
-        fields.ccemail = document.getElementById('cfEmail').value;
-    }
     for (const [k, v] of Object.entries(fields)) {
         const input = document.createElement('input');
         input.type = 'hidden';
