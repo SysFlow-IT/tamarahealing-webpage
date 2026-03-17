@@ -398,10 +398,10 @@
         <h2 class="section-title reveal" data-i18n="contactTitle">Zacznij swoją podróż<br>ku uzdrowieniu</h2>
         <p class="contact-sub reveal" data-i18n="contactSub">Skontaktuj się, aby umówić bezpłatną konsultację wstępną</p>
         <form class="contact-form reveal" id="contactForm" onsubmit="return handleSubmit(event)">
-            <input type="hidden" name="_subject" id="fsSubject" value="Nowa wiadomość z tamarahealing.pl">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="access_key" value="a59136a1-0369-424f-aba8-8d747b1bed0d">
+            <input type="hidden" name="subject" value="Nowa wiadomość z tamarahealing.pl">
+            <input type="hidden" name="from_name" value="Body Mind Healing">
+            <input type="checkbox" name="botcheck" style="display:none">
             <div class="form-group"><label data-i18n="formName">Imię</label><input type="text" name="name" id="cfName" required></div>
             <div class="form-group"><label>Email</label><input type="email" name="email" id="cfEmail" required></div>
             <div class="form-group"><label data-i18n="formPhone">Telefon</label><input type="tel" name="phone" id="cfPhone"></div>
@@ -814,30 +814,33 @@ function handleSubmit(e) {
     }
     const email = document.getElementById('cfEmail').value;
     const wantCc = document.getElementById('cfCc').checked;
-    // Build FormData
     const form = document.getElementById('contactForm');
     const formData = new FormData(form);
-    formData.delete('_honey');
-    if (wantCc) formData.set('_cc', email);
-    formData.set('_autoresponse', T[currentLang].formAutoReply);
-    formData.set('_subject', 'Nowa wiadomość z tamarahealing.pl - ' + formData.get('name'));
+    formData.set('subject', 'Nowa wiadomość z tamarahealing.pl - ' + formData.get('name'));
+    if (wantCc) formData.set('ccemail', email);
     // Disable button
     btn.disabled = true;
     btn.textContent = T[currentLang].formSending || 'Wysyłanie...';
-    // Send via FormSubmit.co
-    fetch('https://formsubmit.co/ajax/tamara@bodymindhealing.nl', {
+    // Send via Web3Forms
+    fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(formData))
+        body: formData
     })
     .then(r => r.json())
     .then(data => {
-        fb.style.display = 'block';
-        fb.style.background = 'rgba(200,150,62,.15)';
-        fb.style.color = 'var(--gold)';
-        fb.textContent = T[currentLang].formSuccess;
-        form.reset();
-        genCaptcha();
+        if (data.success) {
+            fb.style.display = 'block';
+            fb.style.background = 'rgba(200,150,62,.15)';
+            fb.style.color = 'var(--gold)';
+            fb.textContent = T[currentLang].formSuccess;
+            form.reset();
+            genCaptcha();
+        } else {
+            fb.style.display = 'block';
+            fb.style.background = 'rgba(200,50,50,.15)';
+            fb.style.color = '#c33';
+            fb.textContent = T[currentLang].formError;
+        }
         btn.disabled = false;
         btn.textContent = T[currentLang].formSend || 'Wyślij wiadomość';
     })
